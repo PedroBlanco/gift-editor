@@ -51,11 +51,29 @@ function parseExample ( nExample )
       break;
     case "string":
       if (_origen.length > 0) {
-        var _mensaje = peg_parser.parse (_origen );
-        var _texto = 'Titulo: "' + _mensaje[0].Title+ '"\n\nComentario: "' + _mensaje[0].Comment+ '"\n\nPregunta: "'+ _mensaje[0].Text.Question+ '"\n\nRespuesta: "' + _mensaje[0].Text.Answer + '"';
-        $('#example_dest_' + nExample ).text( _texto );
-        _end.state = 'success';
-        _end.message = 'Convirtiendo (#example_text_' + nExample + ') ' + _origen + '" a "' + _texto + '"';
+        var _mensaje;
+        try {
+          _mensaje = peg_parser.parse (_origen );
+        } catch (e) {
+          if (e instanceof SyntaxError) {
+            console.error ('SyntaxError exception.');
+            _end.state = 'error';
+            _end.message = 'Error: '+_mensaje.message;
+          } else {
+            console.error ('Unknown exception.');
+            _end.state = 'error';
+            _end.message = 'Unrecognized exception.';
+          }
+        }
+        if ( _mensaje.name != "SyntaxError" ) {
+          var _texto = 'Titulo: "' + _mensaje[0].Title+ '"\n\nComentario: "' + _mensaje[0].Comment+ '"\n\nPregunta: "'+ _mensaje[0].Text.Question+ '"\n\nRespuesta: "' + _mensaje[0].Text.Answer + '"';
+          $('#example_dest_' + nExample ).text( _texto );
+          _end.state = 'success';
+          _end.message = 'Convirtiendo (#example_text_' + nExample + ') ' + _origen + '" a "' + _texto + '"';
+        } else {
+          _end.state = 'error';
+          _end.message = _mensaje.message;
+        }
       } else {
         _end.state = 'warning';
         _end.message = '#example_text_' + nExample + ' has 0 length.';
