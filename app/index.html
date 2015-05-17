@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Editor GIFT - gbl-1</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -16,16 +16,28 @@
     <!-- endbuild -->
   </head>
   <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
+    <div class="container-fluid">
+      <div class="jumbotron row col-sm-4">
+        <h1>Hola Ana!</h1>
+        <h1>'Allo, 'Allo!?</h1>
         <p>You now have</p>
         <ul>
           <li>HTML5 Boilerplate</li>
           <li>Bootstrap</li>
+          <li>Mobile connection</li>
         </ul>
         <p>installed.</p>
         <h3>Enjoy coding! - Yeoman</h3>
+      </div>
+      <div class="jumbotron row col-sm-4">
+        <h1>Prueba de PEG-v4</h1>
+        <h2>Texto a parsear (GIFT):</h2>
+        <textarea id="text1">Area de texto vacía...</textarea>
+        <button id="button-process" type="button" class="btn btn-default">Procesar la entrada</button>
+      </div>
+      <div class="jumbotron row col-sm-4">
+        <h2>Datos extraidos:</h2>
+        <pre id="text2">Respuesta...</pre>
       </div>
     </div>
 
@@ -35,6 +47,7 @@
     <![endif]-->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <!--
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -43,12 +56,13 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
-
+    -->
 
         <!-- build:js scripts/main.js -->
         <script src="bower_components/jquery/jquery.js"></script>
+        <script src="scripts/peg-v4.js"></script>
         <script src="scripts/main.js"></script>
-        <script src="scripts/hello.js"></script>
+        <!-- <script src="scripts/hello.js"></script> -->
         <!-- endbuild -->
 
         <!-- build:js scripts/vendor/bootstrap.js -->
