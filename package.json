@@ -1,6 +1,12 @@
 {
   "name": "gbl-1",
-  "version": "0.0.0",
+  "description": "GIFT Format Editor",
+  "keywords": [
+    "gift",
+    "moodle",
+    "editor"
+  ],
+  "version": "0.0.1",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -24,7 +30,8 @@
     "load-grunt-tasks": "~0.6.0",
     "matchdep": "~0.3.0",
     "time-grunt": "~1.0.0",
-    "jshint-stylish": "~1.0.0"
+    "jshint-stylish": "~1.0.0",
+    "grunt-includes": "~0.5.1"
   },
   "engines": {
     "node": ">=0.8.0"

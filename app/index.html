@@ -15,8 +15,41 @@
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
-  <body>
+  <body >
     <div class="container-fluid">
+      <span class="row col-sm-12">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">GIFT Format Editor</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Questions
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Create</a></li>
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Validate</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Groups
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Create</a></li>
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Validate</a></li>
+              </ul>
+            </li>
+            <li><a href="404.html">Misc</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </span>
       <div class="jumbotron row col-sm-4">
         <h1>Hola Ana!</h1>
         <h1>'Allo, 'Allo!?</h1>
@@ -30,16 +63,19 @@
         <h3>Enjoy coding! - Yeoman</h3>
       </div>
       <div class="jumbotron row col-sm-4">
-        <h1>Prueba de PEG-v4</h1>
-        <h2>Texto a parsear (GIFT):</h2>
-        <textarea id="text1">Area de texto vacía...</textarea>
-        <button id="button-process" type="button" class="btn btn-default">Procesar la entrada</button>
+        <h2>Prueba de PEG-v4</h2>
+        <form role="form">
+          <div class="form-group">
+            <label for="text1">Texto a parsear (GIFT):</label>
+            <textarea class="form-control" id="text1">Area de texto vacía...</textarea>
+            <button id="button-process" type="button" class="btn btn-default">Procesar la entrada</button>
+          </div>
+        </form>
       </div>
       <div class="jumbotron row col-sm-4">
-        <h2>Datos extraidos:</h2>
-        <pre id="text2">Respuesta...</pre>
+        <h3>Datos extraidos:</h3>
+        <pre id="text2">...</pre>
       </div>
-    </div>
 
 
     <!--[if lt IE 7]>
@@ -79,5 +115,6 @@
         <script src="bower_components/bootstrap/js/collapse.js"></script>
         <script src="bower_components/bootstrap/js/tab.js"></script>
         <!-- endbuild -->
+     </div>
 </body>
 </html>
