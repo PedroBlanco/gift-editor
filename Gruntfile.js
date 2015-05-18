@@ -257,23 +257,8 @@ module.exports = function (grunt) {
         'svgmin',
         'htmlmin'
       ]
-    },
-    // Build the site using grunt-includes
-    includes: {
-      build: {
-        cwd: '<%= yeoman.dist %>',
-        src: '<%= yeoman.dist %>/*.html',
-        dest: '<%= yeoman.dist %>',
-        options: {
-          flatten: true,
-          includePath: '<%= yeoman.app %>/include',
-          banner: '<!-- Site built using grunt includes! -->\n'
-        }
-      }
     }
   });
-
-  //grunt.loadNpmTasks('grunt-includes');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
@@ -284,7 +269,6 @@ module.exports = function (grunt) {
       'clean:server',
       'coffee',
       'less',
-//      'includes',
       'copy:server',
       'connect:livereload',
       'watch'
@@ -300,7 +284,6 @@ module.exports = function (grunt) {
     'clean:server',
     'coffee',
     'less',
-//    'includes',
     'copy:server',
     'connect:test',
     'mocha'
@@ -308,7 +291,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-//    'includes',
     'copy:server',
     'useminPrepare',
     'concurrent',

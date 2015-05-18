@@ -31,7 +31,8 @@
     "matchdep": "~0.3.0",
     "time-grunt": "~1.0.0",
     "jshint-stylish": "~1.0.0",
-    "grunt-includes": "~0.5.1"
+    "grunt-includes": "~0.5.1",
+    "grunt-processhtml": "~0.3.7"
   },
   "engines": {
     "node": ">=0.8.0"
