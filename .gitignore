@@ -22,9 +22,13 @@ Thumbs.db
 .idea
 
 node_modules
+
 dist
+dist2
 dist2--
-dist2--
-.tmp
-app/bower_components
 live
+test
+
+.tmp
+
+app/bower_components
