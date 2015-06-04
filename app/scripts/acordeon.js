@@ -51,9 +51,9 @@ $('#button_gift_input').click( function () {
   try {
     parseText('#text_gift_input');
   } catch ( myException ) {
-    console.error ('Exception: ' + myException );
-    $.bootstrapGrowl( '<strong>Exception</strong>: ' +  myException, {
-      type: 'error',
+    console.error ('Exception caught: ' + myException );
+    $.bootstrapGrowl( '<strong>Exception caught</strong>: ' +  myException, {
+      type: 'danger',
       align: 'center',
       width: 'auto'
     } );
@@ -85,8 +85,8 @@ function parseText ( selectorText )
             console.error ('SyntaxError exception: ' + _mensaje.message );
             throw 'SyntaxError exception: ' + _mensaje.message;
           } else {
-            console.error ('Unknown exception: ' + _mensaje.message );
-            throw 'Unknown exception: ' + _mensaje.message;
+            console.error ('Unknown exception: ' + e );
+            throw 'Unknown exception: ' + e;
           }
         }
         if ( _mensaje.name !== 'SyntaxError' ) {
@@ -123,7 +123,7 @@ function parseText ( selectorText )
     case 'warning':
       console.warn ( _end.message );
       $.bootstrapGrowl( '<strong>Warning</strong>: ' + _end.message, {
-        type: 'warning',
+        type: 'danger',
         align: 'center',
         width: 'auto'
       } );
@@ -131,7 +131,7 @@ function parseText ( selectorText )
     case 'error':
       console.error ( _end.message );
       $.bootstrapGrowl( '<strong>Error</strong>: ' + _end.message, {
-        type: 'error',
+        type: 'danger',
         align: 'center',
         width: 'auto'
       } );
@@ -139,7 +139,7 @@ function parseText ( selectorText )
     case 'not_begun':
       console.error ( _end.message );
       $.bootstrapGrowl( '<strong>Error/Not begun</strong>: ' +  _end.message, {
-        type: 'error',
+        type: 'danger',
         align: 'center',
         width: 'auto'
       } );
@@ -147,7 +147,7 @@ function parseText ( selectorText )
     default:
       console.error ( 'Undefined error!' );
       $.bootstrapGrowl( '<strong>Error</strong>: Undefined error!', {
-        type: 'error',
+        type: 'danger',
         align: 'center',
         width: 'auto'
       } );
