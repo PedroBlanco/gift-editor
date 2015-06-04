@@ -41,15 +41,15 @@ function parseExample ( nExample )
   var _end = {'state':'not_begun', 'message':'Parsing not begun.'};
   var _origen = $('#example_text_' + nExample).text();
   switch (jQuery.type(_origen)) {
-    case "undefined":
+    case 'undefined':
     _end.state = 'error';
     _end.message = '#example_text_' + nExample + ' is undefined.' ;
       break;
-    case "null":
+    case 'null':
     _end.state = 'error';
     _end.message = '#example_text_' + nExample + ' is null.';
       break;
-    case "string":
+    case 'string':
       if (_origen.length > 0) {
         var _mensaje;
         try {
@@ -65,7 +65,7 @@ function parseExample ( nExample )
             _end.message = 'Unrecognized exception.';
           }
         }
-        if ( _mensaje.name != "SyntaxError" ) {
+        if ( _mensaje.name !== 'SyntaxError' ) {
           var _texto = 'Titulo: "' + _mensaje[0].Title+ '"\n\nComentario: "' + _mensaje[0].Comment+ '"\n\nPregunta: "'+ _mensaje[0].Text.Question+ '"\n\nRespuesta: "' + _mensaje[0].Text.Answer + '"';
           $('#example_dest_' + nExample ).text( _texto );
           _end.state = 'success';

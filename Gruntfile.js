@@ -16,7 +16,8 @@ module.exports = function (grunt) {
   // configurable paths
   var yeomanConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    live: 'live'
   };
 
   grunt.initConfig({
@@ -33,15 +34,25 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      // Copiamos los archivos ya preprocesados a <%= yeoman.live %>
+      copy: {
+        files: ['<%= yeoman.app %>/{,*/}*.*'],
+        tasks: ['copy:server']
+      },
+      // Copiamos los archivos HTML ya preprocesados a <%= yeoman.live %>
+      processhtml: {
+        files: ['<%= yeoman.app %>/{,*/}*.html'],
+        tasks: ['processhtml']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.live %>/*.html',
+          '{.tmp,<%= yeoman.live %>}/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.live %>}/scripts/{,*/}*.js',
+          '<%= yeoman.live %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -51,6 +62,7 @@ module.exports = function (grunt) {
         // change this to '0.0.0.0' to access the server from outside
         //hostname: 'localhost',
         hostname: '192.168.0.102',
+        //hostname: '192.168.10.121',
         livereload: 35729
       },
       livereload: {
@@ -58,7 +70,7 @@ module.exports = function (grunt) {
           open: true,
           base: [
             '.tmp',
-            '<%= yeoman.app %>'
+            '<%= yeoman.live %>'
           ]
         }
       },
@@ -240,11 +252,24 @@ module.exports = function (grunt) {
       },
       server: {
         files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.live %>',
+          src: [
+            '*.{ico,png,txt}',
+            'fonts/{,*/}*.*',
+            '.htaccess',
+            'images/{,*/}*.{webp,gif}',
+            'styles/*.css',
+            'styles/main.css.map',
+            'scripts/{,*/}*.js',
+            'bower_components/**'          ]
         }, {
           expand: true,
           dot: true,
           cwd: '<%= yeoman.app %>/bower_components/bootstrap/dist/fonts/',
-          dest: '<%= yeoman.app %>/fonts/glyphicons',
+          dest: '<%= yeoman.live %>/fonts/glyphicons',
           src: ['*']
         }]
       }
@@ -257,8 +282,21 @@ module.exports = function (grunt) {
         'svgmin',
         'htmlmin'
       ]
+    },
+    processhtml: {
+      server: {
+        options:{
+          commentMarker: 'process'
+        },
+        files: {
+          '<%= yeoman.live %>/index.html': ['<%= yeoman.app %>/index.html']
+        }
+      }
     }
   });
+
+  // Incluismo grunt-processhtml para poder utilizar includes en nuestros html y no tener que repetir los bloques comunes
+  grunt.loadNpmTasks('grunt-processhtml');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
@@ -269,6 +307,7 @@ module.exports = function (grunt) {
       'clean:server',
       'coffee',
       'less',
+      'processhtml:server',
       'copy:server',
       'connect:livereload',
       'watch'

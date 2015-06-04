@@ -5963,4 +5963,13 @@ td.visible-print {
 .jumbotron {
   margin: 50px auto 0 auto;
 }
+.left-pannel {
+  background-color: aliceblue;
+}
+.center-pannel {
+  background-color: lightgoldenrodyellow;
+}
+.right-pannel {
+  background-color: blanchedalmond;
+}
 /*# sourceMappingURL=/styles/main.css.map */

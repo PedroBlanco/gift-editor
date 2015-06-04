@@ -4,7 +4,9 @@
   "dependencies": {
     "bootstrap": "~3.0.0",
     "modernizr": "~2.6.2",
-    "jquery": "~1.9.1"
+    "jquery": "~1.9.1",
+    "jqueryui": "~1.11.4",
+    "localforage": "~1.2.3"
   },
   "devDependencies": {}
 }
