@@ -10,7 +10,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="bower_components/jqueryui/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/more.css">
+    <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -51,15 +55,16 @@
         </div>
       </span>
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Intro</a></li>
+        <li><a data-toggle="tab" href="#home">Intro</a></li>
         <li><a data-toggle="tab" href="#example_1">Example 1</a></li>
         <li><a data-toggle="tab" href="#example_2">Example 2</a></li>
         <li><a data-toggle="tab" href="#example_3">Example 3</a></li>
         <li><a data-toggle="tab" href="#example_4">Example 4</a></li>
         <li><a data-toggle="tab" href="#example_extra">Extra example</a></li>
+        <li class="active"><a data-toggle="tab" href="#pruebas">Pruebas</a></li>
       </ul>
       <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
+        <div id="home" class="tab-pane fade in">
           <div class="jumbotron row col-sm-4">
             <h1>'Allo, 'Allo!?!</h1>
             <!-- process:include include/test.html -->
@@ -89,7 +94,7 @@
             <pre id="text2">...</pre>
           </div>
         </div>
-        <div id="example_1" class="tab-pane fade">
+        <div id="example_1" class="tab-pane fade in">
           <div class="row col-sm-4">
             <h3>Example 1</h3>
             <pre id="example_text_1">// Comentario 1
@@ -107,7 +112,7 @@ Q1
           <div class="row col-sm-4">
           </div>
         </div>
-        <div id="example_2" class="tab-pane fade">
+        <div id="example_2" class="tab-pane fade in">
           <div class="row col-sm-4">
             <h3>Example 2</h3>
             <pre id="example_text_2">// Comentario 2
@@ -124,7 +129,7 @@ Q2b
           <div class="row col-sm-4">
           </div>
         </div>
-        <div id="example_3" class="tab-pane fade">
+        <div id="example_3" class="tab-pane fade in">
           <div class="row  col-sm-4">
             <h3>Example 3</h3>
             <pre id="example_text_3">// Comentario 3
@@ -140,7 +145,7 @@ Q2b
           <div class="row col-sm-4">
           </div>
         </div>
-        <div id="example_4" class="tab-pane fade">
+        <div id="example_4" class="tab-pane fade in">
           <div class="row col-sm-4">
             <h3>Example 4</h3>
             <pre id="example_text_4">// Comentario 4
@@ -156,7 +161,7 @@ Q2b
           <div class="row col-sm-4">
           </div>
         </div>
-        <div id="example_extra" class="tab-pane fade">
+        <div id="example_extra" class="tab-pane fade in">
           <div class="row col-sm-4">
             <h3>Extra example</h3>
             <textarea id="example_text_extra">...</textarea>
@@ -169,6 +174,11 @@ Q2b
           </div>
           <div class="row col-sm-4">
           </div>
+        </div>
+        <div id="pruebas" class="tab-pane fade in active">
+          <!-- process:include include/tab_pruebas.html -->
+          ...
+          <!-- /process -->
         </div>
       </div>
 
@@ -192,7 +202,10 @@ Q2b
 
         <!-- build:js scripts/main.js -->
         <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jqueryui/jquery-ui.js"></script>
+        <script src="scripts/jquery.bootstrap-growl.js"></script>
         <script src="scripts/peg-v4.js"></script>
+        <script src="scripts/acordeon.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 

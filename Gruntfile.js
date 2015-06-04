@@ -62,6 +62,7 @@ module.exports = function (grunt) {
         // change this to '0.0.0.0' to access the server from outside
         //hostname: 'localhost',
         hostname: '192.168.0.102',
+        //hostname: '192.168.10.121',
         livereload: 35729
       },
       livereload: {
@@ -260,7 +261,7 @@ module.exports = function (grunt) {
             'fonts/{,*/}*.*',
             '.htaccess',
             'images/{,*/}*.{webp,gif}',
-            'styles/main.css',
+            'styles/*.css',
             'styles/main.css.map',
             'scripts/{,*/}*.js',
             'bower_components/**'          ]
