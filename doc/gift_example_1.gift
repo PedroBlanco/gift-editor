@@ -1,0 +1,36 @@
+// Tipo: fill in the blanks - end
+::T1a::
+Q1
+{A1}
+
+// Tipo: fill in the blanks - middle
+::T1b::Two plus {=two =2}
+equals four.
+
+// Tipo: fill in the blanks - start
+::T1c::{=Two =2} plus two
+equals four.
+
+// Tipo: fill in the blanks - multiple
+::T1d::Water molecule is composed by {=1 =one} atom of Oxygen and {=2 =two} atoms of Hidrogen.
+
+// Tipo: matching
+::T2:: Which animal eats which food? { =cat -> cat food =dog -> dog food }
+
+// Tipo essay
+::T3a::Q1
+{}
+
+// Tipo: ¿essay? - Not part of the format
+::T3b::{A3}
+
+// Tipo: description/instructions (not really a question)
+::T3c::Q1
+
+// Tipo: True/false
+::T5::
+1+1=2
+{T}
+
+// Tipo: math range question
+::T6::What is a number from 1 to 5? {#3:2}
