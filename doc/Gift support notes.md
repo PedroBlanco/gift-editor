@@ -2,15 +2,45 @@
 
 ##Supported and interpreted
 
+```
+// Tipo essay
+::T3a::Q1
+{}
+
+// Tipo: description/instructions (not really a question)
+::T3c::Q1
+
+// Tipo: True/false
+::T5::
+1+1=2
+{T}
+
+// Tipo: math tolerance question
+::T6a::What is a number from 1 to 5? {#3:2}
+
+// Tipo: math range question
+::T6b::What is a number from 1 to 5? {#1..5}
+```
+
 
 ##Partial support (not correctly interpreted)
 
 ```
+// Tipo: fill in the blanks - end
+::T1a::
+Q1
+{A1}
+
 // Tipo: fill in the blanks - middle
 ::T1b::Two plus {=two =2}
 equals four.
+
+// Tipo: fill in the blanks - start
+::T1c::{=Two =2} plus two
+equals four.
+
 ```
-> Question has to be divided in 2 strings
+> T1b Question has to be divided in 2 strings
 
 ##Not yet parsed (error)
 

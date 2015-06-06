@@ -4,9 +4,12 @@
 
 console.log('Iniciando Editor GIFT GBL-1');
 
+
 var texto = document.getElementById('text1');
-var textoInicial = '// Comentario \n::T4::Q1\n\n\n';
-texto.innerText = textoInicial;
+if ( texto !== null ) {
+  var textoInicial = '// Comentario \n::T4::Q1\n\n\n';
+  texto.innerText = textoInicial;
+}
 
 
 $('#button-process').click (function() {

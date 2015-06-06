@@ -97,11 +97,19 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
-          ]
+            '!<%= yeoman.dist %>/.git*'          ]
         }]
       },
-      server: '.tmp'
+      server: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= yeoman.live %>/*',
+            '!<%= yeoman.live %>/.git*'
+          ]
+        }]
+      }
     },
     jshint: {
       options: {
@@ -150,15 +158,15 @@ module.exports = function (grunt) {
     },
     // not used since Uglify task does concat,
     // but still available if needed
-    /*concat: {
-      dist: {}
-    },*/
+    // concat: {
+    //   dist: {}
+    // },
     // not enabled since usemin task does concat and uglify
     // check index.html to edit your build targets
     // enable this task if you prefer defining your build targets here
-    /*uglify: {
-      dist: {}
-    },*/
+    // uglify: {
+    //   dist: {}
+    // },
     rev: {
       dist: {
         files: {
@@ -172,7 +180,7 @@ module.exports = function (grunt) {
       }
     },
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: '<%= yeoman.live %>/index.html',
       options: {
         dest: '<%= yeoman.dist %>'
       }
@@ -209,6 +217,7 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.dist %>/styles/main.css': [
             '.tmp/styles/{,*/}*.css',
+            '.tmp/concat/styles/{,*/}*.css',
             '<%= yeoman.app %>/styles/{,*/}*.css'
           ]
         }
@@ -229,27 +238,13 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>',
+          cwd: '<%= yeoman.live %>',
           src: '*.html',
           dest: '<%= yeoman.dist %>'
         }]
       }
     },
     copy: {
-      dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            'fonts/{,*/}*.*',
-            '.htaccess',
-            'images/{,*/}*.{webp,gif}'
-          ]
-        }]
-      },
       server: {
         files: [{
           expand: true,
@@ -271,6 +266,20 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/bower_components/bootstrap/dist/fonts/',
           dest: '<%= yeoman.live %>/fonts/glyphicons',
           src: ['*']
+        }]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.live %>',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            '*.{ico,png,txt}',
+            'fonts/{,*/}*.*',
+            '.htaccess',
+            'images/{,*/}*.{webp,gif}'
+          ]
         }]
       }
     },
@@ -295,7 +304,7 @@ module.exports = function (grunt) {
     }
   });
 
-  // Incluismo grunt-processhtml para poder utilizar includes en nuestros html y no tener que repetir los bloques comunes
+  // Incluimos grunt-processhtml para poder utilizar includes en nuestros html, no tener que repetir los bloques comunes y poder modularizar/separar index.html (que se está haciendo bastante grande)
   grunt.loadNpmTasks('grunt-processhtml');
 
   grunt.registerTask('serve', function (target) {
@@ -330,6 +339,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'processhtml:server',
     'copy:server',
     'useminPrepare',
     'concurrent',
