@@ -1,82 +1,88 @@
-<div id='left-panel' class="col-sm-4 left-panel center-block">
-  <button type="button" id="hide-left-panel" class="btn btn-info input-sm" style="float: left;">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </button>
-  <h3 class="text-info">Texto GIFT a procesar</h3>
-  <textarea class="form-control" id="text_gift_input" cols="30" rows="10"></textarea>
-  <br/>
-  <button class="form-control btn btn-primary" type="button" id="button_gift_input">Procesar texto GIFT</button>
-</div>
-<div id='center-panel' class="col-sm-4 center-panel center-block">
-  <button type="button" id="show-left-panel" class="btn btn-info input-sm" style="float: left; display: none;">
-    GIFT<span class="glyphicon glyphicon-chevron-right"></span>
-  </button>
-  <button type="button" id="show-right-panel" class="btn btn-info input-sm" style="float: right; display: none;">
-    <span class="glyphicon glyphicon-chevron-left"></span>Categorías
-  </button>
-  <h3 class="text-info">Lista de preguntas</h3>
-  <div id="accordion1" class="panel-group">
-    <div class="empty-place-info center-block text-info">
-      <br><p>Aquí se muestran las preguntas para su gestión</p><br>
-    </div>
-    <!-- <div class="group">
-      <div class="acc_title">
-          <span>Título: "Pregunta 1"</span>
-          <span class="pull-right label label-default">Tipo 1</span>
-      </div>
-      <div>
-        <p>Formato de la pregunta.</p>
-      </div>
-    </div> -->
+<div class="col-sm-4">
+  <div id='left-panel' class="left-panel center-block">
+    <button type="button" id="hide-left-panel" class="btn btn-info" style="float: left;">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </button>
+    <h3 class="text-info">Texto GIFT a procesar</h3>
+    <textarea class="form-control mono" id="text_gift_input" cols="30" rows="10"></textarea>
+    <br/>
+    <button class="form-control btn btn-primary" type="button" id="button_gift_input">Procesar texto GIFT</button>
   </div>
 </div>
-<div id='right-panel' class="col-sm-4 right-panel center-block">
-  <button type="button" id="hide-right-panel" class="btn btn-info input-sm" style="float: right;">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </button>
-  <h3 class="text-info">Lista de categorías</h3>
-  <div id="accordion2">
-    <div class="group">
-      <div class="acc_title">
-          <span>Título: "Categoría 1"</span>
-          <span class="pull-right label label-default">Tipo 1</span>
+<div class="col-sm-4">
+  <div id='center-panel' class="center-panel center-block">
+    <button type="button" id="show-left-panel" class="btn btn-info" style="float: left; display: none;">
+      GIFT<span class="glyphicon glyphicon-chevron-right"></span>
+    </button>
+    <button type="button" id="show-right-panel" class="btn btn-info" style="float: right; display: none;">
+      <span class="glyphicon glyphicon-chevron-left"></span>Categorías
+    </button>
+    <h3 class="text-info">Lista de preguntas</h3>
+    <div id="accordion1" class="panel-group">
+      <div class="empty-place-info center-block text-info">
+        <br><p>Aquí se muestran las preguntas para su gestión</p><br>
       </div>
-      <div>
-        <ul>
-          <li>Pregunta 1</li>
-          <li>Pregunta 2</li>
-          <li>Pregunta 3</li>
-        </ul>
-      </div>
-    </div>
-    <div class="group">
-      <div class="acc_title">
-          <span>Título: "Categoría 2"</span>
-          <span class="pull-right label label-default">Tipo 2</span>
-      </div>
-      <div>
-        <ul>
-          <li>Pregunta 4</li>
-          <li>Pregunta 5</li>
-          <li>Pregunta 6</li>
-        </ul>
-      </div>
-    </div>
-    <div class="group">
-      <div class="acc_title">
-          <span>Título: "Categoría 3"</span>
-          <span class="pull-right label label-default">Tipo 3</span>
-      </div>
-      <div>
-        <ul>
-          <li>Pregunta 7</li>
-          <li>Pregunta 8</li>
-          <li>Pregunta 9</li>
-        </ul>
-      </div>
+      <!-- <div class="group">
+        <div class="acc_title">
+            <span>Título: "Pregunta 1"</span>
+            <span class="pull-right label label-default">Tipo 1</span>
+        </div>
+        <div>
+          <p>Formato de la pregunta.</p>
+        </div>
+      </div> -->
     </div>
   </div>
-  <br/>
-  <div id="test_destination"></div>
-  <br/>
+</div>
+<div class="col-sm-4">
+  <div id='right-panel' class="right-panel center-block">
+    <button type="button" id="hide-right-panel" class="btn btn-info" style="float: right;">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </button>
+    <h3 class="text-info">Lista de categorías</h3>
+    <div id="accordion2">
+      <div class="group">
+        <div class="acc_title">
+            <span>Título: "Categoría 1"</span>
+            <span class="pull-right label label-default">Tipo 1</span>
+        </div>
+        <div>
+          <ul>
+            <li>Pregunta 1</li>
+            <li>Pregunta 2</li>
+            <li>Pregunta 3</li>
+          </ul>
+        </div>
+      </div>
+      <div class="group">
+        <div class="acc_title">
+            <span>Título: "Categoría 2"</span>
+            <span class="pull-right label label-default">Tipo 2</span>
+        </div>
+        <div>
+          <ul>
+            <li>Pregunta 4</li>
+            <li>Pregunta 5</li>
+            <li>Pregunta 6</li>
+          </ul>
+        </div>
+      </div>
+      <div class="group">
+        <div class="acc_title">
+            <span>Título: "Categoría 3"</span>
+            <span class="pull-right label label-default">Tipo 3</span>
+        </div>
+        <div>
+          <ul>
+            <li>Pregunta 7</li>
+            <li>Pregunta 8</li>
+            <li>Pregunta 9</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div id="test_destination"></div>
+    <br/>
+  </div>
 </div>

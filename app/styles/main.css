@@ -5954,14 +5954,21 @@ td.visible-print {
     display: none !important;
   }
 }
+/*
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
 }
+
 .jumbotron {
   margin: 50px auto 0 auto;
+}
+*/
+body {
+  margin-left: 1em;
+  margin-right: 1.5em;
 }
 .left-panel,
 .center-panel,
@@ -5971,15 +5978,29 @@ td.visible-print {
   padding: 1em;
   margin: 1em;
 }
+.left-panel {
+  margin-right: 0em;
+}
+.center-panel {
+  margin-right: 0em;
+  margin-left: 0em;
+}
+.right-panel {
+  margin-left: 0em;
+}
 .left-panel h3,
 .center-panel h3,
 .right-panel h3 {
   text-align: center;
-  clear: both;
+  clear: none;
 }
 .btn {
   border-radius: 0px;
   border-width: 2px;
+  font-weight: bold;
+}
+.mono {
+  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
 }
 .question-comment {
@@ -5988,6 +6009,7 @@ td.visible-print {
 footer {
   border-top: 3em solid white;
   padding-top: 1em;
+  padding-right: 1em;
   background-color: #2A6496;
   color: white;
 }
@@ -6018,5 +6040,35 @@ li.footer_text a {
 }
 .empty-place-info p {
   vertical-align: -50%;
+}
+.btn-info {
+  color: #2A6496;
+  background-color: #FFF;
+  border-color: #2A6496;
+}
+.btn-info:hover {
+  color: #39B3D7;
+  background-color: #FFF;
+  border-color: #39B3D7;
+}
+.nav-bar-row,
+a.navbar-brand,
+#myNavbar,
+#myNavbar a {
+  background-color: #2A6496;
+  color: white;
+}
+.navbar-header,
+div#myNavbar {
+  /*padding-bottom: 20px;*/
+  /*background-color: rgb(66, 139, 202);*/
+  min-height: 50px;
+}
+.nav-bar-row {
+  background-color: #2A6496;
+  color: white;
+  padding: 1em;
+  margin: 0em;
+  margin-bottom: 2em;
 }
 /*# sourceMappingURL=/styles/main.css.map */

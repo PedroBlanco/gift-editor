@@ -24,52 +24,54 @@ $('#button_example_extra').click ( function () {parseExample('extra');} );
 
 
 $('#hide-left-panel').click ( function () {
-  $(this).parent().hide('fast');
+  $(this).parent().parent().hide('fast');
   $('#show-left-panel').show('fast');
   // TODO: Aumentar de tamaño el panel de preguntas
-  if ( $('#center-panel').hasClass ( 'col-sm-4' )) {
-    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  if ( $('#center-panel').parent().hasClass ( 'col-sm-4' )) {
+    $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
   } else {
-    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+    $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
   }
 } );
 
 $('#hide-right-panel').click ( function () {
-  $(this).parent().hide('fast');
+  $(this).parent().parent().hide('fast');
   $('#show-right-panel').show('fast');
   // TODO: Aumentar de tamaño el panel de preguntas
-  if ( $('#center-panel').hasClass ( 'col-sm-4' )) {
-    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  if ( $('#center-panel').parent().hasClass ( 'col-sm-4' )) {
+    $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
   } else {
-    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+    $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
   }
 } );
 
 $('#show-left-panel').click ( function () {
   $(this).hide('fast');
-  $('#left-panel').show('fast');
+  $('#left-panel').parent().show('fast');
   // TODO: Disminuir de tamaño el panel de preguntas
-  if ( $('#center-panel').hasClass ( 'col-sm-8' )) {
-    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  if ( $('#center-panel').parent().hasClass ( 'col-sm-8' )) {
+    $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
   } else {
-    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+    $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
   }
 } );
 
 $('#show-right-panel').click ( function () {
   $(this).hide('fast');
-  $('#right-panel').show('fast');
+  $('#right-panel').parent().show('fast');
   // TODO: Disminuir de tamaño el panel de preguntas
-  if ( $('#center-panel').hasClass ( 'col-sm-8' )) {
-    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  if ( $('#center-panel').parent().hasClass ( 'col-sm-8' )) {
+    $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
   } else {
-    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+    $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
   }
 } );
 
 
 $('#button_gift_input').click( function () {
   try {
+    $('#accordion1 div.empty-place-info').toggle();
+    
     parseText('#text_gift_input', '#accordion1' );
   } catch ( myException ) {
     if ( PARSE_DEBUG ) {
