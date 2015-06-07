@@ -15,7 +15,7 @@ equals four.
 ::T1d::Water molecule is composed by {=1 =one} atom of Oxygen and {=2 =two} atoms of Hidrogen.
 
 // Tipo: matching
-::T2:: Which animal eats which food? { =cat -> cat food =dog -> dog food }
+::T2:: Which animal eats which food? { =cat -> cat food =dog -> dog food =fish -> fish food }
 
 // Tipo essay
 ::T3a::Q1

@@ -1,0 +1,41 @@
+// Tipo: fill in the blanks - end
+::T1a::Two plus two
+equals {=four =4}
+
+// Tipo: fill in the blanks - middle
+::T1b::Two plus {=two =2}
+equals four.
+
+// Tipo: fill in the blanks - start
+::T1c::{=Two =2} plus two
+equals four.
+
+// Tipo: matching
+::Food for animals:: Which animal eats which food?
+{ =cat -> cat food =dog -> dog food =fish -> fish food }
+
+// Tipo: description/instructions (not really a question)
+::Descripción del examen::Este es un examen
+de prueba en el que no se pueden usar ni
+lápiz ni papel
+
+// Tipo essay
+::Opinión sobre texto de relleno::Escriba su
+opinión sobre si el texto de relleno
+llamado "Lorem ipsum dolor" debería actualizarse a
+los tiempos o debería seguir intacto
+{}
+
+// Tipo: True/false
+::Lengua - codos::
+¿Puede usted llegar con su lengua a
+cualquiera de sus dos codos?
+{F}
+
+// Tipo: math tolerance question
+::Platos de un menú::¿Cuántos platos
+tiene un menú del día? {#2:1}
+
+// Tipo: math range question
+::Entre 3 y 7::Dígame un número entre
+3 y 7 {#3..7}

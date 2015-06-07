@@ -50,9 +50,10 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.live %>/*.html',
-          '{.tmp,<%= yeoman.live %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.live %>}/scripts/{,*/}*.js',
-          '<%= yeoman.live %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.live %>/styles/{,*/}*.css',
+          '<%= yeoman.live %>/scripts/{,*/}*.js',
+          '<%= yeoman.live %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.live %>/styles/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -69,7 +70,7 @@ module.exports = function (grunt) {
         options: {
           open: true,
           base: [
-            '.tmp',
+            // '.tmp',
             '<%= yeoman.live %>'
           ]
         }
@@ -78,7 +79,7 @@ module.exports = function (grunt) {
         options: {
           port: 9001,
           base: [
-            '.tmp',
+            // '.tmp',
             'test',
             '<%= yeoman.app %>'
           ]
@@ -174,6 +175,7 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+            '<%= yeoman.dist %>/styles/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
             '<%= yeoman.dist %>/fonts/{,*/}*.*'
           ]
         }
@@ -255,7 +257,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             'fonts/{,*/}*.*',
             '.htaccess',
-            'images/{,*/}*.{webp,gif}',
+            'images/{,*/}*.{webp,gif,png}',
+            'styles/images/{,*/}*.{webp,gif,png}',
             'styles/*.css',
             'styles/main.css.map',
             'scripts/{,*/}*.js',
@@ -278,7 +281,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             'fonts/{,*/}*.*',
             '.htaccess',
-            'images/{,*/}*.{webp,gif}'
+            'styles/images/{,*/}*.{webp,gif.png}',
+            'images/{,*/}*.{webp,gif.png}'
           ]
         }]
       }
