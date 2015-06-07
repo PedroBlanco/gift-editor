@@ -1,12 +1,24 @@
-<div class="row col-sm-4 left-pannel center-block">
-  <h3 class="center-block">Texto GIFT a procesar</h3>
+<div id='left-panel' class="col-sm-4 left-panel center-block">
+  <button type="button" id="hide-left-panel" class="btn btn-info input-sm" style="float: left;">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </button>
+  <h3 class="text-info">Texto GIFT a procesar</h3>
   <textarea class="form-control" id="text_gift_input" cols="30" rows="10"></textarea>
   <br/>
-  <button class="form-control btn btn-primary" type="button" id="button_gift_input" class="btn btn-default">Procesar texto GIFT</button>
+  <button class="form-control btn btn-primary" type="button" id="button_gift_input">Procesar texto GIFT</button>
 </div>
-<div class="row col-sm-4 center-pannel center-block">
-  <h3 class="center-block">Lista de preguntas</h3>
+<div id='center-panel' class="col-sm-4 center-panel center-block">
+  <button type="button" id="show-left-panel" class="btn btn-info input-sm" style="float: left; display: none;">
+    GIFT<span class="glyphicon glyphicon-chevron-right"></span>
+  </button>
+  <button type="button" id="show-right-panel" class="btn btn-info input-sm" style="float: right; display: none;">
+    <span class="glyphicon glyphicon-chevron-left"></span>Categorías
+  </button>
+  <h3 class="text-info">Lista de preguntas</h3>
   <div id="accordion1" class="panel-group">
+    <div class="empty-place-info center-block text-info">
+      <br><p>Aquí se muestran las preguntas para su gestión</p><br>
+    </div>
     <!-- <div class="group">
       <div class="acc_title">
           <span>Título: "Pregunta 1"</span>
@@ -18,8 +30,11 @@
     </div> -->
   </div>
 </div>
-<div class="row col-sm-4 right-pannel center-block">
-  <h3 class="center-block">Lista de categorías</h3>
+<div id='right-panel' class="col-sm-4 right-panel center-block">
+  <button type="button" id="hide-right-panel" class="btn btn-info input-sm" style="float: right;">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </button>
+  <h3 class="text-info">Lista de categorías</h3>
   <div id="accordion2">
     <div class="group">
       <div class="acc_title">

@@ -23,6 +23,50 @@ $('#button_example_4').click ( function () {parseExample(4);} );
 $('#button_example_extra').click ( function () {parseExample('extra');} );
 
 
+$('#hide-left-panel').click ( function () {
+  $(this).parent().hide('fast');
+  $('#show-left-panel').show('fast');
+  // TODO: Aumentar de tamaño el panel de preguntas
+  if ( $('#center-panel').hasClass ( 'col-sm-4' )) {
+    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  } else {
+    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+  }
+} );
+
+$('#hide-right-panel').click ( function () {
+  $(this).parent().hide('fast');
+  $('#show-right-panel').show('fast');
+  // TODO: Aumentar de tamaño el panel de preguntas
+  if ( $('#center-panel').hasClass ( 'col-sm-4' )) {
+    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  } else {
+    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+  }
+} );
+
+$('#show-left-panel').click ( function () {
+  $(this).hide('fast');
+  $('#left-panel').show('fast');
+  // TODO: Disminuir de tamaño el panel de preguntas
+  if ( $('#center-panel').hasClass ( 'col-sm-8' )) {
+    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  } else {
+    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+  }
+} );
+
+$('#show-right-panel').click ( function () {
+  $(this).hide('fast');
+  $('#right-panel').show('fast');
+  // TODO: Disminuir de tamaño el panel de preguntas
+  if ( $('#center-panel').hasClass ( 'col-sm-8' )) {
+    $('#center-panel').toggleClass('col-sm-4').toggleClass('col-sm-8');
+  } else {
+    $('#center-panel').toggleClass('col-sm-8').toggleClass('col-sm-12');
+  }
+} );
+
 
 $('#button_gift_input').click( function () {
   try {

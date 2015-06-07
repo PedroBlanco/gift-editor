@@ -5963,14 +5963,19 @@ td.visible-print {
 .jumbotron {
   margin: 50px auto 0 auto;
 }
-.left-pannel {
-  background-color: aliceblue;
+.left-panel,
+.center-panel,
+.right-panel {
+  border: 3px solid #2A6496;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em;
 }
-.center-pannel {
-  background-color: lightgoldenrodyellow;
-}
-.right-pannel {
-  background-color: blanchedalmond;
+.left-panel h3,
+.center-panel h3,
+.right-panel h3 {
+  text-align: center;
+  clear: both;
 }
 .btn {
   border-radius: 0px;
@@ -5979,5 +5984,39 @@ td.visible-print {
 }
 .question-comment {
   font-style: italic;
+}
+footer {
+  border-top: 3em solid white;
+  padding-top: 1em;
+  background-color: #2A6496;
+  color: white;
+}
+li.footer_title {
+  font-weight: bolder;
+  list-style-type: none;
+  text-align: center;
+  color: inherit;
+}
+li.footer_text {
+  list-style-type: none;
+  text-align: left;
+  color: inherit;
+}
+li.footer_text a {
+  color: inherit;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.empty-place-info {
+  border: 3px dashed #2A6496;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 2em;
+  min-height: 6em;
+  text-align: center;
+  vertical-align: -50%;
+}
+.empty-place-info p {
+  vertical-align: -50%;
 }
 /*# sourceMappingURL=/styles/main.css.map */

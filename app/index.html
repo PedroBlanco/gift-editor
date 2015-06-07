@@ -4,24 +4,35 @@ Here comes the full html head node
 <body >
 <div class="container-fluid">
 
+  <span class="row">
   <!-- process:include include/nav_bar.html -->
   Here comes the navigation bar
   <!-- /process -->
+  </span>
 
-  <!-- NO-process:include include/tabs_set_tests.html -->
-  <!-- Here comes the initial part of the tabbed design used to include several GIFT parser tests -->
-  <!-- NO-/process -->
-      <!-- process:include include/tab_pruebas.html -->
-      Here comes the proposed design for the 3 main panel/columns
-      <!-- /process -->
-  <!-- NO-process:include include/tabs_set_tests_end.html -->
-  <!-- Here comes the final part of the tabbed design used to include several GIFT parser tests -->
-  <!-- NO-/process -->
+  <div class="row">
+    <!-- process:include include/panel-control.html -->
+    Here comes the panel-control bar
+    <!-- /process -->
+  </div>
+
+  <div class="row">
+    <!-- process:include include/tab_pruebas.html -->
+    Here comes the proposed design for the 3 main panel/columns
+    <!-- /process -->
+  </div>
+
+  <div class="row">
+  <!-- process:include include/html_footer.html -->
+    Here comes the footer section
+  <!-- /process -->
+</div>
+
+</div>
 
 <!-- process:include include/html_end_scripts.html -->
 Here comes the final scripts section
 <!-- /process -->
 
-</div>
 </body>
 </html>
