@@ -5977,4 +5977,7 @@ td.visible-print {
   border-width: 2px;
   font-weight: bold;
 }
+.question-comment {
+  font-style: italic;
+}
 /*# sourceMappingURL=/styles/main.css.map */
