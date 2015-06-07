@@ -4,40 +4,6 @@
 'use strict';
 
 
-// var questions_global = [];
-
-// var PARSE_DEBUG = true;
-var PARSE_DEBUG = false;
-
-if ( PARSE_DEBUG ) {
-  var GROWL_DELAY = 0;
-} else {
-  var GROWL_DELAY = 3000;
-}
-
-
-if ( $('#text_gift_input' ).val() === '' ) {
-  $('#text_gift_input' ).val( '// Tipo: fill in the blanks - end\n::T1a::Two plus two\nequals {=four =4}\n\n// Tipo: fill in the blanks - middle\n::T1b::Two plus {=two =2}\nequals four.\n\n// Tipo: fill in the blanks - start\n::T1c::{=Two =2} plus two\nequals four.\n\n// Tipo: matching\n::Food for animals:: Which animal eats which food?\n{ =cat -> cat food =dog -> dog food =fish -> fish food }\n\n// Tipo: description/instructions (not really a question)\n::Descripción del examen::Este es un examen\nde prueba en el que no se pueden usar ni\nlápiz ni papel\n\n// Tipo essay\n::Opinión sobre texto de relleno::Escriba su\nopinión sobre si el texto de relleno\nllamado "Lorem ipsum dolor" debería actualizarse a\nlos tiempos o debería seguir intacto\n{}\n\n// Tipo: True/false\n::Lengua - codos::\n¿Puede usted llegar con su lengua a\ncualquiera de sus dos codos?\n{F}\n\n// Tipo: math tolerance question\n::Platos de un menú::¿Cuántos platos\ntiene un menú del día? {#2:1}\n\n// Tipo: math range question\n::Entre 3 y 7::Dígame un número entre\n3 y 7 {#3..7}\n' );
-}
-
-
-$('#button_gift_input').click( function () {
-  try {
-    parseText('#text_gift_input', '#accordion1' );
-  } catch ( myException ) {
-    if ( PARSE_DEBUG ) {
-      console.error ('Exception caught: ' + myException );
-    }
-    $.bootstrapGrowl( '<strong>Exception caught</strong>: ' +  myException, {
-      type: 'danger',
-      align: 'center',
-      width: 'auto',
-      delay: GROWL_DELAY
-    } );
-  }
-} );
-
-
 function parseText ( selectorText, _dest )
 {
   var _end = {'state':'not_begun', 'message':'Parsing not begun.'};
@@ -294,6 +260,7 @@ function render_description ( _q, _d )
   var _rendered_question = {
     type: 'Descripción',
     title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
     html: '' };
 
   _rendered_question.html = '<form class="form-inline" role="form">';
@@ -317,6 +284,7 @@ function render_essay ( _q, _d )
   var _rendered_question = {
     type: 'Redacción',
     title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
     html: '' };
 
   _rendered_question.html = '<form class="form-inline" role="form">';
@@ -342,6 +310,7 @@ function render_true_false ( _q, _d )
   var _rendered_question = {
     type: 'Verdadero/Falso',
     title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
     html: '' };
 
   _rendered_question.html = '<form class="form-inline" role="form">';
@@ -373,6 +342,7 @@ function render_numeric ( _q, _d )
   var _rendered_question = {
     type: ( ( _d.type == 'numeric-tolerance')?'Tolerancia numérica':'Rango numérico'),
     title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
     html: '' };
 
   _rendered_question.html = '<form class="form-inline" role="form">';
@@ -404,6 +374,7 @@ function render_matching ( _q, _d )
   var _rendered_question = {
     type: 'Emparejar',
     title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
     html: '' };
 
   _rendered_question.html = '<form class="form-inline" role="form">';
@@ -434,6 +405,7 @@ function render_fill_blank ( _q, _d )
   var _rendered_question = {
     type: 'Hueco',
     title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
     html: '' };
 
   _rendered_question.html = '<form class="form-inline" role="form">';
@@ -472,25 +444,17 @@ function render_fill_blank ( _q, _d )
   _rendered_question.html += '</div>';
   _rendered_question.html += '</form>';
 
+  // for ( var _c in _q.Comment ) {
+  //   console.debug ( '+++ Comentario: ' + _q.Comment[_c] );
+  // }
+
   return new_accordion_question ( _rendered_question );
 }
 
 
 function new_accordion_question ( _rq )
 {
-  var _new_question = $('<div class="group"><div class="acc_title"><span>' +  _rq.title + '</span><span class="pull-right label label-default">'+ _rq.type + '</span></div><div>' + _rq.html + '</div></div>' );
+  var _new_question = $('<div class="group"><div class="acc_title"><span>' +  _rq.title + '</span><span class="pull-right label label-default">'+ _rq.type + '</span></div><div><p class="text-info question-comment">' + _rq.comment + '</p><br/>' + _rq.html + '</div></div>' );
 
   return _new_question;
 }
-
-
-
-/*
-for ( x in preguntas ) {
-
-    $('<div>', {class='group'} ).appendTo('#accordion');
-    var _nueva = $(''
-
-    // ver http://stackoverflow.com/a/10619477
-}
-*/
