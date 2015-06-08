@@ -6010,7 +6010,7 @@ footer {
   border-top: 3em solid white;
   padding-top: 1em;
   padding-right: 1em;
-  background-color: #2A6496;
+  background-color: #3B3B3B;
   color: white;
 }
 li.footer_title {
@@ -6070,5 +6070,8 @@ div#myNavbar {
   padding: 1em;
   margin: 0em;
   margin-bottom: 2em;
+}
+#text_gift_input {
+  resize: vertical;
 }
 /*# sourceMappingURL=/styles/main.css.map */

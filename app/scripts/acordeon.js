@@ -44,3 +44,8 @@ $( '#accordion2' )
     }
   });
 });
+
+jQuery.fn.info_on_empty = function ( _selector ) {
+  $( _selector ).show();
+  if ( PARSE_DEBUG ) { console.debug ( 'Mostrando ' + _selector ); }
+};

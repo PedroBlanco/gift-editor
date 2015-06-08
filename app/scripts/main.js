@@ -70,8 +70,6 @@ $('#show-right-panel').click ( function () {
 
 $('#button_gift_input').click( function () {
   try {
-    $('#accordion1 div.empty-place-info').toggle();
-    
     parseText('#text_gift_input', '#accordion1' );
   } catch ( myException ) {
     if ( PARSE_DEBUG ) {
@@ -84,6 +82,7 @@ $('#button_gift_input').click( function () {
       delay: GROWL_DELAY
     } );
   }
+  $('#accordion1').has('div.group').next().hide();
 } );
 
 
@@ -110,3 +109,7 @@ if ( PARSE_DEBUG ) {
 } else {
   var GROWL_DELAY = 3000;
 }
+
+// FIXME: Es posible que haya que usar alguna de las dos siguientes líneas cada vez que alteremos el contenido de accordion1
+$('#accordion1:empty').info_on_empty ( '#accordion1-empty' );
+// $('#accordion1').has('div.group').next().hide();
