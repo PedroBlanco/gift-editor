@@ -6071,7 +6071,8 @@ div#myNavbar {
   margin: 0em;
   margin-bottom: 2em;
 }
-#text_gift_input {
+#text_gift_input,
+#text_gift_output {
   resize: vertical;
 }
 /*# sourceMappingURL=/styles/main.css.map */

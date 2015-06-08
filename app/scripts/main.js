@@ -1,5 +1,6 @@
-/*jslint node: true */
-/*jslint multistr: true */
+/* jslint node: true */
+/* jshint camelcase: false */
+/* jslint multistr: true */
 'use strict';
 
 console.log('Iniciando Editor GIFT GBL-1');
@@ -83,6 +84,21 @@ $('#button_gift_input').click( function () {
     } );
   }
   $('#accordion1').has('div.group').next().hide();
+} );
+
+
+$('#button_gift_output').click( function () {
+  $('#text_gift_output').val( accordion_to_GIFT ( '#accordion1' ) );
+
+  // Mostramos los controles de salida del GIFT
+  $('#text_gift_output').prev().show();
+  $('#text_gift_output').show();
+
+  // Ocultamos los controles de entrada de GIFT
+  $('#text_gift_input').prev().hide();
+  $('#text_gift_input').hide();
+  $('#text_gift_input').next().hide();
+  $('#text_gift_input').next().next().hide();
 } );
 
 

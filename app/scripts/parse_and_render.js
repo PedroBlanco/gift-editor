@@ -300,7 +300,6 @@ function render_essay ( _q, _d )
 }
 
 
-
 function render_true_false ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
@@ -330,7 +329,6 @@ function render_true_false ( _q, _d )
 
   return new_accordion_question ( _rendered_question );
 }
-
 
 
 function render_numeric ( _q, _d )
@@ -454,7 +452,7 @@ function render_fill_blank ( _q, _d )
 
 function new_accordion_question ( _rq )
 {
-  var _new_question = $('<div class="group"><div class="acc_title"><span>' +  _rq.title + '</span><span class="pull-right label label-default">'+ _rq.type + '</span></div><div><p class="text-info question-comment">' + _rq.comment + '</p><br/>' + _rq.html + '</div></div>' );
+  var _new_question = $('<div class="group"><div class="acc_title"><span class="question-title">' +  _rq.title + '</span><span class="pull-right label label-default question-type">'+ _rq.type + '</span></div><div><p class="text-info question-comment">' + _rq.comment + '</p><br/><div class="question-body">' + _rq.html + '</div></div></div>' );
 
   return _new_question;
 }
