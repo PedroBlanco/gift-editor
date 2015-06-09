@@ -4,13 +4,13 @@
 'use strict';
 
 
-function extract_question_GIFT ( _body, _type )
+var extract_question_GIFT = function extract_question_GIFT ( _body, _type )
 {
   return '';
 }
 
 
-function accordion_to_GIFT ( _selector )
+var accordion_to_GIFT = function accordion_to_GIFT ( _selector )
 {
   var _GIFT_text = '';
 

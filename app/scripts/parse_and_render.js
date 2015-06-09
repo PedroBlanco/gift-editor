@@ -4,7 +4,7 @@
 'use strict';
 
 
-function parseText ( selectorText, _dest )
+var parseText = function parseText ( selectorText, _dest )
 {
   var _end = {'state':'not_begun', 'message':'Parsing not begun.'};
   var _origen = $(selectorText).val().trim();
@@ -116,7 +116,7 @@ function parseText ( selectorText, _dest )
 }
 
 
-function render_questions ( _qs, _dest )
+var render_questions = function render_questions ( _qs, _dest )
 {
   if ( _dest === undefined ) {
   _dest = '#accordion1';
@@ -165,7 +165,7 @@ function render_questions ( _qs, _dest )
 }
 
 
-function detect_question_type ( _q )
+var detect_question_type = function detect_question_type ( _q )
 {
   var _detected = false;
 
@@ -251,7 +251,7 @@ function detect_question_type ( _q )
 }
 
 
-function render_description ( _q, _d )
+var render_description = function render_description ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
     console.log ( '--- Rendering description' );
@@ -275,7 +275,7 @@ function render_description ( _q, _d )
 }
 
 
-function render_essay ( _q, _d )
+var render_essay = function render_essay ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
     console.log ( '--- Rendering essay' );
@@ -300,7 +300,7 @@ function render_essay ( _q, _d )
 }
 
 
-function render_true_false ( _q, _d )
+var render_true_false = function render_true_false ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
     console.log ( '--- Rendering true/false' );
@@ -331,7 +331,7 @@ function render_true_false ( _q, _d )
 }
 
 
-function render_numeric ( _q, _d )
+var render_numeric = function render_numeric ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
     console.log ( '--- Rendering numeric ' + _d.type );
@@ -363,7 +363,7 @@ function render_numeric ( _q, _d )
 }
 
 
-function render_matching ( _q, _d )
+var render_matching = function render_matching ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
     console.log ( '--- Rendering matching' );
@@ -394,7 +394,7 @@ function render_matching ( _q, _d )
 }
 
 
-function render_fill_blank ( _q, _d )
+var render_fill_blank = function render_fill_blank ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
     console.log ( '--- Rendering fill blank - ' + JSON.stringify ( _q.Text.Question ) );
@@ -450,7 +450,7 @@ function render_fill_blank ( _q, _d )
 }
 
 
-function new_accordion_question ( _rq )
+var new_accordion_question = function new_accordion_question ( _rq )
 {
   var _new_question = $('<div class="group"><div class="acc_title"><span class="question-title">' +  _rq.title + '</span><span class="pull-right label label-default question-type">'+ _rq.type + '</span></div><div><p class="text-info question-comment">' + _rq.comment + '</p><br/><div class="question-body">' + _rq.html + '</div></div></div>' );
 
