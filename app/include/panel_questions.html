@@ -1,0 +1,68 @@
+<div class="col-sm-4">
+  <div id='center-panel' class="center-panel center-block">
+    <button type="button" id="show-left-panel" class="btn btn-info" style="float: left; display: none;">
+      GIFT<span class="glyphicon glyphicon-chevron-right"></span>
+    </button>
+    <button type="button" id="show-right-panel" class="btn btn-info" style="float: right; display: none;">
+      <span class="glyphicon glyphicon-chevron-left"></span>Categorías
+    </button>
+    <div class="dropdown dropdown-questions-operations">
+      <a id="dropdown_questions" role="button" data-toggle="dropdown" class="btn btn-info" data-target="#" href="#">
+        <span class="glyphicon glyphicon-tasks"></span>
+      </a>
+      <!-- Multi-level dropdown from http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3 -->
+      <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+        <li class="dropdown-submenu">
+          <a tabindex="-1" href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Añadir...</a>
+          <ul class="dropdown-menu">
+            <li><a tabindex="-1" href="#">Descripción</a></li>
+            <li><a tabindex="-1" href="#">Redacción</a></li>
+            <li class="dropdown-submenu">
+              <a href="#">Rellenar un hueco</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Al principio</a></li>
+                <li><a href="#">Enmedio</a></li>
+              	<li><a href="#">Al final</a></li>
+              </ul>
+            </li>
+            <li><a tabindex="-1" href="#">Emparejar</a></li>
+            <li><a tabindex="-1" href="#">Verdadero/Falso</a></li>
+            <li class="dropdown-submenu">
+              <a href="#">Numérica</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Con rango</a></li>
+                <li><a href="#">Con tolerancia</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="dropdown-submenu">
+          <a tabindex="-1" href="#"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Eliminar...</a>
+          <ul class="dropdown-menu">
+            <li><a tabindex="-1" href="#" id="remove-all-questions">Todas las preguntas</a></li>
+            <li><a tabindex="-1" href="#">Las preguntas seleccionadas</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2 class="text-info">Lista de preguntas</h2><br>
+    <div id="accordion1" class="panel-group">
+      <!-- <div class="group">
+        <div class="acc_title">
+            <span>Título: "Pregunta 1"</span>
+            <span class="pull-right label label-default">Tipo 1</span>
+        </div>
+        <div>
+          <p class="text-info question-comment">
+            Comentario
+          </p>
+          Pregunta
+        </div>
+      </div> -->
+    </div>
+    <div id="accordion1-empty" class="empty-place-info center-block text-info" style="display: none;">
+      <br><p>Aquí se muestran las preguntas para su gestión</p><br>
+    </div>
+  </div>
+</div>
