@@ -89,8 +89,16 @@ var events_init = function events_init ()
 
 
   $('#button_gift_output').click( function () {
-    $('#text_gift_output').val( accordion_to_GIFT ( '#accordion1' ) );
+    if ( PARSE_DEBUG ) {
+      console.debug ( '> Generando GIFT: Inicio' );
+    }
 
+    $('#text_gift_input').val( accordion_to_GIFT ( '#accordion1' ) );
+
+    if ( PARSE_DEBUG ) {
+      console.debug ( '< Generando GIFT: Fin' );
+    }
+    /*
     // Mostramos los controles de salida del GIFT
     $('#text_gift_output').prev().show();
     $('#text_gift_output').show();
@@ -100,6 +108,7 @@ var events_init = function events_init ()
     $('#text_gift_input').hide();
     $('#text_gift_input').next().hide();
     $('#text_gift_input').next().next().hide();
+    */
   } );
 
 

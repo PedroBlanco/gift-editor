@@ -6006,6 +6006,9 @@ body {
 .question-comment {
   font-style: italic;
 }
+div.acc_title span.question-type {
+  float: right;
+}
 footer {
   border-top: 3em solid white;
   padding-top: 1em;
@@ -6074,5 +6077,11 @@ div#myNavbar {
 #text_gift_input,
 #text_gift_output {
   resize: vertical;
+}
+div.acc_title span.glyphicon-move {
+  float: left;
+}
+div.acc_title span.glyphicon-remove {
+  float: right;
 }
 /*# sourceMappingURL=/styles/main.css.map */

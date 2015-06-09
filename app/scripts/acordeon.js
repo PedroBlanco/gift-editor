@@ -13,8 +13,9 @@ var init_accordion = function init_accordion ()
     })
     .sortable({
       axis: 'y',
-  //    handle: 'div.acc_title',
-      handle: 'span.ui-accordion-header-icon',
+      handle: 'div.acc_title',
+      // handle: 'span.ui-accordion-header-icon',
+      // handle: 'span.glyphicon-move',
       stop: function( event, ui ) {
         // IE doesn't register the blur when sorting
         // so trigger focusout handlers to remove .ui-state-focus
@@ -35,8 +36,7 @@ var init_accordion = function init_accordion ()
     })
     .sortable({
       axis: 'y',
-  //    handle: 'div.acc_title',
-      handle: 'span.ui-accordion-header-icon',
+      handle: 'div.acc_title',
       stop: function( event, ui ) {
         // IE doesn't register the blur when sorting
         // so trigger focusout handlers to remove .ui-state-focus
