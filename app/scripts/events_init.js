@@ -120,4 +120,24 @@ var events_init = function events_init ()
   $('#accordion1:empty').info_on_empty ( '#accordion1-empty' );
   // $('#accordion1').has('div.group').next().hide();
 
+
+  // Eliminar pregunta
+  $('#accordion1').on('click', 'button.remove-question' ,function () {
+    var _id = $(this).parent().parent().parent().parent().parent().attr('id');
+
+    // if ( PARSE_DEBUG ) {
+      console.log ( 'Eliminando: #' + _id + ' - ' +
+        $(this).parent().parent().parent().parent().prev().children('span.question-title').text()
+      );
+    // }
+
+    $('#modal_remove_question').on('click', 'button.btn-danger', function () {
+      $( '#' + _id ).remove();
+    });
+
+    $("#modal_remove_question").modal();
+
+  } );
+
+
 }

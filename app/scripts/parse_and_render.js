@@ -453,17 +453,36 @@ var render_fill_blank = function render_fill_blank ( _q, _d )
 var new_accordion_question = function new_accordion_question ( _rq )
 {
   var _new_question = $(
-    '<div class="group"><div class="acc_title">' +
-    '<span class="label label-default question-type">'+ _rq.type + '</span>' +
-    '<span class="question-title">' + _rq.title + '</span>' +
-    '</div><div>' +
-    '<div class="question-operations"><div class="btn-group btn-group-justified">' +
-    '<div class="btn-group"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Editar</button></div>' +
-    '<div class="btn-group"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>&nbsp;Eliminar</button>' +
-    '</div></div></div>' +
-    '<br/><p class="text-info question-comment">' + _rq.comment + '</p><br/>' +
-    '<div class="question-body">' + _rq.html + '</div></div></div>'
+    '<div class="group" id="' + _uniqueId ( '_question' ) + '">' +
+      '<div class="acc_title">' +
+        '<span class="label label-default question-type">'+ _rq.type + '</span>' +
+        '<span class="question-title">' + _rq.title + '</span>' +
+      '</div>' +
+      '<div class="question-details">' +
+        '<div class="question-operations">' +
+          '<div class="btn-group btn-group-justified">' +
+            '<div class="btn-group">' +
+              '<button type="button" class="btn btn-info edit-question"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Editar</button>' +
+            '</div>' +
+            '<div class="btn-group">' +
+              '<button type="button" class="btn btn-danger remove-question"><span class="glyphicon glyphicon-remove"></span>&nbsp;Eliminar</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<br/><p class="text-info question-comment">' + _rq.comment + '</p><br/>' +
+        '<div class="question-body">' + _rq.html + '</div>' +
+      '</div>' +
+    '</div>'
   );
 
   return _new_question;
 }
+
+
+// Visto en http://stackoverflow.com/a/14044646
+var idCounter = 0;
+var _uniqueId = function _uniqueId ( prefix )
+{
+  var id = '' + ++idCounter;
+  return prefix ? prefix + id : id;
+};
