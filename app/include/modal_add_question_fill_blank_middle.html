@@ -11,15 +11,19 @@
         <form role="form" id="form-add-question-fill-blank-middle">
          <div class="form-group">
            <label for="form-add-question-fill-blank-middle-title">Título:</label>
-           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-title">
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-title" placeholder="Opcional">
          </div>
          <div class="form-group">
            <label for="form-add-question-fill-blank-middle-comment">Comentario:</label>
-           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-comment">
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-comment" placeholder="Opcional">
          </div>
          <div class="form-group">
-           <label for="form-add-question-fill-blank-middle-text">Texto de la pregunta:</label>
-           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-text" required="required">
+           <label for="form-add-question-fill-blank-middle-text-begin">Pregunta:</label>
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-text-begin" required="required" placeholder="Obligatorio - Texto de la pregunta antes del hueco">
+           <br>
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-void" required="required" placeholder="Obligatorio - Hueco para respuesta">
+           <br>
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-text-finish" required="required" placeholder="Obligatorio - Texto de la pregunta después del hueco">
          </div>
        </form>
       </div>

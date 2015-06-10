@@ -11,15 +11,34 @@
         <form role="form" id="form-add-question-matching">
          <div class="form-group">
            <label for="form-add-question-matching-title">Título:</label>
-           <input type="text" class="form-control" id="form-add-question-matching-title">
+           <input type="text" class="form-control" id="form-add-question-matching-title" placeholder="Opcional">
          </div>
          <div class="form-group">
            <label for="form-add-question-matching-comment">Comentario:</label>
-           <input type="text" class="form-control" id="form-add-question-matching-comment">
+           <input type="text" class="form-control" id="form-add-question-matching-comment" placeholder="Opcional">
          </div>
          <div class="form-group">
-           <label for="form-add-question-matching-text">Texto de la pregunta:</label>
-           <input type="text" class="form-control" id="form-add-question-matching-text" required="required">
+           <label for="form-add-question-matching-text">Pregunta:</label>
+           <input type="text" class="form-control" id="form-add-question-matching-text" placeholder="Obligatorio" required="required">
+           <br>
+           <p class="form-control-static">Debe rellenar las tres parejas de campos:</p>
+         </div>
+         <div class="form-group">
+           <input class="input-small" type="text" id="form-add-question-matching-pair-1-1" placeholder="Pareja A" value=""/>
+           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+           <input class="input-small" type="text" id="form-add-question-matching-pair-1-2" placeholder="Pareja A" value=""/>
+         </div>
+         <hr>
+         <div class="form-group">
+           <input class="input-small" type="text" id="form-add-question-matching-pair-2-1" placeholder="Pareja B" value=""/>
+           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+           <input class="input-small" type="text" id="form-add-question-matching-pair-2-2" placeholder="Pareja B" value=""/>
+         </div>
+         <hr>
+         <div class="form-group">
+           <input class="input-small" type="text" id="form-add-question-matching-pair-3-1" placeholder="Pareja C" value=""/>
+           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+           <input class="input-small" type="text" id="form-add-question-matching-pair-3-2" placeholder="Pareja C" value=""/>
          </div>
        </form>
       </div>

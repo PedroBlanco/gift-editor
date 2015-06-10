@@ -6133,4 +6133,22 @@ div.acc_title span.glyphicon-remove {
   display: inline;
   float: left;
 }
+.input-mir {
+  width: 20%;
+}
+.input-small {
+  width: 40%;
+}
+.input-medium {
+  width: 60%;
+}
+.input-large {
+  width: 80%;
+}
+.input-xlarge {
+  width: 100%;
+}
+.input-xxlarge {
+  width: 120%;
+}
 /*# sourceMappingURL=/styles/main.css.map */

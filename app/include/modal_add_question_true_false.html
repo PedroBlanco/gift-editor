@@ -11,16 +11,23 @@
         <form role="form" id="form-add-question-true-false">
          <div class="form-group">
            <label for="form-add-question-true-false-title">Título:</label>
-           <input type="text" class="form-control" id="form-add-question-true-false-title">
+           <input type="text" class="form-control" id="form-add-question-true-false-title" placeholder="Opcional">
          </div>
          <div class="form-group">
            <label for="form-add-question-true-false-comment">Comentario:</label>
-           <input type="text" class="form-control" id="form-add-question-true-false-comment">
+           <input type="text" class="form-control" id="form-add-question-true-false-comment" placeholder="Opcional">
          </div>
          <div class="form-group">
-           <label for="form-add-question-true-false-text">Texto de la pregunta:</label>
-           <input type="text" class="form-control" id="form-add-question-true-false-text" required="required">
+           <label for="form-add-question-true-false-text">Pregunta:</label>
+           <input type="text" class="form-control" id="form-add-question-true-false-text" required="required" placeholder="Obligatorio">
          </div>
+        <div class="radio">
+          <input type="radio" name="form-add-question-true-false-optradio1">
+          <label class="control-label" for="form-add-question-true-false-optradio1">&nbsp;Verdadero</label>
+          <br/>
+          <input type="radio" name="form-add-question-true-false-optradio2">
+          <label class="control-label" for="form-add-question-true-false-optradio2">&nbsp;Falso</label>
+        </div>
        </form>
       </div>
       <div class="modal-footer">
