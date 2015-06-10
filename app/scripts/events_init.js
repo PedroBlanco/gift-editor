@@ -119,43 +119,4 @@ var events_init = function events_init ()
   // FIXME: Es posible que haya que usar alguna de las dos siguientes líneas cada vez que alteremos el contenido de accordion1
   $('#accordion1:empty').info_on_empty ( '#accordion1-empty' );
   // $('#accordion1').has('div.group').next().hide();
-
-
-  // Eliminar pregunta
-  $('#accordion1').on('click', 'button.remove-question' ,function () {
-
-    var _id = $(this).parent().parent().parent().parent().parent().attr('id');
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Eliminando: #' + _id + ' - ' +
-        $(this).parent().parent().parent().parent().prev().children('span.question-title').text()
-      );
-    }
-
-    // Activación del botón del modal para eliminar sólo la pregunta origen
-    $('#modal_remove_question').on('click', 'button.btn-danger', function () {
-      $( '#' + _id ).remove();
-    });
-
-    $("#modal_remove_question").modal();
-  });
-
-
-  // Eliminar todas las preguntas
-  $('#remove-all-questions').click( function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Eliminando todas las preguntas' );
-    }
-
-    // Activación del botón del modal de eliminar todas las preguntas
-    $('#modal_remove_all_questions').on('click', 'button.btn-danger', function () {
-      $( '#accordion1' ).children('div.group').each(function () {
-        $(this).remove();
-      });
-      $('#accordion1:empty').info_on_empty ( '#accordion1-empty' );
-    });
-
-    $("#modal_remove_all_questions").modal();
-  } );
 }

@@ -19,3 +19,5 @@ console.log('Iniciando Editor GIFT: GBL-1');
 init_accordion ();
 
 events_init ();
+
+modal_events_init ();
