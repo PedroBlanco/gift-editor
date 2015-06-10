@@ -45,7 +45,7 @@ var parseText = function parseText ( selectorText, _dest )
           if ( PARSE_DEBUG ) {
             var _texto = 'Titulo: "' + _mensaje[0].Title+ '"\n\nComentario: "' + _mensaje[0].Comment+ '"\n\nPregunta: "'+ _mensaje[0].Text.Question+ '"\n\nRespuesta: "' + _mensaje[0].Text.Answer + '"';
           // Mostramos la primera pregunta para asegurarnos que está todo bien
-            $('#test_destination' ).text( _texto );
+            // $('#test_destination' ).text( _texto );
             _end.message = 'Converting (' + selectorText + ') ' + _origen + '" to "' + _texto + '"';
           } else {
             _end.message = 'Correct parsing &nbsp;&nbsp;&nbsp;&nbsp;';
@@ -117,6 +117,11 @@ var parseText = function parseText ( selectorText, _dest )
 
 
 var render_questions = function render_questions ( _qs, _dest )
+/*
+Fill_blank_middle   -> _qs => Array ( { Comment, Title, Text: { Question[2], Answer } )
+Resto de preguntas  -> _qs => Array ( { Comment, Title, Text: { Question, Answer } )
+Selector de destino -> _dest = '#accordion1' normalmente
+*/
 {
   if ( _dest === undefined ) {
   _dest = '#accordion1';
