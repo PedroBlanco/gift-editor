@@ -23,6 +23,8 @@ var modal_events_init = function modal_events_init ()
     // Activación del botón del modal para eliminar sólo la pregunta origen
     $('#modal_remove_question').on('click', 'button.btn-danger', function () {
       $( '#' + _id ).remove();
+      $('#accordion1:empty').info_on_empty ( '#accordion1-empty' );
+      $('#accordion1').children('div.group').first().parent().next().hide();
     });
 
     $('#modal_remove_question').modal();
@@ -41,6 +43,7 @@ var modal_events_init = function modal_events_init ()
       $( '#accordion1' ).children('div.group').each(function () {
         $(this).remove();
       });
+      // FIXME: No es necesario (no funciona?)
       $('#accordion1:empty').info_on_empty ( '#accordion1-empty' );
     });
 
@@ -66,6 +69,10 @@ var modal_events_init = function modal_events_init ()
           Answer: ''
         }
       };
+
+      $('#modal_add_question_description input').each(function(){
+        $(this).val('');
+      });
 
       $( '#accordion1' ).append ( render_description ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
@@ -96,6 +103,10 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      $('#modal_add_question_essay input').each(function(){
+        $(this).val('');
+      });
+
       $( '#accordion1' ).append ( render_essay ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
       $('#accordion1').has('div.group').next().hide();
@@ -124,6 +135,10 @@ var modal_events_init = function modal_events_init ()
           Answer: '{=' + $('#form-add-question-fill-blank-start-void').val() + '}'
         }
       };
+
+      $('#modal_add_question_fill_blank_start input').each(function(){
+        $(this).val('');
+      });
 
       $( '#accordion1' ).append ( render_fill_blank ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
@@ -155,6 +170,10 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      $('#modal_add_question_fill_blank_middle input').each(function(){
+        $(this).val('');
+      });
+
       $( '#accordion1' ).append ( render_fill_blank ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
       $('#accordion1').has('div.group').next().hide();
@@ -183,6 +202,10 @@ var modal_events_init = function modal_events_init ()
           Answer: '{=' + $('#form-add-question-fill-blank-end-void').val() + '}'
         }
       };
+
+      $('#modal_add_question_fill_blank_end input').each(function(){
+        $(this).val('');
+      });
 
       $( '#accordion1' ).append ( render_fill_blank ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
@@ -225,6 +248,10 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      $('#modal_add_question_matching input').each(function(){
+        $(this).val('');
+      });
+
       $( '#accordion1' ).append ( render_matching ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
       $('#accordion1').has('div.group').next().hide();
@@ -254,6 +281,10 @@ var modal_events_init = function modal_events_init ()
           '..' + $('#form-add-question-numeric-range-answer-finish').val() + '}'
         }
       };
+
+      $('#modal_add_question_numeric_range input').each(function(){
+        $(this).val('');
+      });
 
       $( '#accordion1' ).append ( render_numeric ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
@@ -285,6 +316,10 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      $('#modal_add_question_numeric_tolerance input').each(function(){
+        $(this).val('');
+      });
+
       $( '#accordion1' ).append ( render_numeric ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
       $('#accordion1').has('div.group').next().hide();
@@ -313,6 +348,11 @@ var modal_events_init = function modal_events_init ()
           Answer: '{'+ $('input[name="form-add-question-true-false-optradio"]:checked').val() +'}'
         }
       };
+
+      $('#form-add-question-true-false-comment').val('');
+      $('#form-add-question-true-false-title').val('');
+      $('#form-add-question-true-false-text').val('');
+      $('input[name="form-add-question-true-false-optradio"]:checked').prop('checked', false);
 
       $( '#accordion1' ).append ( render_true_false ( _q, detect_question_type ( _q ) ) );
       $( '#accordion1' ).accordion( 'refresh' );
