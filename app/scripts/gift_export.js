@@ -102,7 +102,7 @@ var accordion_to_GIFT = function accordion_to_GIFT ( _selector )
       console.debug ( '*** accordion_to_GIFT - Título:       ' + _title );
       console.debug ( '*** accordion_to_GIFT - Comentario:   ' + _comment );
       console.debug ( '*** accordion_to_GIFT - Pregunta:     ' + _full_question );
-      console.debug ( '*** accordion_to_GIFT - HTML interno: ' + $(this).html() );
+      // console.debug ( '*** accordion_to_GIFT - HTML interno: ' + $(this).html() );
       console.debug ( '***------------------------------------------------------------------------------------***' );
     }
     _GIFT_text += '// ' + _comment + '\n';
