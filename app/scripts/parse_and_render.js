@@ -322,11 +322,13 @@ var render_true_false = function render_true_false ( _q, _d )
   _rendered_question.html += '<div class="form-group form-group-sm">';
   _rendered_question.html +=  '<p class="form-control-static">' + _q.Text.Question + '</p><br/>';
   _rendered_question.html +=  '<div class="radio">';
-  _rendered_question.html +=   '<input type="radio" name="optradio1"' + ((_d.answer=='T')?' checked="checked"':'') + '>';
-  _rendered_question.html +=   '<label class="control-label" for="optradio1">Verdadero</label>';
+  _rendered_question.html +=   '<input type="radio" name="optradio" ' +
+                                ((_d.answer=='T')?'checked="checked"':'disabled') + '>';
+  _rendered_question.html +=   '<label class="control-label">Verdadero</label>';
   _rendered_question.html +=   '<br/>';
-  _rendered_question.html +=   '<input type="radio" name="optradio2"' + ((_d.answer=='F')?' checked="checked"':'') + '>';
-  _rendered_question.html +=   '<label class="control-label" for="optradio2">Falso</label>';
+  _rendered_question.html +=   '<input type="radio" name="optradio" ' +
+                                ((_d.answer=='F')?'checked="checked"':'disabled') + '>';
+  _rendered_question.html +=   '<label class="control-label">Falso</label>';
   _rendered_question.html +=  '</div>';
   _rendered_question.html += '</div>';
 
