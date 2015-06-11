@@ -472,7 +472,7 @@ var new_accordion_question = function new_accordion_question ( _rq )
     '<div class="group" id="' + _uniqueId ( '_question' ) + '">' +
       '<div class="acc_title">' +
         '<span class="label label-default question-type" value="' + _rq.detected_type + '">'+ _rq.type + '</span>' +
-// No podemos usar un checkbox de marca en el título porque el evento al pinchar lo recibe el acordeón y no el checkbox...        
+// No podemos usar un checkbox de marca en el título porque el evento al pinchar lo recibe el acordeón y no el checkbox...
 //        '<input type="checkbox" class="question-selected-mark" name="question-selected" value="">' +
         '<span class="question-title">' + _rq.title + '</span>' +
       '</div>' +
@@ -480,7 +480,7 @@ var new_accordion_question = function new_accordion_question ( _rq )
         '<div class="question-operations">' +
           '<div class="btn-group btn-group-justified">' +
             '<div class="btn-group">' +
-              '<button type="button" class="btn btn-info edit-question"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Editar</button>' +
+              '<button type="button" class="btn btn-info edit-question-' + _rq.detected_type + '"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Editar</button>' +
             '</div>' +
             '<div class="btn-group">' +
               '<button type="button" class="btn btn-danger remove-question"><span class="glyphicon glyphicon-remove"></span>&nbsp;Eliminar</button>' +

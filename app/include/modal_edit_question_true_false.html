@@ -1,0 +1,40 @@
+<div class="modal fade" id="modal_edit_question_true_false" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title">Editar pregunta: Verdadero/Falso</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" id="form-edit-question-true-false">
+         <div class="form-group">
+           <label for="form-edit-question-true-false-title">Título:</label>
+           <input tabindex="1" type="text" class="form-control" id="form-edit-question-true-false-title" placeholder="Opcional">
+         </div>
+         <div class="form-group">
+           <label for="form-edit-question-true-false-comment">Comentario:</label>
+           <input tabindex="2" type="text" class="form-control" id="form-edit-question-true-false-comment" placeholder="Opcional">
+         </div>
+         <div class="form-group">
+           <label for="form-edit-question-true-false-text">Pregunta:</label>
+           <input tabindex="3" type="text" class="form-control" id="form-edit-question-true-false-text" required="required" placeholder="Obligatorio">
+         </div>
+        <div class="radio">
+          <input tabindex="4" type="radio" name="form-edit-question-true-false-optradio" id="form-edit-question-true-false-optradio1" value="T">
+          <label class="control-label" for="form-edit-question-true-false-optradio1">&nbsp;Verdadero</label>
+          <br/>
+          <input tabindex="5" type="radio" name="form-edit-question-true-false-optradio" id="form-edit-question-true-false-optradio2" value="F">
+          <label class="control-label" for="form-edit-question-true-false-optradio2">&nbsp;Falso</label>
+        </div>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button tabindex="7" type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
+        <button tabindex="6" type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span>&nbsp;Editar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
