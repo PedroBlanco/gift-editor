@@ -60,6 +60,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_description').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_description').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-description-comment').val()],
@@ -70,6 +73,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_description input').each(function(){
         $(this).val('');
       });
@@ -93,6 +97,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_essay').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_essay').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-essay-comment').val()],
@@ -103,6 +110,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_essay input').each(function(){
         $(this).val('');
       });
@@ -126,6 +134,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_fill_blank_start').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_fill_blank_start').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-fill-blank-start-comment').val()],
@@ -136,6 +147,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_fill_blank_start input').each(function(){
         $(this).val('');
       });
@@ -159,6 +171,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_fill_blank_middle').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_fill_blank_middle').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-fill-blank-middle-comment').val()],
@@ -170,6 +185,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_fill_blank_middle input').each(function(){
         $(this).val('');
       });
@@ -193,6 +209,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_fill_blank_end').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_fill_blank_end').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-fill-blank-end-comment').val()],
@@ -203,6 +222,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_fill_blank_end input').each(function(){
         $(this).val('');
       });
@@ -226,6 +246,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_matching').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_matching').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-matching-comment').val()],
@@ -248,6 +271,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_matching input').each(function(){
         $(this).val('');
       });
@@ -271,6 +295,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_numeric_range').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_numeric_range').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-numeric-range-comment').val()],
@@ -282,6 +309,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_numeric_range input').each(function(){
         $(this).val('');
       });
@@ -305,6 +333,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_numeric_tolerance').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_numeric_tolerance').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-numeric-tolerance-comment').val()],
@@ -316,6 +347,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#modal_add_question_numeric_tolerance input').each(function(){
         $(this).val('');
       });
@@ -339,6 +371,9 @@ var modal_events_init = function modal_events_init ()
 
     // Activación del botón del modal
     $('#modal_add_question_true_false').on('click', 'button.btn-primary', function () {
+      // Desactivamos el evento asociado al botón recién pulsado (#30)
+      $('#modal_add_question_true_false').off('click', 'button.btn-primary');
+
       // Creamos nueva pregunta en el acordeón
       var _q = {
         Comment: [$('#form-add-question-true-false-comment').val()],
@@ -349,6 +384,7 @@ var modal_events_init = function modal_events_init ()
         }
       };
 
+      // Limpiamos el formulario
       $('#form-add-question-true-false-comment').val('');
       $('#form-add-question-true-false-title').val('');
       $('#form-add-question-true-false-text').val('');

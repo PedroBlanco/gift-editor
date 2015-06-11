@@ -259,7 +259,8 @@ var detect_question_type = function detect_question_type ( _q )
 var render_description = function render_description ( _q, _d )
 {
   if ( PARSE_DEBUG ) {
-    console.log ( '--- Rendering description' );
+    console.log ( '--- Rendering description _q: ' + JSON.stringify ( _q ) );
+    console.log ( '--- Rendering description _d: ' + JSON.stringify ( _d ) );
   }
 
   var _rendered_question = {
