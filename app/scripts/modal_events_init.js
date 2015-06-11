@@ -66,6 +66,32 @@ var modal_events_init = function modal_events_init ()
 
 
 
+  // Eliminar todas las preguntas
+  $('#remove-selected-questions').click( function () {
+
+    if ( PARSE_DEBUG ) {
+      console.log ( 'Eliminando las preguntas seleccionadas' );
+    }
+
+    $('#modal_remove_selected_questions').modal();
+  } );
+
+  // Activación del botón del modal de eliminar todas las preguntas
+  $('#modal_remove_selected_questions').on('click', 'button.btn-danger', function () {
+    $( '#accordion1' ).find('input[name="question-selected"]:checked').each(function () {
+      $(this).remove();
+    });
+    // FIXME: No es necesario (no funciona?)
+    $('#accordion1:empty').info_on_empty ( '#accordion1-empty' );
+  });
+
+  // Programamos el foco en el botón de eliminar para cuando se muestre por completo el modal
+  $('#modal_remove_selected_questions').on('shown.bs.modal', function () {
+    $('#modal_remove_selected_questions button.btn-danger').focus();
+  });
+
+
+
   // Añadir pregunta: descripción
   $('#add-question-description').click( function () {
 
