@@ -4,7 +4,7 @@
 'use strict';
 
 
-var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name )
+var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name, _type )
 {
   console.debug ( '...Asignando de ' + _selector + ' a ' + _name );
 
@@ -16,9 +16,16 @@ var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name )
   $('#form-' + _name + '-title').val(
     $('#' + _selector).find('span.question-title').text()
   );
-  $('#form-' + _name + '-text').val(
-    $('#' + _selector).find('p[name="question-text"]').text()
-  );
+
+  switch ( _type ) {
+    case 'true-false':
+      $('#form-' + _name + '-text').val(
+        $('#' + _selector).find('p[name="question-text"]').text()
+      );
+    break;
+    default:
+      // Si no somos capaces de detectar la pregunta antes de mostrar un modal, tal vez deberíamos parar y mostrar un error
+  }
 }
 
 var asignar_datos_desde_modal = function asignar_datos_desde_modal ( _name, _type )

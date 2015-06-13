@@ -773,119 +773,105 @@ var modal_events_init = function modal_events_init ()
     $('#form-add-question-true-false-title').focus();
   });
 
-  // Editar pregunta: Verdadero/falso
-  $('#accordion1').on('click', 'button.edit-question-true-false', function () {
 
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Editar pregunta: Verdadero/falso' );
-    }
+  var edit_modals = [
+    'edit-question-true-false'
+  ];
 
-    var _id = '';
-    var _dest = 'edit-question-';
-    $(this).parentsUntil('div.group','div.question-details').each(function(){
-      _id = $(this).parent().attr('id');
-      _dest += $(this).parent().attr('question-type');
+  for (var i in edit_modals) {
+    // Editar pregunta
+    $('#accordion1').on('click', 'button.' + edit_modals[i], function () {
+
+      var _id = '';
+      var _dest = 'edit-question-';
+      var _type = '';
+      $(this).parentsUntil('div.group','div.question-details').each(function(){
+        _id = $(this).parent().attr('id');
+        _type = $(this).parent().attr('question-type');
+      });
+      _dest += _type;
+
+      if ( PARSE_DEBUG ) {
+        console.log ( 'Editar pregunta: '+ _type );
+      }
+
+      console.log ( 'Asignando datos '+ _type + ' de ' + _id + ' a ' + _dest );
+
+      asignar_datos_a_modal ( _id, _dest, _type );
+
+      // Activamos el modal
+      $('#modal-' + _dest).modal();
+    } );
+
+
+    // Modal ocultado (tras aceptar los cambios, darle a cancelar, pulsar sobre la X o sobre la zona sombreada)
+    $('#modal-' + edit_modals[i]).on('hidden.bs.modal', function () {
+
+      var _name = $(this).attr('id').substr (6);
+
+      console.debug('Ocultando el modal de validación ' + '#modal-' + _name );
+
+      console.log ( 'Nodo hidden: ' + $(this).attr('id') );
+
+      $( '#modal-' + _name  ).removeData('submit-in-progress' );
+      $( '#form-' + _name  ).validator('destroy').off('submit');
+
+      limpiar_formulario ( _name );
+
+    } );
+
+    // Modal mostrado (cargamos los datos y ponemos el foco)
+    $('#modal-' + edit_modals[i]).on('shown.bs.modal', function () {
+      var _name = $(this).attr('id').substr(6);
+      var _target = $(this).attr('target');
+      var _question_type = $(this).attr('question-type');
+
+      $('#form-' + _name + ' input:first').focus();
+
+      $( '#modal-' + _name  ).data('submit-in-progress', 'false' );
+
+      // Activamos la validación, desactivando submit si no valida
+      $( '#form-' + _name  ).validator({disable:'true'}).on('submit', function (e) {
+        console.debug('Submit en el modal ' + '#modal-' + _name );
+        // if ( $( '#modal-' + _name  ).data('submit-in-progress') === 'false' ) {
+          // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
+          $( '#modal-' + _name  ).data('submit-in-progress', 'true');
+
+          if (e.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.error ('Error: validacion fallida ' + '#modal-' + _name );
+            // alert ('Error: validacion fallida ' + '#modal-' + _name );
+          } else {
+
+            console.log ( 'Guardando datos de ' + _name + '/' + _question_type + ' a ' + _target );
+            var _q = asignar_datos_desde_modal ( _name, _question_type );
+
+            console.log ( 'Datos devueltos: ' + JSON.stringify(_q) );
+
+            $( '#modal-' + _name  ).modal('hide');
+
+            var _result = render_individual_question ( _q  );
+
+            console.log ( 'Resultado: ' + _result );
+
+            $( _target ).replaceWith ( _result );
+            $( '#accordion1' ).accordion( 'refresh' );
+
+            // No haría falta ocultar el texto info_on_empty al estar editando una pregunta existente
+            $('#accordion1').has('div.group').next().hide();
+
+            // everything looks good!
+            console.info ('Exito: validacion exitosa ' + '#modal-' + _name );
+            // alert ('Exito: validacion exitosa ' + '#modal-' + _name );
+          }
+        // } else {
+        //   $( '#modal-' + _name  ).data('submit-in-progress', 'false' );
+        // }
+        return false;
+      });
+
     });
-
-    console.log ( 'Asignando datos de ' + _id + ' a ' + _dest );
-
-    asignar_datos_a_modal ( _id, _dest );
-
-    // Activamos el modal
-    $('#modal-' + _dest).modal();
-  } );
-
-/*
-  // Activación del botón de aceptar del modal
-  $('#modal-edit-question-true-false').on('click', 'button.btn-primary', function () {
-
-    // nombre del modal y del formulario
-    var _name ='';
-    // id de la pregunta origen de los datos y a la que vamos a sustituir
-    var _target='';
-    // El tipo de pregunta para orientar el guardado desde el formulario origen
-    var _question_type = '';
-    // La pregunta que vamos a guardar en el acordeón
-    var _q;
-
-    $(this).parentsUntil('div.modal','div.modal-dialog').each(function(){
-      _name = $(this).parent().attr('id').substr(6);
-      _target = $(this).parent().attr('target');
-      _question_type = $(this).parent().attr('question-type');
-    });
-
-
-  });
-*/
-  // Modal ocultado (tras aceptar los cambios, darle a cancelar, pulsar sobre la X o sobre la zona sombreada)
-  $('#modal-edit-question-true-false').on('hidden.bs.modal', function () {
-
-    var _name = $(this).attr('id').substr (6);
-
-    console.debug('Ocultando el modal de validación ' + '#modal-' + _name );
-
-    console.log ( 'Nodo hidden: ' + $(this).attr('id') );
-
-    $( '#modal-' + _name  ).removeData('submit-in-progress' );
-    $( '#form-' + _name  ).validator('destroy').off('submit');
-
-    limpiar_formulario ( _name );
-
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-edit-question-true-false').on('shown.bs.modal', function () {
-    var _name = $(this).attr('id').substr(6);
-    var _target = $(this).attr('target');
-    var _question_type = $(this).attr('question-type');
-
-    $('#form-' + _name + ' input:first').focus();
-
-    $( '#modal-' + _name  ).data('submit-in-progress', 'false' );
-
-    // Activamos la validación, desactivando submit si no valida
-    $( '#form-' + _name  ).validator({disable:'true'}).on('submit', function (e) {
-      console.debug('Submit en el modal ' + '#modal-' + _name );
-      // if ( $( '#modal-' + _name  ).data('submit-in-progress') === 'false' ) {
-        // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
-        $( '#modal-' + _name  ).data('submit-in-progress', 'true');
-
-        if (e.isDefaultPrevented()) {
-          // handle the invalid form...
-          console.error ('Error: validacion fallida ' + '#modal-' + _name );
-          // alert ('Error: validacion fallida ' + '#modal-' + _name );
-        } else {
-
-          console.log ( 'Guardando datos de ' + _name + '/' + _question_type + ' a ' + _target );
-          var _q = asignar_datos_desde_modal ( _name, _question_type );
-
-          console.log ( 'Datos devueltos: ' + JSON.stringify(_q) );
-
-          $( '#modal-' + _name  ).modal('hide');
-
-          var _result = render_individual_question ( _q  );
-
-          console.log ( 'Resultado: ' + _result );
-
-          $( _target ).replaceWith ( _result );
-          $( '#accordion1' ).accordion( 'refresh' );
-
-          // No haría falta ocultar el texto info_on_empty al estar editando una pregunta existente
-          $('#accordion1').has('div.group').next().hide();
-
-          // everything looks good!
-          console.info ('Exito: validacion exitosa ' + '#modal-' + _name );
-          alert ('Exito: validacion exitosa ' + '#modal-' + _name );
-        }
-      // } else {
-      //   $( '#modal-' + _name  ).data('submit-in-progress', 'false' );
-      // }
-      return false;
-    });
-
-  });
-
-
+  }
 /*
   // Prueba de validación
   $('#modal-test-validator-danger').click (function() {
