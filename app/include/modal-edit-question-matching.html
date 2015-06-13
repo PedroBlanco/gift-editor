@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-edit-question-matching" role="dialog">
+<div class="modal fade" id="modal-edit-question-matching" question-type="matching" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -7,46 +7,47 @@
         <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
         <h4 class="modal-title">Editar pregunta: Emparejar</h4>
       </div>
-      <div class="modal-body">
-        <form role="form" id="form-edit-question-matching">
+      <form role="form" id="form-edit-question-matching">
+        <div class="modal-body">
          <div class="form-group">
            <label for="form-edit-question-matching-title">Título:</label>
-           <input tabindex="1" type="text" class="form-control" id="form-edit-question-matching-title" placeholder="Opcional">
+           <input type="text" class="form-control" id="form-edit-question-matching-title" placeholder="Opcional">
          </div>
          <div class="form-group">
            <label for="form-edit-question-matching-comment">Comentario:</label>
-           <input tabindex="2" type="text" class="form-control" id="form-edit-question-matching-comment" placeholder="Opcional">
+           <input type="text" class="form-control" id="form-edit-question-matching-comment" placeholder="Opcional">
          </div>
          <div class="form-group">
            <label for="form-edit-question-matching-text">Pregunta:</label>
-           <input tabindex="3" type="text" class="form-control" id="form-edit-question-matching-text" placeholder="Obligatorio" required="required">
+           <input type="text" class="form-control" id="form-edit-question-matching-text" placeholder="Obligatorio" required="required">
            <br>
            <p class="form-control-static">Debe rellenar las tres parejas de campos:</p>
          </div>
-         <div class="form-group">
-           <input tabindex="4" class="input-small" type="text" id="form-edit-question-matching-pair-1-1" placeholder="Pareja A" value=""/>
+         <div class="form-group matching-pair" id="form-edit-question-matching-pair-1">
+           <input class="input-small" name="first" type="text" id="form-edit-question-matching-pair-1-1" name="first" placeholder="" value="" required="required"/>
            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-           <input tabindex="5" class="input-small" type="text" id="form-edit-question-matching-pair-1-2" placeholder="Pareja A" value=""/>
+           <input class="input-small" name="second" type="text" id="form-edit-question-matching-pair-1-2" name="second" placeholder="" value="" required="required"/>
          </div>
          <hr>
-         <div class="form-group">
-           <input tabindex="6" class="input-small" type="text" id="form-edit-question-matching-pair-2-1" placeholder="Pareja B" value=""/>
+         <div class="form-group matching-pair" id="form-edit-question-matching-pair-2">
+           <input class="input-small" name="first" type="text" id="form-edit-question-matching-pair-2-1" name="first" placeholder="" value="" required="required"/>
            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-           <input tabindex="7" class="input-small" type="text" id="form-edit-question-matching-pair-2-2" placeholder="Pareja B" value=""/>
+           <input class="input-small" name="second" type="text" id="form-edit-question-matching-pair-2-2" name="second" placeholder="" value="" required="required"/>
          </div>
          <hr>
-         <div class="form-group">
-           <input tabindex="8" class="input-small" type="text" id="form-edit-question-matching-pair-3-1" placeholder="Pareja C" value=""/>
+         <div class="form-group matching-pair" id="form-edit-question-matching-pair-3">
+           <input class="input-small" name="first" type="text" id="form-edit-question-matching-pair-3-1" name="first" placeholder="" value="" required="required"/>
            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-           <input tabindex="9" class="input-small" type="text" id="form-edit-question-matching-pair-3-2" placeholder="Pareja C" value=""/>
+           <input class="input-small" name="second" type="text" id="form-edit-question-matching-pair-3-2" name="second" placeholder="" value="" required="required"/>
          </div>
-       </form>
-      </div>
-      <div class="modal-footer">
-        <button tabindex="11" type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
-        <button tabindex="10" type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span>&nbsp;Editar</button>
-      </div>
+         <hr>
+         <button type="button" class="btn btn-info btn-block btn-new-pair" id="form-edit-question-matching-new-pair">Añadir nueva pareja</button>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-ok"></span>&nbsp;Guardar</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
+        </div>
+      </form>
     </div>
-
   </div>
 </div>

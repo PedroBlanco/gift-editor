@@ -7,6 +7,21 @@
 
 var modal_events_init = function modal_events_init ()
 {
+
+  // Añadir pareja de correspondencia
+  $('button.btn-new-pair').click(function(){
+    var _name = $(this).attr('id').slice(5,-9);
+    console.log ( ' Pulsando... ' + $(this).attr('id') + ' de ' + _name );
+    create_edit_matching_pair ( _name, '', '', true );
+    $(this).prev().prev().find('input:first').focus();
+  });
+
+  // Eliminar pareja de correspondencia
+  $('div.modal-body').on('click', 'span.remove-pair', function(){
+    $(this).parent().next().remove();
+    $(this).parent().remove();
+  });
+
   // Eliminar pregunta
   $('#accordion1').on('click', 'button.remove-question' ,function () {
 
@@ -315,232 +330,13 @@ var modal_events_init = function modal_events_init ()
 
 
 
-  // Añadir pregunta: Emparejar
-  $('#add-question-matching').click( function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Añadir pregunta: Emparejar' );
-    }
-
-    // Activamos el modal
-    $('#modal-add-question-matching').modal();
-  } );
-
-  // Activación del botón del modal
-  $('#modal-add-question-matching').on('click', 'button.btn-primary', function () {
-
-    // Creamos nueva pregunta en el acordeón
-    var _q = {
-      Comment: [$('#form-add-question-matching-comment').val()],
-      Title: $('#form-add-question-matching-title').val(),
-      Text: {
-        Question: $('#form-add-question-matching-text').val(),
-        Answer: '{ =' +
-        $('#form-add-question-matching-pair-1-1').val() +
-        ' -> ' +
-        $('#form-add-question-matching-pair-1-2').val() +
-        ' =' +
-        $('#form-add-question-matching-pair-2-1').val() +
-        ' -> ' +
-        $('#form-add-question-matching-pair-2-2').val() +
-        ' =' +
-        $('#form-add-question-matching-pair-3-1').val() +
-        ' -> ' +
-        $('#form-add-question-matching-pair-3-2').val() +
-        ' }'
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#modal-add-question-matching input').each(function(){
-      $(this).val('');
-    });
-
-    $( '#accordion1' ).append ( render_matching ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Activación del botón de cancelar del modal
-  $('#modal-add-question-matching').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#modal-add-question-matching input').each(function(){
-      $(this).val('');
-    });
-
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-add-question-matching').on('shown.bs.modal', function () {
-    $('#form-add-question-matching-title').focus();
-  });
-
-
-/*
-  // Añadir pregunta: Rango numérico
-  $('#add-question-numeric-range').click( function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Añadir pregunta: Rango numérico' );
-    }
-
-    // Activamos el modal
-    $('#modal-add-question-numeric-range').modal();
-  } );
-
-  // Activación del botón del modal
-  $('#modal-add-question-numeric-range').on('click', 'button.btn-primary', function () {
-    // Desactivamos el evento asociado al botón recién pulsado (#30)
-    $('#modal-add-question-numeric-range').off('click', 'button.btn-primary');
-
-    // Creamos nueva pregunta en el acordeón
-    var _q = {
-      Comment: [$('#form-add-question-numeric-range-comment').val()],
-      Title: $('#form-add-question-numeric-range-title').val(),
-      Text: {
-        Question: $('#form-add-question-numeric-range-text').val(),
-        Answer: '{#' + $('#form-add-question-numeric-range-answer-begin').val() +
-        '..' + $('#form-add-question-numeric-range-answer-finish').val() + '}'
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#modal-add-question-numeric-range input').each(function(){
-      $(this).val('');
-    });
-
-    $( '#accordion1' ).append ( render_numeric ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Activación del botón de cancelar del modal
-  $('#modal-add-question-numeric-range').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#modal-add-question-numeric-range input').each(function(){
-      $(this).val('');
-    });
-
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-add-question-numeric-range').on('shown.bs.modal', function () {
-    $('#form-add-question-numeric-range-title').focus();
-  });
-
-
-
-  // Añadir pregunta: Tolerancia numérica
-  $('#add-question-numeric-tolerance').click( function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Añadir pregunta: Tolerancia numérica' );
-    }
-
-    // Activamos el modal
-    $('#modal-add-question-numeric-tolerance').modal();
-  } );
-
-  // Activación del botón del modal
-  $('#modal-add-question-numeric-tolerance').on('click', 'button.btn-primary', function () {
-
-    // Creamos nueva pregunta en el acordeón
-    var _q = {
-      Comment: [$('#form-add-question-numeric-tolerance-comment').val()],
-      Title: $('#form-add-question-numeric-tolerance-title').val(),
-      Text: {
-        Question: $('#form-add-question-numeric-tolerance-text').val(),
-        Answer: '{#' + $('#form-add-question-numeric-tolerance-answer').val() +
-        ':' + $('#form-add-question-numeric-tolerance-radius').val() + '}'
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#modal-add-question-numeric-tolerance input').each(function(){
-      $(this).val('');
-    });
-
-    $( '#accordion1' ).append ( render_numeric ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-add-question-numeric-tolerance').on('shown.bs.modal', function () {
-    $('#form-add-question-numeric-tolerance-title').focus();
-  });
-
-
-  // Activación del botón de cancelar del modal
-  $('#modal-add-question-numeric-tolerance').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#modal-add-question-numeric-tolerance input').each(function(){
-      $(this).val('');
-    });
-
-  } );
-
-
-  // Añadir pregunta: Verdadero/falso
-  $('#add-question-true-false').click( function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Añadir pregunta: Verdadero/falso' );
-    }
-
-    // Activamos el modal
-    $('#modal-add-question-true-false').modal();
-  } );
-
-  // Activación del botón del modal
-  $('#modal-add-question-true-false').on('click', 'button.btn-primary', function () {
-
-    // Creamos nueva pregunta en el acordeón
-    var _q = {
-      Comment: [$('#form-add-question-true-false-comment').val()],
-      Title: $('#form-add-question-true-false-title').val(),
-      Text: {
-        Question: $('#form-add-question-true-false-text').val(),
-        Answer: '{'+ $('input[name="form-add-question-true-false-optradio"]:checked').val() +'}'
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#form-add-question-true-false-comment').val('');
-    $('#form-add-question-true-false-title').val('');
-    $('#form-add-question-true-false-text').val('');
-    $('input[name="form-add-question-true-false-optradio"]:checked').prop('checked', false);
-
-    $( '#accordion1' ).append ( render_true_false ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Activación del botón de cancelar del modal
-  $('#modal-add-question-true-false').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#form-add-question-true-false-comment').val('');
-    $('#form-add-question-true-false-title').val('');
-    $('#form-add-question-true-false-text').val('');
-    $('input[name="form-add-question-true-false-optradio"]:checked').prop('checked', false);
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-add-question-true-false').on('shown.bs.modal', function () {
-    $('#form-add-question-true-false-title').focus();
-  });
-*/
-
   var new_modals = [
     'add-question-description',
     'add-question-essay',
     'add-question-true-false',
     'add-question-numeric-range',
-    'add-question-numeric-tolerance'
+    'add-question-numeric-tolerance',
+    'add-question-matching'
   ];
 
   for ( var i in new_modals ) {
@@ -626,7 +422,8 @@ var modal_events_init = function modal_events_init ()
     'edit-question-essay',
     'edit-question-true-false',
     'edit-question-numeric-range',
-    'edit-question-numeric-tolerance'
+    'edit-question-numeric-tolerance',
+    'edit-question-matching'
   ];
 
   for (var i in edit_modals) {

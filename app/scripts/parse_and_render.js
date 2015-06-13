@@ -415,9 +415,9 @@ var render_matching = function render_matching ( _q, _d )
   for ( var _pair in _d.answer ) {
     _split_pair = _d.answer[_pair].split('->');
     _rendered_question.html +=  '<div name="pair">';
-    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[0] ) + '" name="first"/>';
+    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[0] ) + '" name="first" disabled/>';
     _rendered_question.html +=   '<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" name= "match-separator"></span>';
-    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[1] ) + '" name="second"/>';
+    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[1] ) + '" name="second" disabled/>';
     _rendered_question.html +=  '</div>';
     _rendered_question.html +=  '<hr/>';
   }
