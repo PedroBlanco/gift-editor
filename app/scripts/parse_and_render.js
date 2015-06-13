@@ -146,9 +146,9 @@ var render_individual_question = function render_individual_question ( _q )
         if ( PARSE_DEBUG ) {  console.log ('*** Matching: ' + _q.Title + '/' + _q.Text.Question + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
         _dest =  render_matching ( _q, q_detected );
       break;
-    case 'start-fill-blank':
-    case 'inline-fill-blank':
-    case 'end-fill-blank':
+    case 'fill-blank-start':
+    case 'fill-blank-middle':
+    case 'fill-blank-end':
         if ( PARSE_DEBUG ) {  console.log ('*** Fill-blank: ' + _q.Title + '/' + JSON.stringify (_q.Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
         _dest =  render_fill_blank ( _q, q_detected );
       break;
@@ -196,16 +196,16 @@ var detect_question_type = function detect_question_type ( _q )
   var _answer = _q.Text.Answer;
   var _result = {type:'unknown', answer: [] };
 
-  // First, the easiest comparison, start-fill-blank or inline-fill-blank
+  // First, the easiest comparison, fill-blank-start or fill-blank-middle
   if ( _q.Text.Question && _q.Text.Question instanceof Array ) {
     if ( _q.Text.Question[0] === '' ) {
       _detected = true;
-      _result.type = 'start-fill-blank';
+      _result.type = 'fill-blank-start';
       _result.answer = _q.Text.Answer.slice(1,-1).trim().slice(1).split( '=' );
       // console.debug ( 'DETECTED START: ' + JSON.stringify (_result.answer) + ' ' + _q.Text.Question[1] );
     } else {
       _detected = true;
-      _result.type = 'inline-fill-blank';
+      _result.type = 'fill-blank-middle';
       _result.answer = _q.Text.Answer.slice(1,-1).trim().slice(1).split( '=' );
       // console.debug ( 'DETECTED INLINE: ' + _q.Text.Question[0] + JSON.stringify (_result.answer) + ' ' + _q.Text.Question[1] );
     }
@@ -253,7 +253,7 @@ var detect_question_type = function detect_question_type ( _q )
         _detected = true;
       }
     } else {
-      // Los únicos tipos que nos quedan por detectar serían start-fill-blank, end-fill-blank y matching
+      // Los únicos tipos que nos quedan por detectar serían fill-blank-end y matching
       var _match_separated = _answer.match (/->/gm);
       if ( _match_separated && _match_separated.length >= 3 ) {
         // Para considerarse Matching, debe haber por lo menos 3 opciones (->)
@@ -264,7 +264,7 @@ var detect_question_type = function detect_question_type ( _q )
       } else {
         // TODO: Fill blank final o ¿hay alguna más?
         _result.answer = _answer.slice(1).split( '=' );
-        _result.type = 'end-fill-blank';
+        _result.type = 'fill-blank-end';
         _detected = true;
         // console.debug ( '+++ END FILL BLANK - ' + JSON.stringify ( _q.Text.Question ) );
       }
@@ -447,26 +447,26 @@ var render_fill_blank = function render_fill_blank ( _q, _d )
   // console.debug ( '+++ ' +  _d.type + ' - ' + JSON.stringify ( _q.Text.Question ) );
 
   switch ( _d.type ) {
-  case 'start-fill-blank':
+  case 'fill-blank-start':
     for ( var _x in _d.answer ) {
       // console.debug ( 'START: ' + _d.answer[_x] + ' ' + _q.Text.Question[1] );
-      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank"/>';
+      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank" disabled/>';
     }
     _rendered_question.html +=  '<span class="form-control-static" name="question-text">' + _q.Text.Question[1] + '</span>';
     break;
-  case 'inline-fill-blank':
+  case 'fill-blank-middle':
     _rendered_question.html +=  '<span class="form-control-static" name="question-text-first">' + _q.Text.Question[0] + '</span>';
     for ( var _x in _d.answer ) {
       // console.debug ( 'INLINE ' + _q.Text.Question[0] + _d.answer[_x] + ' ' + _q.Text.Question[1] );
-      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank"/>';
+      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank" disabled/>';
     }
     _rendered_question.html +=  '<span class="form-control-static" name="question-text-second">' + _q.Text.Question[1] + '</span>';
     break;
-  case 'end-fill-blank':
+  case 'fill-blank-end':
     _rendered_question.html +=  '<span class="form-control-static" name="question-text">' + _q.Text.Question + '</span>';
     for ( var _x in _d.answer ) {
       // console.debug ( 'END: ' + _q.Text.Question + ' ' + _d.answer[_x] );
-      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank"/>';
+      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank" disabled/>';
     }
     break;
 

@@ -1,4 +1,4 @@
-/* >jshint ignore: start */
+/* jshint ignore: start */
 /* jshint camelcase: false */
 /* jslint multistr: true */
 'use strict';
@@ -104,6 +104,33 @@ var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name, _
         _n_p++;
       });
     break;
+    case 'fill-blank-start':
+      $('#form-' + _name + '-void').val(
+        $('#' + _selector).find('input[name="blank"]').val()
+      );
+      $('#form-' + _name + '-text').val(
+        $('#' + _selector).find('span[name="question-text"]').text()
+      );
+    break;
+    case 'fill-blank-middle':
+      $('#form-' + _name + '-text-begin').val(
+        $('#' + _selector).find('span[name="question-text-first"]').text()
+      );
+      $('#form-' + _name + '-text-finish').val(
+        $('#' + _selector).find('span[name="question-text-second"]').text()
+      );
+      $('#form-' + _name + '-void').val(
+        $('#' + _selector).find('input[name="blank"]').val()
+      );
+    break;
+    case 'fill-blank-end':
+      $('#form-' + _name + '-text').val(
+        $('#' + _selector).find('span[name="question-text"]').text()
+      );
+      $('#form-' + _name + '-void').val(
+        $('#' + _selector).find('input[name="blank"]').val()
+      );
+    break;
     default:
       // Si no somos capaces de detectar la pregunta antes de mostrar un modal, tal vez deberíamos parar y mostrar un error
   }
@@ -154,7 +181,20 @@ var asignar_datos_desde_modal = function asignar_datos_desde_modal ( _name, _typ
       });
       _q.Text.Answer += '}';
       console.debug ( 'Matching answer: ' + JSON.stringify (_q.Text.Answer));
-    break;    default:
+    break;
+    case 'fill-blank-start':
+      _q.Text.Question = ['', $('#form-' + _name + '-text').val()];
+      _q.Text.Answer = '{=' + $('#form-' + _name + '-void').val() + '}';
+    break;
+    case 'fill-blank-middle':
+      _q.Text.Question = [$('#form-' + _name + '-text-begin').val(), $('#form-' + _name + '-text-finish').val()];
+      _q.Text.Answer = '{=' + $('#form-' + _name + '-void').val() + '}';
+    break;
+    case 'fill-blank-end':
+      _q.Text.Question = $('#form-' + _name + '-text').val();
+      _q.Text.Answer = '{=' + $('#form-' + _name + '-void').val() + '}';
+    break;
+    default:
       // Si no somos capaces de detectar la pregunta desde el modal, creamos una pregunta tipo descripción
       _q.Text.Question = $('#form-' + _name + '-text').val();
       _q.Text.Answer = '';
