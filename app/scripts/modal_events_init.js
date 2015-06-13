@@ -295,7 +295,7 @@ var modal_events_init = function modal_events_init ()
     });
   }
 
-
+/*
   // Modales a validar
   var v_mod = [
     'test-validator',
@@ -307,11 +307,11 @@ var modal_events_init = function modal_events_init ()
     // console.log ( 'Modal: ' + '#modal-'+v_mod[i]);
     // console.log ( 'Formulario: ' + '#form-'+v_mod[i]);
 
-/*
-    $( 'body' ).on('shown.bs.modal', '#modal-'+v_mod[i], function () {
-      console.log ( 'Modal mostrado');
-    });
-    */
+
+    // $( 'body' ).on('shown.bs.modal', '#modal-'+v_mod[i], function () {
+    //   console.log ( 'Modal mostrado');
+    // });
+
 
     $( 'body' ).on('shown.bs.modal', '#modal-' + v_mod[i] , function () {
       var _m = $(this).attr('id').substr (6);
@@ -365,5 +365,6 @@ var modal_events_init = function modal_events_init ()
     });
 
   }
+  */
 
 }

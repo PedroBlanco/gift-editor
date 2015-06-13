@@ -1,0 +1,61 @@
+/***
+    Sexta versión del generador de parser para formato GIFT mediante PEG.js
+
+    http://pegjs.org/online
+***/
+
+start
+  = question:Question* { return question; }
+
+Question
+  = comment:Comment* Separator title:Title Separator text:QuestionAndAnswer qt:QuestionTerminator { return { Comment:comment, Title : title, Text : text} ; }
+
+Title
+  = (!Separator SourceCharacter)* {return text();}
+
+QuestionAndAnswer
+  = qt1:QuestionText at:$("{" AnswerText "}")? qt2:QuestionText {return {Question:((qt2=='')?qt1.trim():[qt1.trim(),qt2.trim()]), Answer:at};}
+
+Separator
+  = "::"
+
+QuestionText
+  = (!QuestionTerminator !Separator !AnswerDelimiter SourceCharacter)*{return text();}
+
+AnswerText
+  = (!QuestionTerminator !Separator !AnswerDelimiter SourceCharacter)* {return text();}
+
+AnswerDelimiter
+  = "{"
+  / "}"
+
+SourceCharacter
+  = .
+
+QuestionTerminator
+  = LineTerminatorSequence LineTerminatorSequence+
+
+LineTerminatorSequence "end of line"
+  = "\n"
+  / "\r\n"
+  / "\r"
+  / "\u2028"
+  / "\u2029"
+
+Comment
+  = "//" WhiteSpace* ct:$(!LineTerminatorSequence SourceCharacter)* LineTerminatorSequence {return ct;}
+
+WhiteSpace "whitespace"
+  = "\t"
+  / "\v"
+  / "\f"
+  / " "
+  / "\u00A0"
+  / "\uFEFF"
+  / Zs
+
+// Separator, Space
+Zs = [\u0020\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]
+
+__
+  = (WhiteSpace / LineTerminatorSequence)*
