@@ -3,11 +3,11 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-        <h4 class="modal-title">Editar pregunta: Verdadero/Falso</h4>
-      </div>
       <form role="form" id="form-edit-question-true-false">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+          <h4 class="modal-title">Editar pregunta: Verdadero/Falso</h4>
+        </div>
         <div class="modal-body">
           <div class="form-group">
            <label for="form-edit-question-true-false-title">Título:</label>
@@ -21,12 +21,13 @@
            <label for="form-edit-question-true-false-text">Pregunta:</label>
            <input tabindex="3" type="text" class="form-control" id="form-edit-question-true-false-text" required="required" placeholder="Obligatorio">
           </div>
-          <div class="radio" required>
-            <input tabindex="4" type="radio" name="form-edit-question-true-false-optradio" id="form-edit-question-true-false-optradio1" value="T" required>
+          <div class="radio form-group" required>
+            <input tabindex="4" type="radio" name="optradio" id="form-edit-question-true-false-optradio1" value="T" required>
             <label class="control-label" for="form-edit-question-true-false-optradio1">&nbsp;Verdadero</label>
             <br/>
-            <input tabindex="5" type="radio" name="form-edit-question-true-false-optradio" id="form-edit-question-true-false-optradio2" value="F" required>
+            <input tabindex="5" type="radio" name="optradio" id="form-edit-question-true-false-optradio2" value="F" required>
             <label class="control-label" for="form-edit-question-true-false-optradio2">&nbsp;Falso</label>
+            <div class="help-block with-errors">Debe seleccionar una opción</div>
           </div>
         </div>
         <div class="modal-footer">

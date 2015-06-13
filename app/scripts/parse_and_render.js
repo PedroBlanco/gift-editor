@@ -345,11 +345,11 @@ var render_true_false = function render_true_false ( _q, _d )
   _rendered_question.html += '<div class="form-group form-group-sm">';
   _rendered_question.html +=  '<p class="form-control-static" name="question-text">' + _q.Text.Question + '</p><br/>';
   _rendered_question.html +=  '<div class="radio" value="'+_d.answer+'">';
-  _rendered_question.html +=   '<input type="radio" name="optradio" ' +
+  _rendered_question.html +=   '<input type="radio" name="optradio" value="T" ' +
                                 ((_d.answer=='T')?'checked="checked"':'disabled') + '>';
   _rendered_question.html +=   '<label class="control-label">Verdadero</label>';
   _rendered_question.html +=   '<br/>';
-  _rendered_question.html +=   '<input type="radio" name="optradio" ' +
+  _rendered_question.html +=   '<input type="radio" name="optradio" value="F" ' +
                                 ((_d.answer=='F')?'checked="checked"':'disabled') + '>';
   _rendered_question.html +=   '<label class="control-label">Falso</label>';
   _rendered_question.html +=  '</div>';
@@ -380,11 +380,11 @@ var render_numeric = function render_numeric ( _q, _d )
   _rendered_question.html +=  '<p class="form-control-static" name="question-text">' + _q.Text.Question + '</p><br/>';
   _rendered_question.html +=  '<label class="control-label">';
   _rendered_question.html +=  ( _d.type === 'numeric-tolerance')?'':'Desde&nbsp;';
-  _rendered_question.html +=  '<input class="form-control" type="number" name="first" value="' + _d.answer[0] + '"/>';
+  _rendered_question.html +=  '<input class="form-control" type="number" name="first" value="' + _d.answer[0] + '" disabled/>';
   _rendered_question.html +=  '</label>';
   _rendered_question.html +=  '<label class="control-label">';
   _rendered_question.html +=  ( _d.type === 'numeric-tolerance')?'&nbsp;con una toleracia de&nbsp;':'&nbsp;hasta&nbsp;';
-  _rendered_question.html +=  '<input class="form-control" type="number" name="second" value="' + _d.answer[1] + '"/>';
+  _rendered_question.html +=  '<input class="form-control" type="number" name="second" value="' + _d.answer[1] + '" disabled/>';
   _rendered_question.html +=  '</label>';
   _rendered_question.html += '</div>';
 

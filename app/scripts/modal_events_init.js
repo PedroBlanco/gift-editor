@@ -1,4 +1,4 @@
-/* jshint ignore: start */
+/* _jshint ignore: start */
 /* jshint camelcase: false */
 /* jslint multistr: true */
 'use strict';
@@ -141,71 +141,71 @@ var modal_events_init = function modal_events_init ()
 
 
 
-  // Editar pregunta: descripción
-  $('#accordion1').on('click', 'button.edit-question-description', function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Editar pregunta: descripción' );
-    }
-
-    var _id = $(this).parent().parent().parent().parent().parent().attr('id');
-
-    $( '#modal-edit-question-description' ).attr ( 'target', _id );
-
-    // Cargamos los datos de la pregunta en el modal
-    $('#form-edit-question-description-comment').val(
-      $(this).parent().parent().parent().parent().parent().find('p.question-comment').text()
-    );
-    $('#form-edit-question-description-title').val(
-      $(this).parent().parent().parent().parent().parent().find('span.question-title').text()
-    );
-    $('#form-edit-question-description-text').val(
-      $(this).parent().parent().parent().parent().parent().find('p[name="question-text"]').text()
-    );
-
-    // Activamos el modal
-    $('#modal-edit-question-description').modal();
-  } );
-
-  // Activación del botón de aceptar del modal
-  $('#modal-edit-question-description').on('click', 'button.btn-primary', function () {
-
-    // Guardamos los datos de la pregunta
-    var _q = {
-      Comment: [$('#form-edit-question-description-comment').val()],
-      Title: $('#form-edit-question-description-title').val(),
-      Text: {
-        Question: $('#form-edit-question-description-text').val(),
-        Answer: ''
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#modal-edit-question-description input').each(function(){
-      $(this).val('');
-    });
-
-    var _id = $( '#modal-edit-question-description' ).attr ( 'target' );
-
-    $( '#' + _id ).replaceWith ( render_description ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Activación del botón de cancelar del modal
-  $('#modal-edit-question-description').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#modal-edit-question-description input').each(function(){
-      $(this).val('');
-    });
-
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-edit-question-description').on('shown.bs.modal', function () {
-    $('#form-edit-question-description-title').focus();
-  });
+  // // Editar pregunta: descripción
+  // $('#accordion1').on('click', 'button.edit-question-description', function () {
+  //
+  //   if ( PARSE_DEBUG ) {
+  //     console.log ( 'Editar pregunta: descripción' );
+  //   }
+  //
+  //   var _id = $(this).parent().parent().parent().parent().parent().attr('id');
+  //
+  //   $( '#modal-edit-question-description' ).attr ( 'target', _id );
+  //
+  //   // Cargamos los datos de la pregunta en el modal
+  //   $('#form-edit-question-description-comment').val(
+  //     $(this).parent().parent().parent().parent().parent().find('p.question-comment').text()
+  //   );
+  //   $('#form-edit-question-description-title').val(
+  //     $(this).parent().parent().parent().parent().parent().find('span.question-title').text()
+  //   );
+  //   $('#form-edit-question-description-text').val(
+  //     $(this).parent().parent().parent().parent().parent().find('p[name="question-text"]').text()
+  //   );
+  //
+  //   // Activamos el modal
+  //   $('#modal-edit-question-description').modal();
+  // } );
+  //
+  // // Activación del botón de aceptar del modal
+  // $('#modal-edit-question-description').on('click', 'button.btn-primary', function () {
+  //
+  //   // Guardamos los datos de la pregunta
+  //   var _q = {
+  //     Comment: [$('#form-edit-question-description-comment').val()],
+  //     Title: $('#form-edit-question-description-title').val(),
+  //     Text: {
+  //       Question: $('#form-edit-question-description-text').val(),
+  //       Answer: ''
+  //     }
+  //   };
+  //
+  //   // Limpiamos el formulario
+  //   $('#modal-edit-question-description input').each(function(){
+  //     $(this).val('');
+  //   });
+  //
+  //   var _id = $( '#modal-edit-question-description' ).attr ( 'target' );
+  //
+  //   $( '#' + _id ).replaceWith ( render_description ( _q, detect_question_type ( _q ) ) );
+  //   $( '#accordion1' ).accordion( 'refresh' );
+  //   $('#accordion1').has('div.group').next().hide();
+  // });
+  //
+  // // Activación del botón de cancelar del modal
+  // $('#modal-edit-question-description').on('click', 'button.btn-info', function () {
+  //
+  //   // Limpiamos el formulario
+  //   $('#modal-edit-question-description input').each(function(){
+  //     $(this).val('');
+  //   });
+  //
+  // } );
+  //
+  // // Programamos el foco en el primer campo para cuando se muestre por completo el modal
+  // $('#modal-edit-question-description').on('shown.bs.modal', function () {
+  //   $('#form-edit-question-description-title').focus();
+  // });
 
 
 
@@ -260,71 +260,71 @@ var modal_events_init = function modal_events_init ()
 
 
 
-  // Editar pregunta: redacción
-  $('#accordion1').on('click', 'button.edit-question-essay', function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Editar pregunta: redacción' );
-    }
-
-    var _id = $(this).parent().parent().parent().parent().parent().attr('id');
-
-    $( '#modal-edit-question-essay' ).attr ( 'target', _id );
-
-    // Cargamos los datos de la pregunta en el modal
-    $('#form-edit-question-essay-comment').val(
-      $(this).parent().parent().parent().parent().parent().find('p.question-comment').text()
-    );
-    $('#form-edit-question-essay-title').val(
-      $(this).parent().parent().parent().parent().parent().find('span.question-title').text()
-    );
-    $('#form-edit-question-essay-text').val(
-      $(this).parent().parent().parent().parent().parent().find('p[name="question-text"]').text()
-    );
-
-    // Activamos el modal
-    $('#modal-edit-question-essay').modal();
-  } );
-
-  // Activación del botón de aceptar del modal
-  $('#modal-edit-question-essay').on('click', 'button.btn-primary', function () {
-
-    // Guardamos los datos de la pregunta
-    var _q = {
-      Comment: [$('#form-edit-question-essay-comment').val()],
-      Title: $('#form-edit-question-essay-title').val(),
-      Text: {
-        Question: $('#form-edit-question-essay-text').val(),
-        Answer: ''
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#modal-edit-question-essay input').each(function(){
-      $(this).val('');
-    });
-
-    var _id = $( '#modal-edit-question-essay' ).attr ( 'target' );
-
-    $( '#' + _id ).replaceWith ( render_essay ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Activación del botón de cancelar del modal
-  $('#modal-edit-question-essay').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#modal-edit-question-essay input').each(function(){
-      $(this).val('');
-    });
-
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-edit-question-essay').on('shown.bs.modal', function () {
-    $('#form-edit-question-essay-title').focus();
-  });
+  // // Editar pregunta: redacción
+  // $('#accordion1').on('click', 'button.edit-question-essay', function () {
+  //
+  //   if ( PARSE_DEBUG ) {
+  //     console.log ( 'Editar pregunta: redacción' );
+  //   }
+  //
+  //   var _id = $(this).parent().parent().parent().parent().parent().attr('id');
+  //
+  //   $( '#modal-edit-question-essay' ).attr ( 'target', _id );
+  //
+  //   // Cargamos los datos de la pregunta en el modal
+  //   $('#form-edit-question-essay-comment').val(
+  //     $(this).parent().parent().parent().parent().parent().find('p.question-comment').text()
+  //   );
+  //   $('#form-edit-question-essay-title').val(
+  //     $(this).parent().parent().parent().parent().parent().find('span.question-title').text()
+  //   );
+  //   $('#form-edit-question-essay-text').val(
+  //     $(this).parent().parent().parent().parent().parent().find('p[name="question-text"]').text()
+  //   );
+  //
+  //   // Activamos el modal
+  //   $('#modal-edit-question-essay').modal();
+  // } );
+  //
+  // // Activación del botón de aceptar del modal
+  // $('#modal-edit-question-essay').on('click', 'button.btn-primary', function () {
+  //
+  //   // Guardamos los datos de la pregunta
+  //   var _q = {
+  //     Comment: [$('#form-edit-question-essay-comment').val()],
+  //     Title: $('#form-edit-question-essay-title').val(),
+  //     Text: {
+  //       Question: $('#form-edit-question-essay-text').val(),
+  //       Answer: ''
+  //     }
+  //   };
+  //
+  //   // Limpiamos el formulario
+  //   $('#modal-edit-question-essay input').each(function(){
+  //     $(this).val('');
+  //   });
+  //
+  //   var _id = $( '#modal-edit-question-essay' ).attr ( 'target' );
+  //
+  //   $( '#' + _id ).replaceWith ( render_essay ( _q, detect_question_type ( _q ) ) );
+  //   $( '#accordion1' ).accordion( 'refresh' );
+  //   $('#accordion1').has('div.group').next().hide();
+  // });
+  //
+  // // Activación del botón de cancelar del modal
+  // $('#modal-edit-question-essay').on('click', 'button.btn-info', function () {
+  //
+  //   // Limpiamos el formulario
+  //   $('#modal-edit-question-essay input').each(function(){
+  //     $(this).val('');
+  //   });
+  //
+  // } );
+  //
+  // // Programamos el foco en el primer campo para cuando se muestre por completo el modal
+  // $('#modal-edit-question-essay').on('shown.bs.modal', function () {
+  //   $('#form-edit-question-essay-title').focus();
+  // });
 
 
 
@@ -775,11 +775,16 @@ var modal_events_init = function modal_events_init ()
 
 
   var edit_modals = [
-    'edit-question-true-false'
+    'edit-question-description',
+    'edit-question-essay',
+    'edit-question-true-false',
+    'edit-question-numeric-range',
+    'edit-question-numeric-tolerance'
   ];
 
   for (var i in edit_modals) {
     // Editar pregunta
+    if ( MODAL_DEBUG ) { console.log ( 'Activando botón ' + 'button.' + edit_modals[i] ); }
     $('#accordion1').on('click', 'button.' + edit_modals[i], function () {
 
       var _id = '';
@@ -791,11 +796,11 @@ var modal_events_init = function modal_events_init ()
       });
       _dest += _type;
 
-      if ( PARSE_DEBUG ) {
+      if ( MODAL_DEBUG ) {
         console.log ( 'Editar pregunta: '+ _type );
       }
 
-      console.log ( 'Asignando datos '+ _type + ' de ' + _id + ' a ' + _dest );
+      if ( MODAL_DEBUG ) { console.log ( 'Asignando datos '+ _type + ' de ' + _id + ' a ' + _dest ); }
 
       asignar_datos_a_modal ( _id, _dest, _type );
 
@@ -809,9 +814,9 @@ var modal_events_init = function modal_events_init ()
 
       var _name = $(this).attr('id').substr (6);
 
-      console.debug('Ocultando el modal de validación ' + '#modal-' + _name );
+      if ( MODAL_DEBUG ) { console.debug('Ocultando el modal de validación ' + '#modal-' + _name ); }
 
-      console.log ( 'Nodo hidden: ' + $(this).attr('id') );
+      if ( MODAL_DEBUG ) { console.log ( 'Nodo hidden: ' + $(this).attr('id') ); }
 
       $( '#modal-' + _name  ).removeData('submit-in-progress' );
       $( '#form-' + _name  ).validator('destroy').off('submit');
@@ -828,63 +833,44 @@ var modal_events_init = function modal_events_init ()
 
       $('#form-' + _name + ' input:first').focus();
 
-      $( '#modal-' + _name  ).data('submit-in-progress', 'false' );
 
       // Activamos la validación, desactivando submit si no valida
       $( '#form-' + _name  ).validator({disable:'true'}).on('submit', function (e) {
         console.debug('Submit en el modal ' + '#modal-' + _name );
-        // if ( $( '#modal-' + _name  ).data('submit-in-progress') === 'false' ) {
-          // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
-          $( '#modal-' + _name  ).data('submit-in-progress', 'true');
 
-          if (e.isDefaultPrevented()) {
-            // handle the invalid form...
-            console.error ('Error: validacion fallida ' + '#modal-' + _name );
-            // alert ('Error: validacion fallida ' + '#modal-' + _name );
-          } else {
+        if (e.isDefaultPrevented()) {
+          // handle the invalid form...
+          if ( MODAL_DEBUG ) { console.error ('Error: validacion fallida ' + '#modal-' + _name ); }
+          // alert ('Error: validacion fallida ' + '#modal-' + _name );
+        } else {
 
-            console.log ( 'Guardando datos de ' + _name + '/' + _question_type + ' a ' + _target );
-            var _q = asignar_datos_desde_modal ( _name, _question_type );
+          if ( MODAL_DEBUG ) { console.log ( 'Guardando datos de ' + _name + '/' + _question_type + ' a ' + _target ); }
+          var _q = asignar_datos_desde_modal ( _name, _question_type );
 
-            console.log ( 'Datos devueltos: ' + JSON.stringify(_q) );
+          if ( MODAL_DEBUG ) { console.log ( 'Datos devueltos: ' + JSON.stringify(_q) ); }
 
-            $( '#modal-' + _name  ).modal('hide');
+          $( '#modal-' + _name  ).modal('hide');
 
-            var _result = render_individual_question ( _q  );
+          var _result = render_individual_question ( _q  );
 
-            console.log ( 'Resultado: ' + _result );
+          if ( MODAL_DEBUG ) { console.log ( 'Resultado: ' + _result ); }
 
-            $( _target ).replaceWith ( _result );
-            $( '#accordion1' ).accordion( 'refresh' );
+          $( _target ).replaceWith ( _result );
+          $( '#accordion1' ).accordion( 'refresh' );
 
-            // No haría falta ocultar el texto info_on_empty al estar editando una pregunta existente
-            $('#accordion1').has('div.group').next().hide();
+          // No haría falta ocultar el texto info_on_empty al estar editando una pregunta existente
+          $('#accordion1').has('div.group').next().hide();
 
-            // everything looks good!
-            console.info ('Exito: validacion exitosa ' + '#modal-' + _name );
-            // alert ('Exito: validacion exitosa ' + '#modal-' + _name );
-          }
-        // } else {
-        //   $( '#modal-' + _name  ).data('submit-in-progress', 'false' );
-        // }
+          // everything looks good!
+          if ( MODAL_DEBUG ) { console.info ('Exito: validacion exitosa ' + '#modal-' + _name ); }
+          // alert ('Exito: validacion exitosa ' + '#modal-' + _name );
+        }
+
         return false;
       });
 
     });
   }
-/*
-  // Prueba de validación
-  $('#modal-test-validator-danger').click (function() {
-    console.info ('Iniciando validación manual');
-    $('#form-test-validator').validator('validate');
-  });
-
-
-  $('#menu-test-validator').click(function(){
-
-  });
-*/
-
 
 /*
 
@@ -909,6 +895,7 @@ pulsar submit {
 
 
 */
+
   // Modales a validar
   var v_mod = [
     'test-validator',
@@ -917,8 +904,8 @@ pulsar submit {
 
   for (var i in v_mod) {
 
-    console.log ( 'Modal: ' + '#modal-'+v_mod[i]);
-    console.log ( 'Formulario: ' + '#form-'+v_mod[i]);
+    // console.log ( 'Modal: ' + '#modal-'+v_mod[i]);
+    // console.log ( 'Formulario: ' + '#form-'+v_mod[i]);
 
 /*
     $( 'body' ).on('shown.bs.modal', '#modal-'+v_mod[i], function () {
@@ -978,100 +965,5 @@ pulsar submit {
     });
 
   }
-  // for (var i in v_mod) {
-
-    // console.log ( 'Modal: ' + '#modal-'+v_mod[i]);
-    // console.log ( 'Formulario: ' + '#form-'+v_mod[i]);
-
-/*
-    $( 'body' ).on('shown.bs.modal', '#modal-'+v_mod[i], function () {
-      console.log ( 'Modal mostrado');
-    });
-    */
-/*
-
-    $( 'body' ).on('shown.bs.modal', '#modal-test-validator', function () {
-      // Activamos el primer campo del formulario
-      $( '#form-test-validator input:first' ).focus();
-      console.debug('Activando primer campo del modal de validación ' + '#modal-test-validator');
-
-      $( '#modal-test-validator' ).data('submit-in-progress', 'false' );
-
-      // Activamos la validación, desactivando submit si no valida
-      $( '#form-test-validator' ).validator({disable:'true'}).on('submit', function (e) {
-        console.debug('Submit en el modal de validación ' + '#modal-test-validator');
-        if ( $( '#modal-test-validator' ).data('submit-in-progress') === 'false' ) {
-          // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
-          $( '#modal-test-validator' ).data('submit-in-progress', 'true');
-
-          if (e.isDefaultPrevented()) {
-            // handle the invalid form...
-            console.error ('Error: validacion fallida ' + '#modal-test-validator');
-            alert ('Error: validacion fallida ' + '#modal-test-validator');
-          } else {
-            // everything looks good!
-            console.info ('Exito: validacion exitosa ' + '#modal-test-validator');
-            alert ('Exito: validacion exitosa ' + '#modal-test-validator');
-            $( '#modal-test-validator' ).modal("hide");
-          }
-        } else {
-          $( '#modal-test-validator' ).data('submit-in-progress', 'false' );
-        }
-        return false;
-      });
-    });
-
-    // Salir del modal: Eliminamos la validación, desactivamos el submit y limpiamos los datos
-    $( 'body' ).on('hidden.bs.modal', '#modal-test-validator', function () {
-      console.debug('Ocultando el modal de validación ' + '#modal-test-validator');
-      $( '#modal-test-validator' ).removeData('submit-in-progress' );
-      $( '#form-test-validator' ).validator('destroy').off('submit').find('input').each(function(){
-        $(this).val('');
-      });
-
-    });
-
-  // }
-
-    $( 'body' ).on('shown.bs.modal', '#modal-test-validator-B', function () {
-      // Activamos el primer campo del formulario
-      $( '#form-test-validator-B input:first' ).focus();
-      console.debug('Activando primer campo del modal de validación ' + '#modal-test-validator-B');
-
-      $( '#modal-test-validator-B' ).data('submit-in-progress', 'false' );
-
-      // Activamos la validación, desactivando submit si no valida
-      $( '#form-test-validator-B' ).validator({disable:'true'}).on('submit', function (e) {
-        console.debug('Submit en el modal de validación ' + '#modal-test-validator-B');
-        if ( $( '#modal-test-validator-B' ).data('submit-in-progress') === 'false' ) {
-          // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
-          $( '#modal-test-validator-B' ).data('submit-in-progress', 'true');
-
-          if (e.isDefaultPrevented()) {
-            // handle the invalid form...
-            console.error ('Error: validacion fallida ' + '#modal-test-validator-B');
-            alert ('Error: validacion fallida ' + '#modal-test-validator-B');
-          } else {
-            // everything looks good!
-            console.info ('Exito: validacion exitosa ' + '#modal-test-validator-B');
-            alert ('Exito: validacion exitosa ' + '#modal-test-validator-B');
-            $( '#modal-test-validator-B' ).modal("hide");
-          }
-        } else {
-          $( '#modal-test-validator-B' ).data('submit-in-progress', 'false' );
-        }
-      });
-    });
-
-    // Salir del modal: Eliminamos la validación, desactivamos el submit y limpiamos los datos
-    $( 'body' ).on('hidden.bs.modal', '#modal-test-validator-B', function () {
-      console.debug('Ocultando el modal de validación ' + '#modal-test-validator-B');
-      $( '#modal-test-validator-B' ).removeData('submit-in-progress' );
-      $( '#form-test-validator-B' ).validator('destroy').off('submit').find('input').each(function(){
-        $(this).val('');
-      });
-
-    });
-*/
 
 }
