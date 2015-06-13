@@ -116,6 +116,57 @@ var parseText = function parseText ( selectorText, _dest )
 }
 
 
+var render_individual_question = function render_individual_question ( _q )
+{
+  var _dest = ''
+
+  var q_detected = detect_question_type ( _q );
+  switch (q_detected.type) {
+    case 'description':
+        if ( PARSE_DEBUG ) {  console.log ('*** Description: ' + _q.Title + '/' + _q.Text.Question  );    }
+        _dest =  render_description ( _q, q_detected );
+      break;
+    case 'essay':
+        if ( PARSE_DEBUG ) {  console.log ('*** Essay: ' + _q.Title + '/' + _q.Text.Question  );    }
+        _dest =  render_essay ( _q, q_detected );
+      break;
+    case 'true-false':
+        if ( PARSE_DEBUG ) {  console.log ('*** (' + q_detected.answer[0] + '): ' + _q.Title + '/' + _q.Text.Question );    }
+        _dest =  render_true_false ( _q, q_detected );
+      break;
+    case 'numeric-tolerance':
+        if ( PARSE_DEBUG ) {  console.log ('*** Tolerance: ' + _q.Title + '/' + _q.Text.Question + ' = ' + q_detected.answer[0] + '+-' + q_detected.answer[1] ); }
+        _dest =  render_numeric ( _q, q_detected );
+      break;
+    case 'numeric-range':
+        if ( PARSE_DEBUG ) {  console.log ('*** Range: ' + _q.Title + '/' + _q.Text.Question + ' = ' + q_detected.answer[0] + ' to ' + q_detected.answer[1] ); }
+        _dest =  render_numeric ( _q, q_detected );
+      break;
+    case 'matching':
+        if ( PARSE_DEBUG ) {  console.log ('*** Matching: ' + _q.Title + '/' + _q.Text.Question + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
+        _dest =  render_matching ( _q, q_detected );
+      break;
+    case 'start-fill-blank':
+    case 'inline-fill-blank':
+    case 'end-fill-blank':
+        if ( PARSE_DEBUG ) {  console.log ('*** Fill-blank: ' + _q.Title + '/' + JSON.stringify (_q.Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
+        _dest =  render_fill_blank ( _q, q_detected );
+      break;
+    default:
+        if ( PARSE_DEBUG ) {  console.log ( '¿Type? ' + JSON.stringify ( q_detected ) ); }
+        // TODO: show error or something
+        _q.Title = 'UNKNOWN ' + _q.Title;
+        _q.Comment = 'UNKNOWN ' + _q.Title;
+        _q.Text.Question = 'UNKNOWN ' + _q.Text.Question;
+        _dest =  render_description ( _q, q_detected );
+  }
+
+  return _dest;
+}
+
+
+
+
 var render_questions = function render_questions ( _qs, _dest )
 /*
 Fill_blank_middle   -> _qs => Array ( { Comment, Title, Text: { Question[2], Answer } )
@@ -124,48 +175,16 @@ Selector de destino -> _dest = '#accordion1' normalmente
 */
 {
   if ( _dest === undefined ) {
-  _dest = '#accordion1';
+    _dest = '#accordion1';
   }
 
   for ( var x in _qs ) {
     if ( PARSE_DEBUG ) {    console.log ( 'Rendering ('+x+'): ' + _qs[x].Title );    }
-    var q_detected = detect_question_type ( _qs[x] );
-    switch (q_detected.type) {
-      case 'description':
-          if ( PARSE_DEBUG ) {  console.log ('*** Description: ' + _qs[x].Title + '/' + _qs[x].Text.Question  );    }
-          $(_dest).append ( render_description ( _qs[x], q_detected ) );
-        break;
-      case 'essay':
-          if ( PARSE_DEBUG ) {  console.log ('*** Essay: ' + _qs[x].Title + '/' + _qs[x].Text.Question  );    }
-          $(_dest).append ( render_essay ( _qs[x], q_detected ) );
-        break;
-      case 'true-false':
-          if ( PARSE_DEBUG ) {  console.log ('*** (' + q_detected.answer[0] + '): ' + _qs[x].Title + '/' + _qs[x].Text.Question );    }
-          $(_dest).append ( render_true_false ( _qs[x], q_detected ) );
-        break;
-      case 'numeric-tolerance':
-          if ( PARSE_DEBUG ) {  console.log ('*** Tolerance: ' + _qs[x].Title + '/' + _qs[x].Text.Question + ' = ' + q_detected.answer[0] + '+-' + q_detected.answer[1] ); }
-          $(_dest).append ( render_numeric ( _qs[x], q_detected ) );
-        break;
-      case 'numeric-range':
-          if ( PARSE_DEBUG ) {  console.log ('*** Range: ' + _qs[x].Title + '/' + _qs[x].Text.Question + ' = ' + q_detected.answer[0] + ' to ' + q_detected.answer[1] ); }
-          $(_dest).append ( render_numeric ( _qs[x], q_detected ) );
-        break;
-      case 'matching':
-          if ( PARSE_DEBUG ) {  console.log ('*** Matching: ' + _qs[x].Title + '/' + _qs[x].Text.Question + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
-          $(_dest).append ( render_matching ( _qs[x], q_detected ) );
-        break;
-      case 'start-fill-blank':
-      case 'inline-fill-blank':
-      case 'end-fill-blank':
-          if ( PARSE_DEBUG ) {  console.log ('*** Fill-blank: ' + _qs[x].Title + '/' + JSON.stringify (_qs[x].Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
-          $(_dest).append ( render_fill_blank ( _qs[x], q_detected ) );
-        break;
-      default:
-          if ( PARSE_DEBUG ) {  console.log ( '¿Type? ' + JSON.stringify ( q_detected ) ); }
-          // TODO: show error or something
-    }
+
+    $(_dest).append ( render_individual_question ( _qs[x] ) );
+
   }
+
   $( _dest ).accordion( 'refresh' );
 }
 
@@ -469,7 +488,7 @@ var render_fill_blank = function render_fill_blank ( _q, _d )
 var new_accordion_question = function new_accordion_question ( _rq )
 {
   var _new_question = $(
-    '<div class="group" id="' + _uniqueId ( '_question' ) + '">' +
+    '<div class="group" id="' + _uniqueId ( '_question' ) + '" question-type="' + _rq.detected_type + '">' +
       '<div class="acc_title">' +
         '<span class="label label-default question-type" value="' + _rq.detected_type + '">'+ _rq.type + '</span>' +
 // No podemos usar un checkbox de marca en el título porque el evento al pinchar lo recibe el acordeón y no el checkbox...
