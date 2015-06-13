@@ -1,33 +1,31 @@
-<div class="modal fade" id="modal-add-question-description" role="dialog">
+<div class="modal fade" id="modal-add-question-description" question-type="description" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-        <h4 class="modal-title">Añadir pregunta: Descripción</h4>
-      </div>
-      <div class="modal-body">
-        <form role="form" id="form-add-question-description">
-         <div class="form-group">
-           <label for="form-add-question-description-title">Título:</label>
-           <input tabindex="1" type="text" class="form-control" id="form-add-question-description-title" placeholder="Opcional">
-         </div>
-         <div class="form-group">
-           <label for="form-add-question-description-comment">Comentario:</label>
-           <input tabindex="2" type="text" class="form-control" id="form-add-question-description-comment" placeholder="Opcional">
-         </div>
-         <div class="form-group">
-           <label for="form-add-question-description-text">Descripción a mostrar:</label>
-           <input tabindex="3" type="text" class="form-control" id="form-add-question-description-text" required="required" placeholder="Obligatorio">
-         </div>
-       </form>
-      </div>
-      <div class="modal-footer">
-        <button tabindex="5" type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
-        <button tabindex="4" type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir</button>
-      </div>
+      <form role="form" id="form-add-question-description">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+          <h4 class="modal-title">Añadir pregunta: Descripción</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="form-add-question-description-title">Título:</label>
+            <input tabindex="1" type="text" class="form-control" id="form-add-question-description-title" placeholder="Opcional">
+          </div>
+          <div class="form-group">
+            <label for="form-add-question-description-comment">Comentario:</label>
+            <input tabindex="2" type="text" class="form-control" id="form-add-question-description-comment" placeholder="Opcional">
+          </div>
+          <div class="form-group">
+            <label for="form-add-question-description-text">Descripción a mostrar:</label>
+            <input tabindex="3" type="text" class="form-control" id="form-add-question-description-text" required="required" placeholder="Obligatorio">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button tabindex="5" type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
+          <button tabindex="4" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir</button>
+        </div>
+      </form>
     </div>
-
   </div>
 </div>

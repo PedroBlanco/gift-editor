@@ -55,7 +55,7 @@ var accordion_to_GIFT = function accordion_to_GIFT ( _selector )
 
         _full_question += '}\n\n';
       break;
-      case 'start-fill-blank':
+      case 'fill-blank-start':
         _full_question += '{';
 
         $(this).find('input[name="blank"]').each(function(){
@@ -67,7 +67,7 @@ var accordion_to_GIFT = function accordion_to_GIFT ( _selector )
         _full_question += '} ';
         _full_question += $(this).find('span[name="question-text"]').text() + '\n\n';
       break;
-      case 'inline-fill-blank':
+      case 'fill-blank-middle':
         _full_question += $(this).find('span[name="question-text-first"]').text();
         _full_question += ' {';
 
@@ -80,7 +80,7 @@ var accordion_to_GIFT = function accordion_to_GIFT ( _selector )
         _full_question += '} ';
         _full_question += $(this).find('span[name="question-text-second"]').text() + '\n\n';
       break;
-      case 'end-fill-blank':
+      case 'fill-blank-end':
         _full_question += $(this).find('span[name="question-text"]').text();
         _full_question += ' {';
 

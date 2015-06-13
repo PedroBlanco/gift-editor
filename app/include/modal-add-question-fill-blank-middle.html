@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-add-question-fill-blank-middle" role="dialog">
+<div class="modal fade" id="modal-add-question-fill-blank-middle" question-type="fill-blank-middle" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -7,31 +7,32 @@
         <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
         <h4 class="modal-title">Añadir pregunta: Rellenar hueco medio</h4>
       </div>
-      <div class="modal-body">
-        <form role="form" id="form-add-question-fill-blank-middle">
+      <form role="form" id="form-add-question-fill-blank-middle">
+        <div class="modal-body">
          <div class="form-group">
            <label for="form-add-question-fill-blank-middle-title">Título:</label>
-           <input tabindex="1" type="text" class="form-control" id="form-add-question-fill-blank-middle-title" placeholder="Opcional">
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-title" placeholder="Opcional">
          </div>
          <div class="form-group">
            <label for="form-add-question-fill-blank-middle-comment">Comentario:</label>
-           <input tabindex="2" type="text" class="form-control" id="form-add-question-fill-blank-middle-comment" placeholder="Opcional">
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-comment" placeholder="Opcional">
          </div>
          <div class="form-group">
-           <label for="form-add-question-fill-blank-middle-text-begin">Pregunta:</label>
-           <input tabindex="3" type="text" class="form-control" id="form-add-question-fill-blank-middle-text-begin" required="required" placeholder="Obligatorio - Texto de la pregunta antes del hueco">
+           <label for="form-add-question-fill-blank-middle-text-begin">Comiendo de la frase:</label>
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-text-begin" required="required" placeholder="Obligatorio - Texto de la pregunta antes del hueco">
            <br>
-           <input tabindex="4" type="text" class="form-control" id="form-add-question-fill-blank-middle-void" required="required" placeholder="Obligatorio - Hueco para respuesta">
+           <label for="form-add-question-fill-blank-middle-text-void">Hueco:</label>
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-void" required="required" placeholder="Obligatorio - Hueco para respuesta">
            <br>
-           <input tabindex="5" type="text" class="form-control" id="form-add-question-fill-blank-middle-text-finish" required="required" placeholder="Obligatorio - Texto de la pregunta después del hueco">
+           <label for="form-add-question-fill-blank-middle-text-finish">Resto de la frase:</label>
+           <input type="text" class="form-control" id="form-add-question-fill-blank-middle-text-finish" required="required" placeholder="Obligatorio - Texto de la pregunta después del hueco">
          </div>
-       </form>
-      </div>
-      <div class="modal-footer">
-        <button tabindex="7" type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
-        <button tabindex="6" type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
+        </div>
+      </form>
     </div>
-
   </div>
 </div>

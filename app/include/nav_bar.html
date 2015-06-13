@@ -3,29 +3,30 @@
 </div>
 <div class="collapse navbar-collapse" id="myNavbar">
   <ul class="nav navbar-nav">
-    <li><a href="/">Home</a></li>
+    <li><a href="#" data-toggle="modal" data-target="#modal-test-validator-B" >Home</a></li>
     <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Questions
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ejemplos
       <span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a href="#">Create</a></li>
-        <li><a href="#">Edit</a></li>
-        <li><a href="#">Validate</a></li>
+        <li><a href="#">Ejemplo 1</a></li>
+        <li><a href="#">Ejemplo 2</a></li>
+        <li><a href="#">Ejemplo 3</a></li>
       </ul>
     </li>
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Groups
-      <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a href="#">Create</a></li>
-        <li><a href="#">Edit</a></li>
-        <li><a href="#">Validate</a></li>
-      </ul>
-    </li>
-    <li class="active"><a href="#">Misc</a></li>
+    <li class="active"><a id="menu-test-validator" data-toggle="modal" data-target="#modal-test-validator" href="#">Test de validación</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Configuración</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <span class="glyphicon glyphicon-question-sign"></span> Ayuda
+        <span class="caret"></span>
+        <ul class="dropdown-menu">
+          <li><a id="menu-ayuda" href="#">Manual de usuario</a></li>
+          <li class="divider"></li>
+          <li><a id="menu-about" data-toggle="modal" data-target="#modal-about" href="#">Acerca de...</a></li>
+        </ul>
+      </a>
+    </li>
   </ul>
 </div>

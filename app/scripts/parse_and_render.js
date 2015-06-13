@@ -116,6 +116,57 @@ var parseText = function parseText ( selectorText, _dest )
 }
 
 
+var render_individual_question = function render_individual_question ( _q )
+{
+  var _dest = ''
+
+  var q_detected = detect_question_type ( _q );
+  switch (q_detected.type) {
+    case 'description':
+        if ( PARSE_DEBUG ) {  console.log ('*** Description: ' + _q.Title + '/' + _q.Text.Question  );    }
+        _dest =  render_description ( _q, q_detected );
+      break;
+    case 'essay':
+        if ( PARSE_DEBUG ) {  console.log ('*** Essay: ' + _q.Title + '/' + _q.Text.Question  );    }
+        _dest =  render_essay ( _q, q_detected );
+      break;
+    case 'true-false':
+        if ( PARSE_DEBUG ) {  console.log ('*** (' + q_detected.answer[0] + '): ' + _q.Title + '/' + _q.Text.Question );    }
+        _dest =  render_true_false ( _q, q_detected );
+      break;
+    case 'numeric-tolerance':
+        if ( PARSE_DEBUG ) {  console.log ('*** Tolerance: ' + _q.Title + '/' + _q.Text.Question + ' = ' + q_detected.answer[0] + '+-' + q_detected.answer[1] ); }
+        _dest =  render_numeric ( _q, q_detected );
+      break;
+    case 'numeric-range':
+        if ( PARSE_DEBUG ) {  console.log ('*** Range: ' + _q.Title + '/' + _q.Text.Question + ' = ' + q_detected.answer[0] + ' to ' + q_detected.answer[1] ); }
+        _dest =  render_numeric ( _q, q_detected );
+      break;
+    case 'matching':
+        if ( PARSE_DEBUG ) {  console.log ('*** Matching: ' + _q.Title + '/' + _q.Text.Question + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
+        _dest =  render_matching ( _q, q_detected );
+      break;
+    case 'fill-blank-start':
+    case 'fill-blank-middle':
+    case 'fill-blank-end':
+        if ( PARSE_DEBUG ) {  console.log ('*** Fill-blank: ' + _q.Title + '/' + JSON.stringify (_q.Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
+        _dest =  render_fill_blank ( _q, q_detected );
+      break;
+    default:
+        if ( PARSE_DEBUG ) {  console.log ( '¿Type? ' + JSON.stringify ( q_detected ) ); }
+        // TODO: show error or something
+        _q.Title = 'UNKNOWN ' + _q.Title;
+        _q.Comment = 'UNKNOWN ' + _q.Title;
+        _q.Text.Question = 'UNKNOWN ' + _q.Text.Question;
+        _dest =  render_description ( _q, q_detected );
+  }
+
+  return _dest;
+}
+
+
+
+
 var render_questions = function render_questions ( _qs, _dest )
 /*
 Fill_blank_middle   -> _qs => Array ( { Comment, Title, Text: { Question[2], Answer } )
@@ -124,48 +175,16 @@ Selector de destino -> _dest = '#accordion1' normalmente
 */
 {
   if ( _dest === undefined ) {
-  _dest = '#accordion1';
+    _dest = '#accordion1';
   }
 
   for ( var x in _qs ) {
     if ( PARSE_DEBUG ) {    console.log ( 'Rendering ('+x+'): ' + _qs[x].Title );    }
-    var q_detected = detect_question_type ( _qs[x] );
-    switch (q_detected.type) {
-      case 'description':
-          if ( PARSE_DEBUG ) {  console.log ('*** Description: ' + _qs[x].Title + '/' + _qs[x].Text.Question  );    }
-          $(_dest).append ( render_description ( _qs[x], q_detected ) );
-        break;
-      case 'essay':
-          if ( PARSE_DEBUG ) {  console.log ('*** Essay: ' + _qs[x].Title + '/' + _qs[x].Text.Question  );    }
-          $(_dest).append ( render_essay ( _qs[x], q_detected ) );
-        break;
-      case 'true-false':
-          if ( PARSE_DEBUG ) {  console.log ('*** (' + q_detected.answer[0] + '): ' + _qs[x].Title + '/' + _qs[x].Text.Question );    }
-          $(_dest).append ( render_true_false ( _qs[x], q_detected ) );
-        break;
-      case 'numeric-tolerance':
-          if ( PARSE_DEBUG ) {  console.log ('*** Tolerance: ' + _qs[x].Title + '/' + _qs[x].Text.Question + ' = ' + q_detected.answer[0] + '+-' + q_detected.answer[1] ); }
-          $(_dest).append ( render_numeric ( _qs[x], q_detected ) );
-        break;
-      case 'numeric-range':
-          if ( PARSE_DEBUG ) {  console.log ('*** Range: ' + _qs[x].Title + '/' + _qs[x].Text.Question + ' = ' + q_detected.answer[0] + ' to ' + q_detected.answer[1] ); }
-          $(_dest).append ( render_numeric ( _qs[x], q_detected ) );
-        break;
-      case 'matching':
-          if ( PARSE_DEBUG ) {  console.log ('*** Matching: ' + _qs[x].Title + '/' + _qs[x].Text.Question + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
-          $(_dest).append ( render_matching ( _qs[x], q_detected ) );
-        break;
-      case 'start-fill-blank':
-      case 'inline-fill-blank':
-      case 'end-fill-blank':
-          if ( PARSE_DEBUG ) {  console.log ('*** Fill-blank: ' + _qs[x].Title + '/' + JSON.stringify (_qs[x].Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
-          $(_dest).append ( render_fill_blank ( _qs[x], q_detected ) );
-        break;
-      default:
-          if ( PARSE_DEBUG ) {  console.log ( '¿Type? ' + JSON.stringify ( q_detected ) ); }
-          // TODO: show error or something
-    }
+
+    $(_dest).append ( render_individual_question ( _qs[x] ) );
+
   }
+
   $( _dest ).accordion( 'refresh' );
 }
 
@@ -177,16 +196,16 @@ var detect_question_type = function detect_question_type ( _q )
   var _answer = _q.Text.Answer;
   var _result = {type:'unknown', answer: [] };
 
-  // First, the easiest comparison, start-fill-blank or inline-fill-blank
+  // First, the easiest comparison, fill-blank-start or fill-blank-middle
   if ( _q.Text.Question && _q.Text.Question instanceof Array ) {
     if ( _q.Text.Question[0] === '' ) {
       _detected = true;
-      _result.type = 'start-fill-blank';
+      _result.type = 'fill-blank-start';
       _result.answer = _q.Text.Answer.slice(1,-1).trim().slice(1).split( '=' );
       // console.debug ( 'DETECTED START: ' + JSON.stringify (_result.answer) + ' ' + _q.Text.Question[1] );
     } else {
       _detected = true;
-      _result.type = 'inline-fill-blank';
+      _result.type = 'fill-blank-middle';
       _result.answer = _q.Text.Answer.slice(1,-1).trim().slice(1).split( '=' );
       // console.debug ( 'DETECTED INLINE: ' + _q.Text.Question[0] + JSON.stringify (_result.answer) + ' ' + _q.Text.Question[1] );
     }
@@ -234,7 +253,7 @@ var detect_question_type = function detect_question_type ( _q )
         _detected = true;
       }
     } else {
-      // Los únicos tipos que nos quedan por detectar serían start-fill-blank, end-fill-blank y matching
+      // Los únicos tipos que nos quedan por detectar serían fill-blank-end y matching
       var _match_separated = _answer.match (/->/gm);
       if ( _match_separated && _match_separated.length >= 3 ) {
         // Para considerarse Matching, debe haber por lo menos 3 opciones (->)
@@ -245,7 +264,7 @@ var detect_question_type = function detect_question_type ( _q )
       } else {
         // TODO: Fill blank final o ¿hay alguna más?
         _result.answer = _answer.slice(1).split( '=' );
-        _result.type = 'end-fill-blank';
+        _result.type = 'fill-blank-end';
         _detected = true;
         // console.debug ( '+++ END FILL BLANK - ' + JSON.stringify ( _q.Text.Question ) );
       }
@@ -326,11 +345,11 @@ var render_true_false = function render_true_false ( _q, _d )
   _rendered_question.html += '<div class="form-group form-group-sm">';
   _rendered_question.html +=  '<p class="form-control-static" name="question-text">' + _q.Text.Question + '</p><br/>';
   _rendered_question.html +=  '<div class="radio" value="'+_d.answer+'">';
-  _rendered_question.html +=   '<input type="radio" name="optradio" ' +
+  _rendered_question.html +=   '<input type="radio" name="optradio" value="T" ' +
                                 ((_d.answer=='T')?'checked="checked"':'disabled') + '>';
   _rendered_question.html +=   '<label class="control-label">Verdadero</label>';
   _rendered_question.html +=   '<br/>';
-  _rendered_question.html +=   '<input type="radio" name="optradio" ' +
+  _rendered_question.html +=   '<input type="radio" name="optradio" value="F" ' +
                                 ((_d.answer=='F')?'checked="checked"':'disabled') + '>';
   _rendered_question.html +=   '<label class="control-label">Falso</label>';
   _rendered_question.html +=  '</div>';
@@ -361,11 +380,11 @@ var render_numeric = function render_numeric ( _q, _d )
   _rendered_question.html +=  '<p class="form-control-static" name="question-text">' + _q.Text.Question + '</p><br/>';
   _rendered_question.html +=  '<label class="control-label">';
   _rendered_question.html +=  ( _d.type === 'numeric-tolerance')?'':'Desde&nbsp;';
-  _rendered_question.html +=  '<input class="form-control" type="number" name="first" value="' + _d.answer[0] + '"/>';
+  _rendered_question.html +=  '<input class="form-control" type="number" name="first" value="' + _d.answer[0] + '" disabled/>';
   _rendered_question.html +=  '</label>';
   _rendered_question.html +=  '<label class="control-label">';
   _rendered_question.html +=  ( _d.type === 'numeric-tolerance')?'&nbsp;con una toleracia de&nbsp;':'&nbsp;hasta&nbsp;';
-  _rendered_question.html +=  '<input class="form-control" type="number" name="second" value="' + _d.answer[1] + '"/>';
+  _rendered_question.html +=  '<input class="form-control" type="number" name="second" value="' + _d.answer[1] + '" disabled/>';
   _rendered_question.html +=  '</label>';
   _rendered_question.html += '</div>';
 
@@ -396,9 +415,9 @@ var render_matching = function render_matching ( _q, _d )
   for ( var _pair in _d.answer ) {
     _split_pair = _d.answer[_pair].split('->');
     _rendered_question.html +=  '<div name="pair">';
-    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[0] ) + '" name="first"/>';
+    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[0] ) + '" name="first" disabled/>';
     _rendered_question.html +=   '<span class="glyphicon glyphicon-arrow-right" aria-hidden="true" name= "match-separator"></span>';
-    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[1] ) + '" name="second"/>';
+    _rendered_question.html +=   '<input class="form-control" type="text" value="' + $.trim( _split_pair[1] ) + '" name="second" disabled/>';
     _rendered_question.html +=  '</div>';
     _rendered_question.html +=  '<hr/>';
   }
@@ -428,26 +447,26 @@ var render_fill_blank = function render_fill_blank ( _q, _d )
   // console.debug ( '+++ ' +  _d.type + ' - ' + JSON.stringify ( _q.Text.Question ) );
 
   switch ( _d.type ) {
-  case 'start-fill-blank':
+  case 'fill-blank-start':
     for ( var _x in _d.answer ) {
       // console.debug ( 'START: ' + _d.answer[_x] + ' ' + _q.Text.Question[1] );
-      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank"/>';
+      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank" disabled/>';
     }
     _rendered_question.html +=  '<span class="form-control-static" name="question-text">' + _q.Text.Question[1] + '</span>';
     break;
-  case 'inline-fill-blank':
+  case 'fill-blank-middle':
     _rendered_question.html +=  '<span class="form-control-static" name="question-text-first">' + _q.Text.Question[0] + '</span>';
     for ( var _x in _d.answer ) {
       // console.debug ( 'INLINE ' + _q.Text.Question[0] + _d.answer[_x] + ' ' + _q.Text.Question[1] );
-      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank"/>';
+      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank" disabled/>';
     }
     _rendered_question.html +=  '<span class="form-control-static" name="question-text-second">' + _q.Text.Question[1] + '</span>';
     break;
-  case 'end-fill-blank':
+  case 'fill-blank-end':
     _rendered_question.html +=  '<span class="form-control-static" name="question-text">' + _q.Text.Question + '</span>';
     for ( var _x in _d.answer ) {
       // console.debug ( 'END: ' + _q.Text.Question + ' ' + _d.answer[_x] );
-      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank"/>';
+      _rendered_question.html +=  '<input class="form-control" type="text" value="' + _d.answer[_x] + '" name="blank" disabled/>';
     }
     break;
 
@@ -469,12 +488,12 @@ var render_fill_blank = function render_fill_blank ( _q, _d )
 var new_accordion_question = function new_accordion_question ( _rq )
 {
   var _new_question = $(
-    '<div class="group" id="' + _uniqueId ( '_question' ) + '">' +
+    '<div class="group" id="' + _uniqueId ( '_question' ) + '" question-type="' + _rq.detected_type + '">' +
       '<div class="acc_title">' +
         '<span class="label label-default question-type" value="' + _rq.detected_type + '">'+ _rq.type + '</span>' +
 // No podemos usar un checkbox de marca en el título porque el evento al pinchar lo recibe el acordeón y no el checkbox...
 //        '<input type="checkbox" class="question-selected-mark" name="question-selected" value="">' +
-        '<span class="question-title">' + _rq.title + '</span>' +
+        '&nbsp;<span class="question-title">' + _rq.title + '</span>' +
       '</div>' +
       '<div class="question-details">' +
         '<div class="question-operations">' +

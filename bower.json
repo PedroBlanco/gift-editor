@@ -6,7 +6,8 @@
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1",
     "jqueryui": "~1.11.4",
-    "localforage": "~1.2.3"
+    "localforage": "~1.2.3",
+    "bootstrap-validator": "~0.8.1"
   },
   "devDependencies": {}
 }
