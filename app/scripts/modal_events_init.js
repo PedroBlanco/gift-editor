@@ -89,245 +89,6 @@ var modal_events_init = function modal_events_init ()
   });
 
 
-
-  // Añadir pregunta: descripción
-  $('#add-question-description').click( function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Añadir pregunta: descripción' );
-    }
-
-    // Activamos el modal
-    $('#modal-add-question-description').modal();
-  } );
-
-  // Activación del botón de aceptar del modal
-  $('#modal-add-question-description').on('click', 'button.btn-primary', function () {
-
-    // Creamos nueva pregunta en el acordeón
-    var _q = {
-      Comment: [$('#form-add-question-description-comment').val()],
-      Title: $('#form-add-question-description-title').val(),
-      Text: {
-        Question: $('#form-add-question-description-text').val(),
-        Answer: ''
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#modal-add-question-description input').each(function(){
-      $(this).val('');
-    });
-
-    $( '#accordion1' ).append ( render_description ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Activación del botón de cancelar del modal
-  $('#modal-add-question-description').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#modal-add-question-description input').each(function(){
-      $(this).val('');
-    });
-
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-add-question-description').on('shown.bs.modal', function () {
-    $('#form-add-question-description-title').focus();
-  });
-
-
-
-  // // Editar pregunta: descripción
-  // $('#accordion1').on('click', 'button.edit-question-description', function () {
-  //
-  //   if ( PARSE_DEBUG ) {
-  //     console.log ( 'Editar pregunta: descripción' );
-  //   }
-  //
-  //   var _id = $(this).parent().parent().parent().parent().parent().attr('id');
-  //
-  //   $( '#modal-edit-question-description' ).attr ( 'target', _id );
-  //
-  //   // Cargamos los datos de la pregunta en el modal
-  //   $('#form-edit-question-description-comment').val(
-  //     $(this).parent().parent().parent().parent().parent().find('p.question-comment').text()
-  //   );
-  //   $('#form-edit-question-description-title').val(
-  //     $(this).parent().parent().parent().parent().parent().find('span.question-title').text()
-  //   );
-  //   $('#form-edit-question-description-text').val(
-  //     $(this).parent().parent().parent().parent().parent().find('p[name="question-text"]').text()
-  //   );
-  //
-  //   // Activamos el modal
-  //   $('#modal-edit-question-description').modal();
-  // } );
-  //
-  // // Activación del botón de aceptar del modal
-  // $('#modal-edit-question-description').on('click', 'button.btn-primary', function () {
-  //
-  //   // Guardamos los datos de la pregunta
-  //   var _q = {
-  //     Comment: [$('#form-edit-question-description-comment').val()],
-  //     Title: $('#form-edit-question-description-title').val(),
-  //     Text: {
-  //       Question: $('#form-edit-question-description-text').val(),
-  //       Answer: ''
-  //     }
-  //   };
-  //
-  //   // Limpiamos el formulario
-  //   $('#modal-edit-question-description input').each(function(){
-  //     $(this).val('');
-  //   });
-  //
-  //   var _id = $( '#modal-edit-question-description' ).attr ( 'target' );
-  //
-  //   $( '#' + _id ).replaceWith ( render_description ( _q, detect_question_type ( _q ) ) );
-  //   $( '#accordion1' ).accordion( 'refresh' );
-  //   $('#accordion1').has('div.group').next().hide();
-  // });
-  //
-  // // Activación del botón de cancelar del modal
-  // $('#modal-edit-question-description').on('click', 'button.btn-info', function () {
-  //
-  //   // Limpiamos el formulario
-  //   $('#modal-edit-question-description input').each(function(){
-  //     $(this).val('');
-  //   });
-  //
-  // } );
-  //
-  // // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  // $('#modal-edit-question-description').on('shown.bs.modal', function () {
-  //   $('#form-edit-question-description-title').focus();
-  // });
-
-
-
-  // Añadir pregunta: redacción
-  $('#add-question-essay').click( function () {
-
-    if ( PARSE_DEBUG ) {
-      console.log ( 'Añadir pregunta: redacción' );
-    }
-
-    // Activamos el modal
-    $('#modal-add-question-essay').modal();
-  } );
-
-  // Activación del botón del modal
-  $('#modal-add-question-essay').on('click', 'button.btn-primary', function () {
-
-    // Creamos nueva pregunta en el acordeón
-    var _q = {
-      Comment: [$('#form-add-question-essay-comment').val()],
-      Title: $('#form-add-question-essay-title').val(),
-      Text: {
-        Question: $('#form-add-question-essay-text').val(),
-        Answer: '{}'
-      }
-    };
-
-    // Limpiamos el formulario
-    $('#modal-add-question-essay input').each(function(){
-      $(this).val('');
-    });
-
-    $( '#accordion1' ).append ( render_essay ( _q, detect_question_type ( _q ) ) );
-    $( '#accordion1' ).accordion( 'refresh' );
-    $('#accordion1').has('div.group').next().hide();
-  });
-
-  // Activación del botón de cancelar del modal
-  $('#modal-add-question-essay').on('click', 'button.btn-info', function () {
-
-    // Limpiamos el formulario
-    $('#modal-add-question-essay input').each(function(){
-      $(this).val('');
-    });
-
-  } );
-
-  // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  $('#modal-add-question-essay').on('shown.bs.modal', function () {
-    $('#form-add-question-essay-title').focus();
-  });
-
-
-
-  // // Editar pregunta: redacción
-  // $('#accordion1').on('click', 'button.edit-question-essay', function () {
-  //
-  //   if ( PARSE_DEBUG ) {
-  //     console.log ( 'Editar pregunta: redacción' );
-  //   }
-  //
-  //   var _id = $(this).parent().parent().parent().parent().parent().attr('id');
-  //
-  //   $( '#modal-edit-question-essay' ).attr ( 'target', _id );
-  //
-  //   // Cargamos los datos de la pregunta en el modal
-  //   $('#form-edit-question-essay-comment').val(
-  //     $(this).parent().parent().parent().parent().parent().find('p.question-comment').text()
-  //   );
-  //   $('#form-edit-question-essay-title').val(
-  //     $(this).parent().parent().parent().parent().parent().find('span.question-title').text()
-  //   );
-  //   $('#form-edit-question-essay-text').val(
-  //     $(this).parent().parent().parent().parent().parent().find('p[name="question-text"]').text()
-  //   );
-  //
-  //   // Activamos el modal
-  //   $('#modal-edit-question-essay').modal();
-  // } );
-  //
-  // // Activación del botón de aceptar del modal
-  // $('#modal-edit-question-essay').on('click', 'button.btn-primary', function () {
-  //
-  //   // Guardamos los datos de la pregunta
-  //   var _q = {
-  //     Comment: [$('#form-edit-question-essay-comment').val()],
-  //     Title: $('#form-edit-question-essay-title').val(),
-  //     Text: {
-  //       Question: $('#form-edit-question-essay-text').val(),
-  //       Answer: ''
-  //     }
-  //   };
-  //
-  //   // Limpiamos el formulario
-  //   $('#modal-edit-question-essay input').each(function(){
-  //     $(this).val('');
-  //   });
-  //
-  //   var _id = $( '#modal-edit-question-essay' ).attr ( 'target' );
-  //
-  //   $( '#' + _id ).replaceWith ( render_essay ( _q, detect_question_type ( _q ) ) );
-  //   $( '#accordion1' ).accordion( 'refresh' );
-  //   $('#accordion1').has('div.group').next().hide();
-  // });
-  //
-  // // Activación del botón de cancelar del modal
-  // $('#modal-edit-question-essay').on('click', 'button.btn-info', function () {
-  //
-  //   // Limpiamos el formulario
-  //   $('#modal-edit-question-essay input').each(function(){
-  //     $(this).val('');
-  //   });
-  //
-  // } );
-  //
-  // // Programamos el foco en el primer campo para cuando se muestre por completo el modal
-  // $('#modal-edit-question-essay').on('shown.bs.modal', function () {
-  //   $('#form-edit-question-essay-title').focus();
-  // });
-
-
-
   // Añadir pregunta: rellenar hueco inicial
   $('#add-question-fill-blank-start').click( function () {
 
@@ -616,7 +377,7 @@ var modal_events_init = function modal_events_init ()
   });
 
 
-
+/*
   // Añadir pregunta: Rango numérico
   $('#add-question-numeric-range').click( function () {
 
@@ -772,6 +533,92 @@ var modal_events_init = function modal_events_init ()
   $('#modal-add-question-true-false').on('shown.bs.modal', function () {
     $('#form-add-question-true-false-title').focus();
   });
+*/
+
+  var new_modals = [
+    'add-question-description',
+    'add-question-essay',
+    'add-question-true-false',
+    'add-question-numeric-range',
+    'add-question-numeric-tolerance'
+  ];
+
+  for ( var i in new_modals ) {
+
+    if ( MODAL_DEBUG ) { console.log ( 'Activando modal-' + new_modals[i] ); }
+
+    // Pulsamos sobre añadir pregunta
+    $('#' + new_modals[i]).click( function () {
+      var _name = $(this).attr('id');
+
+      if ( MODAL_DEBUG ) {
+        console.log ( 'Ejecutando acción ' + _name );
+      }
+
+      // Activamos el modal
+      $('#modal-' + _name).modal();
+    } );
+
+    // Modal ocultado
+    $('#modal-' + new_modals[i]).on('hidden.bs.modal', function () {
+      var _name = $(this).attr('id').substr (6);
+
+      if ( MODAL_DEBUG ) { console.debug('Ocultando el modal de validación ' + '#modal-' + _name ); }
+
+      if ( MODAL_DEBUG ) { console.log ( 'Nodo hidden: ' + $(this).attr('id') ); }
+
+      $( '#form-' + _name  ).validator('destroy').off('submit');
+
+      // Limpiamos el formulario
+      limpiar_formulario ( _name );
+
+    } );
+
+    // Modal mostrado
+    $('#modal-' + new_modals[i] ).on('shown.bs.modal', function () {
+      var _name = $(this).attr('id').substr(6);
+      var _question_type = $(this).attr('question-type');
+
+      // Programamos el foco en el primer campo para cuando se muestre por completo el modal
+      $('#form-' + _name + ' input:first').focus();
+
+      // Activamos la validación, desactivando submit si no valida
+      $( '#form-' + _name  ).validator({disable:'true'}).on('submit', function (e) {
+        console.debug('Submit en el modal ' + '#modal-' + _name );
+
+        if (e.isDefaultPrevented()) {
+          // handle the invalid form...
+          if ( MODAL_DEBUG ) { console.error ('Error: validacion fallida ' + '#modal-' + _name ); }
+          // alert ('Error: validacion fallida ' + '#modal-' + _name );
+        } else {
+
+          if ( MODAL_DEBUG ) { console.log ( 'Guardando nuevos datos de ' + _name + '/' + _question_type ); }
+          var _q = asignar_datos_desde_modal ( _name, _question_type );
+
+          if ( MODAL_DEBUG ) { console.log ( 'Datos devueltos: ' + JSON.stringify(_q) ); }
+
+          $( '#modal-' + _name  ).modal('hide');
+
+          var _result = render_individual_question ( _q  );
+
+          if ( MODAL_DEBUG ) { console.log ( 'Resultado: ' + _result ); }
+
+          $( '#accordion1' ).append ( _result );
+          $( '#accordion1' ).accordion( 'refresh' );
+
+          $('#accordion1').has('div.group').next().hide();
+
+          // everything looks good!
+          if ( MODAL_DEBUG ) { console.info ('Exito: validacion exitosa ' + '#modal-' + _name ); }
+          // alert ('Exito: validacion exitosa ' + '#modal-' + _name );
+        }
+
+        return false;
+      });
+    });
+
+
+  } // FOR
 
 
   var edit_modals = [
@@ -783,8 +630,9 @@ var modal_events_init = function modal_events_init ()
   ];
 
   for (var i in edit_modals) {
+
     // Editar pregunta
-    if ( MODAL_DEBUG ) { console.log ( 'Activando botón ' + 'button.' + edit_modals[i] ); }
+    if ( MODAL_DEBUG ) { console.log ( 'Activando modal-' + edit_modals[i] ); }
     $('#accordion1').on('click', 'button.' + edit_modals[i], function () {
 
       var _id = '';
@@ -818,7 +666,6 @@ var modal_events_init = function modal_events_init ()
 
       if ( MODAL_DEBUG ) { console.log ( 'Nodo hidden: ' + $(this).attr('id') ); }
 
-      $( '#modal-' + _name  ).removeData('submit-in-progress' );
       $( '#form-' + _name  ).validator('destroy').off('submit');
 
       limpiar_formulario ( _name );

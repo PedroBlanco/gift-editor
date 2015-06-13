@@ -493,7 +493,7 @@ var new_accordion_question = function new_accordion_question ( _rq )
         '<span class="label label-default question-type" value="' + _rq.detected_type + '">'+ _rq.type + '</span>' +
 // No podemos usar un checkbox de marca en el título porque el evento al pinchar lo recibe el acordeón y no el checkbox...
 //        '<input type="checkbox" class="question-selected-mark" name="question-selected" value="">' +
-        '<span class="question-title">' + _rq.title + '</span>' +
+        '&nbsp;<span class="question-title">' + _rq.title + '</span>' +
       '</div>' +
       '<div class="question-details">' +
         '<div class="question-operations">' +
