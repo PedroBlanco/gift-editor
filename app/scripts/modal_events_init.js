@@ -842,6 +842,206 @@ var modal_events_init = function modal_events_init ()
   });
 
 
+/*
+  // Prueba de validación
+  $('#modal-test-validator-danger').click (function() {
+    console.info ('Iniciando validación manual');
+    $('#form-test-validator').validator('validate');
+  });
 
+
+  $('#menu-test-validator').click(function(){
+
+  });
+*/
+
+
+/*
+
+Para cada modal debemos capturar los siguientes eventos:
+
+apertura {
+  foco en el primer campo
+  activación de la validación
+    opciones
+      deshabilitar submit (quitar data-dismiss del botón)
+}
+
+cierre {
+  eliminación de la validación
+}
+
+pulsar submit {
+  si validar
+    ejecutar proceso
+    ocultar el modal
+}
+
+
+*/
+  // Modales a validar
+  var v_mod = [
+    'test-validator',
+    'test-validator-B'
+    ];
+
+  for (var i in v_mod) {
+
+    console.log ( 'Modal: ' + '#modal-'+v_mod[i]);
+    console.log ( 'Formulario: ' + '#form-'+v_mod[i]);
+
+/*
+    $( 'body' ).on('shown.bs.modal', '#modal-'+v_mod[i], function () {
+      console.log ( 'Modal mostrado');
+    });
+    */
+
+    $( 'body' ).on('shown.bs.modal', '#modal-' + v_mod[i] , function () {
+      var _m = $(this).attr('id').substr (6);
+
+      // Activamos el primer campo del formulario
+      $( '#form-' + _m + ' input:first' ).focus();
+
+      console.log ( 'Nodo shown: ' + $(this).attr('id') );
+
+      console.debug('Activando primer campo del modal de validación ' + '#modal-' + _m );
+
+      $( '#modal-' + _m  ).data('submit-in-progress', 'false' );
+
+      // Activamos la validación, desactivando submit si no valida
+      $( '#form-' + _m  ).validator({disable:'true'}).on('submit', function (e) {
+        console.debug('Submit en el modal de validación ' + '#modal-' + _m );
+        if ( $( '#modal-' + _m  ).data('submit-in-progress') === 'false' ) {
+          // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
+          $( '#modal-' + _m  ).data('submit-in-progress', 'true');
+
+          if (e.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.error ('Error: validacion fallida ' + '#modal-' + _m );
+            alert ('Error: validacion fallida ' + '#modal-' + _m );
+          } else {
+            // everything looks good!
+            console.info ('Exito: validacion exitosa ' + '#modal-' + _m );
+            alert ('Exito: validacion exitosa ' + '#modal-' + _m );
+            $( '#modal-' + _m  ).modal('hide');
+          }
+        } else {
+          $( '#modal-' + _m  ).data('submit-in-progress', 'false' );
+        }
+        return false;
+      });
+    });
+
+    // Salir del modal: Eliminamos la validación, desactivamos el submit y limpiamos los datos
+    $( 'body' ).on('hidden.bs.modal', '#modal-' + v_mod[i], function () {
+      var _m = $(this).attr('id').substr (6);
+
+      console.debug('Ocultando el modal de validación ' + '#modal-' + _m );
+
+      console.log ( 'Nodo hidden: ' + $(this).attr('id') );
+
+      $( '#modal-' + _m  ).removeData('submit-in-progress' );
+      $( '#form-' + _m  ).validator('destroy').off('submit').find('input').each(function(){
+        $(this).val('');
+      });
+
+    });
+
+  }
+  // for (var i in v_mod) {
+
+    // console.log ( 'Modal: ' + '#modal-'+v_mod[i]);
+    // console.log ( 'Formulario: ' + '#form-'+v_mod[i]);
+
+/*
+    $( 'body' ).on('shown.bs.modal', '#modal-'+v_mod[i], function () {
+      console.log ( 'Modal mostrado');
+    });
+    */
+/*
+
+    $( 'body' ).on('shown.bs.modal', '#modal-test-validator', function () {
+      // Activamos el primer campo del formulario
+      $( '#form-test-validator input:first' ).focus();
+      console.debug('Activando primer campo del modal de validación ' + '#modal-test-validator');
+
+      $( '#modal-test-validator' ).data('submit-in-progress', 'false' );
+
+      // Activamos la validación, desactivando submit si no valida
+      $( '#form-test-validator' ).validator({disable:'true'}).on('submit', function (e) {
+        console.debug('Submit en el modal de validación ' + '#modal-test-validator');
+        if ( $( '#modal-test-validator' ).data('submit-in-progress') === 'false' ) {
+          // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
+          $( '#modal-test-validator' ).data('submit-in-progress', 'true');
+
+          if (e.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.error ('Error: validacion fallida ' + '#modal-test-validator');
+            alert ('Error: validacion fallida ' + '#modal-test-validator');
+          } else {
+            // everything looks good!
+            console.info ('Exito: validacion exitosa ' + '#modal-test-validator');
+            alert ('Exito: validacion exitosa ' + '#modal-test-validator');
+            $( '#modal-test-validator' ).modal("hide");
+          }
+        } else {
+          $( '#modal-test-validator' ).data('submit-in-progress', 'false' );
+        }
+        return false;
+      });
+    });
+
+    // Salir del modal: Eliminamos la validación, desactivamos el submit y limpiamos los datos
+    $( 'body' ).on('hidden.bs.modal', '#modal-test-validator', function () {
+      console.debug('Ocultando el modal de validación ' + '#modal-test-validator');
+      $( '#modal-test-validator' ).removeData('submit-in-progress' );
+      $( '#form-test-validator' ).validator('destroy').off('submit').find('input').each(function(){
+        $(this).val('');
+      });
+
+    });
+
+  // }
+
+    $( 'body' ).on('shown.bs.modal', '#modal-test-validator-B', function () {
+      // Activamos el primer campo del formulario
+      $( '#form-test-validator-B input:first' ).focus();
+      console.debug('Activando primer campo del modal de validación ' + '#modal-test-validator-B');
+
+      $( '#modal-test-validator-B' ).data('submit-in-progress', 'false' );
+
+      // Activamos la validación, desactivando submit si no valida
+      $( '#form-test-validator-B' ).validator({disable:'true'}).on('submit', function (e) {
+        console.debug('Submit en el modal de validación ' + '#modal-test-validator-B');
+        if ( $( '#modal-test-validator-B' ).data('submit-in-progress') === 'false' ) {
+          // FIXME: como el evento submit se dispara dos veces, comprobamos que sólo apliquemos una
+          $( '#modal-test-validator-B' ).data('submit-in-progress', 'true');
+
+          if (e.isDefaultPrevented()) {
+            // handle the invalid form...
+            console.error ('Error: validacion fallida ' + '#modal-test-validator-B');
+            alert ('Error: validacion fallida ' + '#modal-test-validator-B');
+          } else {
+            // everything looks good!
+            console.info ('Exito: validacion exitosa ' + '#modal-test-validator-B');
+            alert ('Exito: validacion exitosa ' + '#modal-test-validator-B');
+            $( '#modal-test-validator-B' ).modal("hide");
+          }
+        } else {
+          $( '#modal-test-validator-B' ).data('submit-in-progress', 'false' );
+        }
+      });
+    });
+
+    // Salir del modal: Eliminamos la validación, desactivamos el submit y limpiamos los datos
+    $( 'body' ).on('hidden.bs.modal', '#modal-test-validator-B', function () {
+      console.debug('Ocultando el modal de validación ' + '#modal-test-validator-B');
+      $( '#modal-test-validator-B' ).removeData('submit-in-progress' );
+      $( '#form-test-validator-B' ).validator('destroy').off('submit').find('input').each(function(){
+        $(this).val('');
+      });
+
+    });
+*/
 
 }
