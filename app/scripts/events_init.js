@@ -26,48 +26,55 @@ var events_init = function events_init ()
 
 
   $('#hide-left-panel').click ( function () {
-    $(this).parent().parent().hide('fast');
+    $('.left-panel').parent().hide('fast');
     $('#show-left-panel').show('fast');
     // TODO: Aumentar de tamaño el panel de preguntas
-    if ( $('#center-panel').parent().hasClass ( 'col-sm-4' )) {
-      $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
-    } else {
-      $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
-    }
+    // if ( $('#center-panel').parent().hasClass ( 'col-sm-4' )) {
+    //   $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
+    // } else {
+    //   $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
+    // }
+    // Como no vamos a mostrar el panel de categoría, los paneles van a tener 2 estados solamente
+    $('#center-panel').parent().toggleClass('col-sm-5').toggleClass('col-sm-12');
   } );
 
-  $('#hide-right-panel').click ( function () {
-    $(this).parent().parent().hide('fast');
-    $('#show-right-panel').show('fast');
-    // TODO: Aumentar de tamaño el panel de preguntas
-    if ( $('#center-panel').parent().hasClass ( 'col-sm-4' )) {
-      $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
-    } else {
-      $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
-    }
-  } );
+
+// Como no vamos a mostrar el panel de categoría, los paneles van a tener 2 estados solamente
+  // $('#hide-right-panel').click ( function () {
+  //   $(this).parent().parent().hide('fast');
+  //   $('#show-right-panel').show('fast');
+  //   // TODO: Aumentar de tamaño el panel de preguntas
+  //   if ( $('#center-panel').parent().hasClass ( 'col-sm-4' )) {
+  //     $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
+  //   } else {
+  //     $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
+  //   }
+  // } );
 
   $('#show-left-panel').click ( function () {
     $(this).hide('fast');
-    $('#left-panel').parent().show('fast');
-    // TODO: Disminuir de tamaño el panel de preguntas
-    if ( $('#center-panel').parent().hasClass ( 'col-sm-8' )) {
-      $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
-    } else {
-      $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
-    }
+    $('.left-panel').parent().show('fast');
+    // // TODO: Disminuir de tamaño el panel de preguntas
+    // if ( $('#center-panel').parent().hasClass ( 'col-sm-12' )) {
+    //   $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
+    // } else {
+    //   $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
+    // }
+    // Como no vamos a mostrar el panel de categoría, los paneles van a tener 2 estados solamente
+    $('#center-panel').parent().toggleClass('col-sm-5').toggleClass('col-sm-12');
   } );
 
-  $('#show-right-panel').click ( function () {
-    $(this).hide('fast');
-    $('#right-panel').parent().show('fast');
-    // TODO: Disminuir de tamaño el panel de preguntas
-    if ( $('#center-panel').parent().hasClass ( 'col-sm-8' )) {
-      $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
-    } else {
-      $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
-    }
-  } );
+  // Como no vamos a mostrar el panel de categoría, los paneles van a tener 2 estados solamente
+  // $('#show-right-panel').click ( function () {
+  //   $(this).hide('fast');
+  //   $('#right-panel').parent().show('fast');
+  //   // TODO: Disminuir de tamaño el panel de preguntas
+  //   if ( $('#center-panel').parent().hasClass ( 'col-sm-8' )) {
+  //     $('#center-panel').parent().toggleClass('col-sm-4').toggleClass('col-sm-8');
+  //   } else {
+  //     $('#center-panel').parent().toggleClass('col-sm-8').toggleClass('col-sm-12');
+  //   }
+  // } );
 
 
   $('#button_gift_input').click( function () {

@@ -9,7 +9,8 @@ var init_accordion = function init_accordion ()
     .accordion({
       header: '> div > div.acc_title',
       collapsible: true,
-      heightStyle: 'content'
+      heightStyle: 'content',
+      icons: { 'header': 'ui-icon-plusthick', 'activeHeader': 'ui-icon-minusthick' }
     })
     .sortable({
       axis: 'y',

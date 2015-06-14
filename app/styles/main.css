@@ -5954,6 +5954,27 @@ td.visible-print {
     display: none !important;
   }
 }
+@font-face {
+  font-family: 'open_regular';
+  src: url('../fonts/opensans-regular.eot');
+  src: url('../fonts/opensans-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans-regular.woff') format('woff'), url('../fonts/opensans-regular.ttf') format('truetype'), url('../fonts/opensans-regular.svg#LatoRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_bold';
+  src: url('../fonts/opensans-bold.eot');
+  src: url('../fonts/opensans-bold.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans-bold.woff') format('woff'), url('../fonts/opensans-bold.ttf') format('truetype'), url('../fonts/opensans-bold.svg#LatoRegular') format('svg');
+  font-weight: bolder;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open_semibold';
+  src: url('../fonts/opensans-semibold.eot');
+  src: url('../fonts/opensans-semibold.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans-semibold.woff') format('woff'), url('../fonts/opensans-semibold.ttf') format('truetype'), url('../fonts/opensans-semibold.svg#LatoRegular') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
 /*
 .browsehappy {
   margin: 0.2em 0;
@@ -5967,26 +5988,23 @@ td.visible-print {
 }
 */
 body {
-  margin-left: 1em;
-  margin-right: 1.5em;
+  align-content: space-between;
+  margin: 0px;
+  font-family: 'open_regular', arial;
+}
+.container-fluid {
+  align-content: space-around;
+  justify-content: space-around;
+  margin: 0px;
+}
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .left-panel,
 .center-panel,
 .right-panel {
-  border: 3px solid #2A6496;
-  border-radius: 8px;
   padding: 1em;
-  margin: 1em;
-}
-.left-panel {
-  margin-right: 0em;
-}
-.center-panel {
-  margin-right: 0em;
-  margin-left: 0em;
-}
-.right-panel {
-  margin-left: 0em;
 }
 .left-panel h3,
 .center-panel h3,
@@ -5994,6 +6012,7 @@ body {
 .left-panel h2,
 .center-panel h2,
 .right-panel h2 {
+  margin-top: 10px;
   text-align: center;
   clear: none;
 }
@@ -6002,37 +6021,54 @@ body {
   border-width: 2px;
   font-weight: bold;
 }
+.btn-high {
+  min-height: 12em;
+  max-height: 20em;
+}
 .mono {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
 }
+textarea.form-control.mono {
+  min-height: 20em;
+}
 .question-comment {
   font-style: italic;
 }
+div.acc_title span.question-title {
+  font-weight: normal;
+  font-size: 1.2em;
+}
 div.acc_title span.question-type {
-  float: right;
+  font-weight: bold;
+  font-size: 0.8em;
 }
 footer {
-  border-top: 3em solid white;
+  border-top: 1em solid white;
   padding-top: 1em;
   padding-right: 1em;
-  background-color: #3B3B3B;
-  background-image: url('../images/bg_gris_botton.jpg');
-  color: white;
+  overflow: hidden;
+  position: absolute;
+  /******/
+  background: url("../images/bg_gris_botton.jpg") no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 li.footer_title {
   font-weight: bolder;
   list-style-type: none;
   text-align: center;
-  color: inherit;
+  color: white;
 }
 li.footer_text {
   list-style-type: none;
-  text-align: left;
-  color: inherit;
+  text-align: center;
+  color: white;
 }
 li.footer_text a {
-  color: inherit;
+  color: white;
   text-decoration: underline;
   font-weight: bold;
 }
@@ -6043,7 +6079,6 @@ li.footer_text a {
   margin: 2em;
   min-height: 6em;
   text-align: center;
-  vertical-align: -50%;
 }
 .empty-place-info p {
   vertical-align: -50%;
@@ -6062,7 +6097,6 @@ li.footer_text a {
 a.navbar-brand,
 #myNavbar,
 #myNavbar a {
-  background-color: #2A6496;
   color: white;
 }
 .navbar-header,
@@ -6072,11 +6106,20 @@ div#myNavbar {
   min-height: 50px;
 }
 .nav-bar-row {
-  background-color: #2A6496;
   color: white;
   padding: 1em;
   margin: 0em;
-  margin-bottom: 2em;
+  background: url("../images/bg_blue_top.jpg") no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  /* COVER lo busque en internet para que la imagen adapte ancho ventana navegador
+http://www.w3schools.com/css/css3_backgrounds.asp
+https://css-tricks.com/perfect-full-page-background-image/  */
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 .navbar-brand {
   padding: 0px;
@@ -6135,7 +6178,6 @@ div.acc_title span.glyphicon-remove {
 .dropdown-questions-operations {
   clear: none;
   display: inline;
-  float: left;
 }
 .input-mir {
   width: 20%;
@@ -6157,5 +6199,12 @@ div.acc_title span.glyphicon-remove {
 }
 .question-selected-mark {
   float: right;
+}
+.button-column {
+  align-content: space-around;
+}
+.button-bar {
+  display: flex;
+  justify-content: center;
 }
 /*# sourceMappingURL=/styles/main.css.map */
