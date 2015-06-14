@@ -1,16 +1,13 @@
 <div class="col-sm-5">
   <div id='center-panel' class="center-panel center-block">
-    <h2 class="text-info">Lista de preguntas</h2>
+    <h3 >Lista de preguntas</h3>
     <div class="button-bar">
       <button type="button" id="show-left-panel" class="btn btn-info" style="float: left; display: none;">
-        Panel de edición&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
-      </button>&nbsp;
-      <button type="button" id="show-right-panel" class="btn btn-info" style="float: right; display: none;">
-        <span class="glyphicon glyphicon-chevron-left"></span>Categorías
-      </button>
+        Mostrar edición&nbsp;<span class="glyphicon glyphicon-chevron-right"></span>
+      </button>&nbsp;&nbsp;&nbsp;&nbsp;
       <div class="dropdown dropdown-questions-operations">
         <a id="dropdown-add-questions" role="button" data-toggle="dropdown" class="btn btn-info" data-target="#" href="#">
-          <span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir pregunta
+          <span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir
         </a>
         <!-- Multi-level dropdown from http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3 -->
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
@@ -33,9 +30,13 @@
               <li><a href="#" id="add-question-numeric-tolerance">Con tolerancia</a></li>
             </ul>
           </li>
+          <li><a tabindex="-1" href="#" id="add-question-multiple-choice-single-answer">1 respuesta entre varias opciones</a>
+          </li>
+          <li><a tabindex="-1" href="#" id="add-question-multiple-choice-multiple-answer">Varias respuestas entre varias opciones</a>
+          </li>
         </ul>
       </div>
-      &nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <div class="dropdown dropdown-questions-operations">
         <a id="dropdown-remove-questions" role="button" data-toggle="dropdown" class="btn btn-info" data-target="#" href="#">
           <span class="glyphicon glyphicon-minus"></span>&nbsp;Eliminar
@@ -43,14 +44,14 @@
         <!-- Multi-level dropdown from http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3 -->
         <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
           <li><a tabindex="-1" href="#" id="remove-all-questions">Todas las preguntas</a></li>
-          <li><a tabindex="-1" href="#" id="remove-selected-questions">Las preguntas seleccionadas</a></li>
         </ul>
       </div>
     </div>
+    <br>
     <div id="accordion1" class="panel-group">
     </div>
     <div id="accordion1-empty" class="empty-place-info center-block text-info" style="display: none;">
-      <br><p>Aquí se muestran las preguntas para su gestión</p>
+      <br><p>Aquí se muestran las preguntas<br>para su gestión</p>
     </div>
   </div>
 </div>

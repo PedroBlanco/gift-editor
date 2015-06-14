@@ -16,8 +16,22 @@ var modal_events_init = function modal_events_init ()
     $(this).prev().prev().find('input:first').focus();
   });
 
+  // Añadir respuesta incorrecta
+  $('button.btn-new-incorrect-answer').click(function(){
+    var _name = $(this).attr('id').slice(5,-21);
+    console.log ( ' Pulsando... ' + $(this).attr('id') + ' de ' + _name );
+    create_edit_incorrect_answer ( _name, '', true );
+    $(this).prev().prev().find('input:first').focus();
+  });
+
   // Eliminar pareja de correspondencia
   $('div.modal-body').on('click', 'span.remove-pair', function(){
+    $(this).parent().next().remove();
+    $(this).parent().remove();
+  });
+
+  // Eliminar respuesta incorrecta
+  $('div.modal-body').on('click', 'span.remove-incorrect-answer', function(){
     $(this).parent().next().remove();
     $(this).parent().remove();
   });
@@ -112,7 +126,9 @@ var modal_events_init = function modal_events_init ()
     'add-question-matching',
     'add-question-fill-blank-start',
     'add-question-fill-blank-middle',
-    'add-question-fill-blank-end'
+    'add-question-fill-blank-end',
+    'add-question-multiple-choice-single-answer',
+    'add-question-multiple-choice-multiple-answer'
   ];
 
   for ( var i in new_modals ) {
@@ -202,7 +218,9 @@ var modal_events_init = function modal_events_init ()
     'edit-question-matching',
     'edit-question-fill-blank-start',
     'edit-question-fill-blank-middle',
-    'edit-question-fill-blank-end'
+    'edit-question-fill-blank-end',
+    'edit-question-multiple-choice-single-answer',
+    'edit-question-multiple-choice-multiple-answer'
   ];
 
   for (var i in edit_modals) {
@@ -227,6 +245,8 @@ var modal_events_init = function modal_events_init ()
       if ( MODAL_DEBUG ) { console.log ( 'Asignando datos '+ _type + ' de ' + _id + ' a ' + _dest ); }
 
       asignar_datos_a_modal ( _id, _dest, _type );
+
+      if ( MODAL_DEBUG ) { console.log ( 'Activando #modal-' + _dest ); }
 
       // Activamos el modal
       $('#modal-' + _dest).modal();

@@ -1,0 +1,49 @@
+<div class="modal fade" id="modal-add-question-multiple-choice-single-answer" question-type="multiple-choice-single-answer" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title">Añadir pregunta: Una respuesta a elegir</h4>
+      </div>
+      <form role="form" id="form-add-question-multiple-choice-single-answer">
+        <div class="modal-body">
+         <div class="form-group">
+           <label for="form-add-question-multiple-choice-single-answer-title">Título:</label>
+           <input type="text" class="form-control" id="form-add-question-multiple-choice-single-answer-title" placeholder="Opcional">
+         </div>
+         <div class="form-group">
+           <label for="form-add-question-multiple-choice-single-answer-comment">Comentario:</label>
+           <input type="text" class="form-control" id="form-add-question-multiple-choice-single-answer-comment" placeholder="Opcional">
+         </div>
+         <div class="form-group">
+           <label for="form-add-question-multiple-choice-single-answer-text">Pregunta:</label>
+           <input type="text" class="form-control" id="form-add-question-multiple-choice-single-answer-text" placeholder="Obligatorio" required="required">
+           <br>
+         </div>
+         <div class="form-group multiple-choice-single-answer-correct">
+           <span class="glyphicon glyphicon-ok text-success"></span>&nbsp;&nbsp;&nbsp;
+           <input class="input-large" type="text" id="form-add-question-multiple-choice-single-answer-correct" placeholder="Respuesta correcta" value="" required="required"/>
+         </div>
+         <hr>
+         <div class="form-group multiple-choice-single-answer-incorrect">
+           <span class="glyphicon glyphicon-remove text-danger"></span>&nbsp;&nbsp;&nbsp;
+           <input class="input-large" type="text" id="form-add-question-multiple-choice-single-answer-incorrect-1" placeholder="Respuesta incorrecta" value="" required="required"/>
+         </div>
+         <hr>
+         <div class="form-group multiple-choice-single-answer-incorrect">
+           <span class="glyphicon glyphicon-remove text-danger"></span>&nbsp;&nbsp;&nbsp;
+           <input class="input-large" type="text" id="form-add-question-multiple-choice-single-answer-incorrect-2" placeholder="Respuesta incorrecta" value="" required="required"/>
+         </div>
+         <hr>
+         <button type="button" class="btn btn-info btn-block btn-new-incorrect-answer" id="form-add-question-multiple-choice-single-answer-new-incorrect-answer">Añadir nueva respuesta incorrecta</button>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;Añadir</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

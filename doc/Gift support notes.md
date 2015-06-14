@@ -69,6 +69,8 @@ equals four.
 
 ## Not yet parsed (error)
 
+No está soportado por el estándar.
+
 ```
 // Tipo: fill in the blanks - multiple
 // Is this question even possible?

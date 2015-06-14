@@ -5,11 +5,11 @@
 
 /*** Configuración general y registro de eventos ***/
 
-// var PARSE_DEBUG = true;
-var PARSE_DEBUG = false;
+var PARSE_DEBUG = true;
+// var PARSE_DEBUG = false;
 
-// var MODAL_DEBUG = true;
-var MODAL_DEBUG = false;
+var MODAL_DEBUG = true;
+// var MODAL_DEBUG = false;
 
 if ( PARSE_DEBUG ) {
   var GROWL_DELAY = 0;

@@ -152,6 +152,14 @@ var render_individual_question = function render_individual_question ( _q )
         if ( PARSE_DEBUG ) {  console.log ('*** Fill-blank: ' + _q.Title + '/' + JSON.stringify (_q.Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
         _dest =  render_fill_blank ( _q, q_detected );
       break;
+    case 'multiple-choice-single-answer':
+      if ( PARSE_DEBUG ) {  console.log ('*** multiple-choice-single-answer: ' + _q.Title + '/' + JSON.stringify (_q.Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
+      _dest =  render_multiple_choice_single_answer ( _q, q_detected );
+    break;
+    case 'multiple-choice-multiple-answer':
+      if ( PARSE_DEBUG ) {  console.log ('*** multiple-choice-multiple-answer: ' + _q.Title + '/' + JSON.stringify (_q.Text.Question) + ' = ' + JSON.stringify ( q_detected.answer) ) ; }
+      _dest =  render_multiple_choice_multiple_answer ( _q, q_detected );
+    break;
     default:
         if ( PARSE_DEBUG ) {  console.log ( '¿Type? ' + JSON.stringify ( q_detected ) ); }
         // TODO: show error or something
@@ -262,10 +270,64 @@ var detect_question_type = function detect_question_type ( _q )
         _result.type = 'matching';
         _detected = true;
       } else {
-        // TODO: Fill blank final o ¿hay alguna más?
-        _result.answer = _answer.slice(1).split( '=' );
-        _result.type = 'fill-blank-end';
-        _detected = true;
+        var _f_pos = [];
+        _f_pos[0] = _answer.indexOf('=');
+        _f_pos[1] = _answer.indexOf('~');
+        if ( _f_pos[1] === -1 ) {
+          //Si no tiene el carácter ~ debe ser fill-blank-end
+          _result.answer = _answer.slice(1).split( '=' );
+          _result.type = 'fill-blank-end';
+          _detected = true;
+        } else if ( _f_pos[0] === -1 ) {
+          // Si no tiene el el carácter = debe ser una multiple-choice-multiple-answer con sólo ~
+          // Cada elemento del array devuelto, es otro array con la puntuación en el primer elemento y la respuesta en el segundo
+          var _partial_answers = _answer.slice(1).split( '~' );
+          var _separated_partial_answers;
+          _result.answer = [];
+
+          for (var i in _partial_answers) {
+            _separated_partial_answers = _partial_answers[i].trim().slice(1).split('%');
+            _result.answer.push ( _separated_partial_answers );
+          }
+
+          _result.type = 'multiple-choice-multiple-answer';
+          _detected = true;
+        } else {
+          // Teniendo 1 = (FIXME:suponemos que sólo hay 1...) y varios ~ es una multiple-choice-single-answer
+          // Devolveremos un array en el que la última respuesta es la correcta
+
+          // Primero separo por =
+          var _first_split;
+          var _correct_answer;
+          var _incorrect_answers;
+          var _mixed_chunks;
+
+          if ( _f_pos[0] === 0 ) {
+            // Si la respuesta correcta es la primera, separamos e invertimos el array
+            _first_split = _answer.slice(1).split('~');
+            _result.answer = _first_split.reverse();
+          } else {
+            _first_split = _answer.slice(1).split( '=' );
+            _incorrect_answers = _first_split[0].split('~');
+            _mixed_chunks = _first_split[1].split('~');
+            if ( _mixed_chunks.length === 1 ) {
+              // Como en _mixed_chunks sólo está la pregunta correcta, la concatenamos a las incorrectas y terminamos
+              console.log ( '// Como en _mixed_chunks sólo está la pregunta correcta, la concatenamos a las incorrectas y terminamos: ' + JSON.stringify ( _mixed_chunks ) + ' -> ' + JSON.stringify ( _first_split ) );
+              _result.answer = _incorrect_answers.concat ( _mixed_chunks );
+            } else {
+              // En este caso, la respuesta correcta es siempre la primera de _mixed_chunks
+              _correct_answer = _mixed_chunks.shift();
+              // Añadimos las respuestas incorrectas
+              _result.answer = _incorrect_answers.concat ( _mixed_chunks );
+              // Para añadir finalmente la respuesta correcta
+              _result.answer.push ( _correct_answer );
+            }
+          }
+          _result.type = 'multiple-choice-single-answer';
+          _detected = true;
+        }
+
+        // TODO: ¿Hay alguna más?
         // console.debug ( '+++ END FILL BLANK - ' + JSON.stringify ( _q.Text.Question ) );
       }
     }
@@ -421,6 +483,79 @@ var render_matching = function render_matching ( _q, _d )
     _rendered_question.html +=  '</div>';
     _rendered_question.html +=  '<hr/>';
   }
+  _rendered_question.html += '</div>';
+  _rendered_question.html += '</form>';
+
+  return new_accordion_question ( _rendered_question );
+}
+
+
+var render_multiple_choice_single_answer = function render_multiple_choice_single_answer ( _q, _d )
+{
+  if ( PARSE_DEBUG ) {
+    console.log ( '--- Rendering multiple-choice-single-answer' );
+  }
+
+  var _rendered_question = {
+    type: 'Una respuesta a elegir',
+    detected_type: _d.type,
+    title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
+    html: '' };
+
+  _rendered_question.html = '<form class="form-inline" role="form">';
+  _rendered_question.html += '<div class="form-group form-group-sm">';
+  _rendered_question.html +=  '<p class="form-control-static" name="question-text">' + _q.Text.Question + '</p><br/>';
+
+  var _correct = _d.answer.pop();
+  for ( var i in _d.answer ) {
+    _rendered_question.html +=  '<div name="single-answer">';
+    _rendered_question.html +=   '<span class="glyphicon glyphicon-remove text-danger"></span>&nbsp;&nbsp;&nbsp;';
+    _rendered_question.html +=   '<span class="form-control-static" name="incorrect-answer">';
+    _rendered_question.html += $.trim(_d.answer[i]) + '</span>';
+    _rendered_question.html +=  '</div>';
+  }
+  _rendered_question.html +=  '<div name="single-answer">';
+  _rendered_question.html +=   '<span class="glyphicon glyphicon-ok text-success"></span>&nbsp;&nbsp;&nbsp;';
+  _rendered_question.html +=   '<span class="form-control-static" name="correct-answer">';
+  _rendered_question.html += $.trim(_correct) + '</span>';
+  _rendered_question.html +=  '</div>';
+
+
+  _rendered_question.html += '</div>';
+  _rendered_question.html += '</form>';
+
+  return new_accordion_question ( _rendered_question );
+}
+
+
+var render_multiple_choice_multiple_answer = function render_multiple_choice_multiple_answer ( _q, _d )
+{
+  if ( PARSE_DEBUG ) {
+    console.log ( '--- Rendering multiple-choice-multiple-answer' );
+  }
+
+  var _rendered_question = {
+    type: 'Varias respuesta a elegir',
+    detected_type: _d.type,
+    title: _q.Title,
+    comment: _q.Comment.join ( '<br/>'),
+    html: '' };
+
+  _rendered_question.html = '<form class="form-inline" role="form">';
+  _rendered_question.html += '<div class="form-group form-group-sm">';
+  _rendered_question.html +=  '<p class="form-control-static" name="question-text">' + _q.Text.Question + '</p><br/>';
+
+  for ( var i in _d.answer ) {
+    _rendered_question.html +=  '<div name="partial-answer">';
+    _rendered_question.html +=   '<span class="form-control-static" name="answer-weight">';
+    _rendered_question.html +=   $.trim(_d.answer[i][0]) + '</span>';
+    _rendered_question.html +=   '&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right">&nbsp;&nbsp;';
+    _rendered_question.html +=   '<span class="form-control-static" name="answer-text">';
+    _rendered_question.html +=   $.trim(_d.answer[i][1]) + '</span>';
+    _rendered_question.html +=  '</div>';
+  }
+
   _rendered_question.html += '</div>';
   _rendered_question.html += '</form>';
 

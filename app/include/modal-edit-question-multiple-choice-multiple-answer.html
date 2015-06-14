@@ -1,0 +1,53 @@
+<div class="modal fade" id="modal-edit-question-multiple-choice-multiple-answer" question-type="multiple-choice-multiple-answer" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title">Editar pregunta: Varias respuestas a elegir</h4>
+      </div>
+      <form role="form" id="form-edit-question-multiple-choice-multiple-answer">
+        <div class="modal-body">
+         <div class="form-group">
+           <label for="form-edit-question-multiple-choice-multiple-answer-title">Título:</label>
+           <input type="text" class="form-control" id="form-edit-question-multiple-choice-multiple-answer-title" placeholder="Opcional">
+         </div>
+         <div class="form-group">
+           <label for="form-edit-question-multiple-choice-multiple-answer-comment">Comentario:</label>
+           <input type="text" class="form-control" id="form-edit-question-multiple-choice-multiple-answer-comment" placeholder="Opcional">
+         </div>
+         <div class="form-group">
+           <label for="form-edit-question-multiple-choice-multiple-answer-text">Pregunta:</label>
+           <input type="text" class="form-control" id="form-edit-question-multiple-choice-multiple-answer-text" placeholder="Obligatorio" required="required">
+           <br>
+           <p class="form-control-static">Debe rellenar las tres parejas de campos:</p>
+         </div>
+         <div class="form-group multiple-choice-multiple-answer-pair" id="form-edit-question-multiple-choice-multiple-answer-pair-1">
+           <input class="input-small" name="first" type="text" id="form-edit-question-multiple-choice-multiple-answer-pair-1-1" name="first" placeholder="" value="" required="required"/>
+           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+           <input class="input-small" name="second" type="text" id="form-edit-question-multiple-choice-multiple-answer-pair-1-2" name="second" placeholder="" value="" required="required"/>
+         </div>
+         <hr>
+         <div class="form-group multiple-choice-multiple-answer-pair" id="form-edit-question-multiple-choice-multiple-answer-pair-2">
+           <input class="input-small" name="first" type="text" id="form-edit-question-multiple-choice-multiple-answer-pair-2-1" name="first" placeholder="" value="" required="required"/>
+           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+           <input class="input-small" name="second" type="text" id="form-edit-question-multiple-choice-multiple-answer-pair-2-2" name="second" placeholder="" value="" required="required"/>
+         </div>
+         <hr>
+         <div class="form-group multiple-choice-multiple-answer-pair" id="form-edit-question-multiple-choice-multiple-answer-pair-3">
+           <input class="input-small" name="first" type="text" id="form-edit-question-multiple-choice-multiple-answer-pair-3-1" name="first" placeholder="" value="" required="required"/>
+           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+           <input class="input-small" name="second" type="text" id="form-edit-question-multiple-choice-multiple-answer-pair-3-2" name="second" placeholder="" value="" required="required"/>
+         </div>
+         <hr>
+         <button type="button" class="btn btn-info btn-block btn-new-pair" id="form-edit-question-multiple-choice-multiple-answer-new-pair">Añadir nueva pareja</button>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-ok"></span>&nbsp;Guardar</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Cancelar</button>&nbsp;
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

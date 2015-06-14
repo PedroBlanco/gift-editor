@@ -33,6 +33,35 @@ var create_edit_matching_pair = function create_edit_matching_pair ( _name, _fir
   $('#form-' + _name + '-new-pair').before( _new_pair );
 }
 
+
+var create_edit_incorrect_answer = function create_edit_incorrect_answer ( _name, _value, _volatile )
+{
+  // FIXME: Para asegurarnos de que no vamos a coincidir el en id (1 o 2), aumentamos _uniqueID...
+  var _id = _uniqueId () + _uniqueId (); // El valor no importa que se pierda
+  _id = _uniqueId ( 'form-' + _name + '-incorrect-');
+  var _v_text = '';
+  if ( _volatile ) {
+    _v_text = 'volatile-field';
+  } else {
+    _v_text = '';
+  }
+
+  var _new_incorrect = '<div class="form-group ' + _v_text + ' multiple-choice-single-answer-incorrect">'
+  _new_incorrect += '<span class="glyphicon glyphicon-remove text-danger"></span>&nbsp;&nbsp;&nbsp;';
+  _new_incorrect += '<input class="input-large" type="text" id="' + _id;
+  _new_incorrect += '" placeholder="Respuesta incorrecta" value="' + _value + '" required="required"/>';
+
+  if (_volatile ) {
+    _new_incorrect += '&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-trash remove-incorrect-answer" aria-hidden="true"></span>';
+  }
+  _new_incorrect += '</div><hr class="' + _v_text + '">';
+
+  console.log ( 'Creando nueva respuesta incorrecta ( ' + _name + ', ' + _value + ', ' + _volatile + ' )');
+
+  $('#form-' + _name + '-new-incorrect-answer').before( _new_incorrect );
+}
+
+
 var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name, _type )
 {
   if ( MODAL_DEBUG ) { console.debug ( '...Asignando de ' + _selector + ' a ' + _name ); }
@@ -104,6 +133,23 @@ var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name, _
         _n_p++;
       });
     break;
+    case 'multiple-choice-single-answer':
+      $('#form-' + _name + '-text').val(
+        $('#' + _selector).find('p[name="question-text"]').text()
+      );
+      var _n_p = 1;
+      $('#' + _selector + ' span[name="incorrect-answer"]' ).each(function(){
+        if ( _n_p > 2) {
+          create_edit_incorrect_answer ( _name, $(this).text(), true );
+        } else {
+          $('#form-' + _name + '-incorrect-' + _n_p ).val( $(this).text() );
+        }
+        _n_p++;
+        console.log ( 'Asignando respuesta incorrecta ' + $(this).text() );
+      });
+      $('#form-' + _name + '-correct' ).val ( $('#' + _selector + ' span[name="correct-answer"]' ).text() );
+      console.log ( 'Asignando respuesta correcta ' + $('#' + _selector + ' span[name="correct-answer"]' ).text() );
+    break;
     case 'fill-blank-start':
       $('#form-' + _name + '-void').val(
         $('#' + _selector).find('input[name="blank"]').val()
@@ -147,6 +193,8 @@ var asignar_datos_desde_modal = function asignar_datos_desde_modal ( _name, _typ
     }
   };
 
+  if ( MODAL_DEBUG ) { console.debug ( 'Asignando desde...' + _name + '/'+ _type ); }
+
   switch ( _type ) {
     case 'description':
       _q.Text.Question = $('#form-' + _name + '-text').val();
@@ -181,6 +229,16 @@ var asignar_datos_desde_modal = function asignar_datos_desde_modal ( _name, _typ
       });
       _q.Text.Answer += '}';
       console.debug ( 'Matching answer: ' + JSON.stringify (_q.Text.Answer));
+    break;
+    case 'multiple-choice-single-answer':
+      _q.Text.Question = $('#form-' + _name + '-text').val();
+      _q.Text.Answer = '{';
+      $('#form-' + _name + ' div.multiple-choice-single-answer-incorrect input').each ( function () {
+        _q.Text.Answer += '~' + $(this).val() + ' ';
+      });
+      _q.Text.Answer += '=' + $('#form-' + _name + ' div.multiple-choice-single-answer-correct input').val();
+      _q.Text.Answer += ' }';
+      console.debug ( 'Single-answer: ' + JSON.stringify (_q.Text.Answer));
     break;
     case 'fill-blank-start':
       _q.Text.Question = ['', $('#form-' + _name + '-text').val()];

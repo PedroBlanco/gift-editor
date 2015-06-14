@@ -39,3 +39,12 @@ tiene un menú del día? {#2:1}
 // Tipo: math range question
 ::Entre 3 y 7::Dígame un número entre
 3 y 7 {#3..7}
+
+// question: 1 name: Grants tomb
+::Grants tomb::Who is buried in Grant's tomb in New York City? {
+=Grant
+~No one
+~Napoleon
+~Churchill
+~Mother Teresa
+}
