@@ -5989,16 +5989,12 @@ td.visible-print {
 */
 html {
   align-content: space-between;
-  width: 100%;
-  height: 100%;
 }
 body {
   align-content: space-between;
   margin: 0px;
   font-family: 'open_regular', arial;
   position: relative;
-  width: 100%;
-  height: 100%;
 }
 .container-fluid {
   align-content: space-around;
