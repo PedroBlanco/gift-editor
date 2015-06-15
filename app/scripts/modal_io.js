@@ -62,6 +62,37 @@ var create_edit_incorrect_answer = function create_edit_incorrect_answer ( _name
 }
 
 
+var create_edit_partial_answer = function create_edit_partial_answer ( _name, _percentage, _value, _volatile )
+{ /*** TODO ***/
+  // FIXME: Para asegurarnos de que no vamos a coincidir el en id (1 o 2), aumentamos _uniqueID...
+  var _id = _uniqueId () + _uniqueId (); // El valor no importa que se pierda
+  _id = _uniqueId ( 'form-' + _name + '-pair-');
+  var _v_text = '';
+  if ( _volatile ) {
+    _v_text = 'volatile-field';
+  } else {
+    _v_text = '';
+  }
+
+  var _new_partial = '<div class="form-group ' + _v_text + ' multiple-choice-multiple-answer-pair">'
+  _new_partial += '<input class="input-mir" name="percentage" type="number" id="' + _id + '-percentage"';
+  _new_partial += ' placeholder="Porcentaje" value="' + _percentage + '" required="required"/>%';
+  _new_partial += '<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>';
+  _new_partial += '<input class="input-small" name="answer" type="text" id="' + _id + '-answer"';
+  _new_partial += ' placeholder="Respuesta" value="' + _value + '" required="required"/>';
+
+
+  if (_volatile ) {
+    _new_partial += '&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-trash remove-partial-answer" aria-hidden="true"></span>';
+  }
+  _new_partial += '</div><hr class="' + _v_text + '">';
+
+  console.log ( 'Creando nueva respuesta parcial ( ' + _name + ', ' + _percentage + ', ' + _value + ', ' + _volatile + ' )');
+
+  $('#form-' + _name + '-new-pair').before( _new_partial );
+}
+
+
 var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name, _type )
 {
   if ( MODAL_DEBUG ) { console.debug ( '...Asignando de ' + _selector + ' a ' + _name ); }
@@ -149,6 +180,30 @@ var asignar_datos_a_modal = function asignar_datos_a_modal ( _selector, _name, _
       });
       $('#form-' + _name + '-correct' ).val ( $('#' + _selector + ' span[name="correct-answer"]' ).text() );
       console.log ( 'Asignando respuesta correcta ' + $('#' + _selector + ' span[name="correct-answer"]' ).text() );
+    break;
+    case 'multiple-choice-multiple-answer':
+      $('#form-' + _name + '-text').val(
+        $('#' + _selector).find('p[name="question-text"]').text()
+      );
+      var _n_p = 1;
+
+      $('#' + _selector + ' div[name="partial-answer"]' ).each(function(){
+        if ( _n_p > 3) {
+          create_edit_partial_answer ( _name,
+            $(this).find('span[name="answer-percentage"]').text(),
+            $(this).find('span[name="answer-text"]').text(),
+            true );
+        } else {
+          $('#form-' + _name + '-pair-' + _n_p + '-percentage').val(
+            $(this).find('span[name="answer-percentage"]').text() );
+          $('#form-' + _name + '-pair-' + _n_p + '-answer').val(
+            $(this).find('span[name="answer-text"]').text() );
+        }
+        _n_p++;
+        console.log ( 'Asignando respuesta parcial ' +
+          $(this).find('span[name="answer-percentage"]').text() + '% -> ' +
+          $(this).find('span[name="answer-text"]').text() );
+      });
     break;
     case 'fill-blank-start':
       $('#form-' + _name + '-void').val(
@@ -239,6 +294,16 @@ var asignar_datos_desde_modal = function asignar_datos_desde_modal ( _name, _typ
       _q.Text.Answer += '=' + $('#form-' + _name + ' div.multiple-choice-single-answer-correct input').val();
       _q.Text.Answer += ' }';
       console.debug ( 'Single-answer: ' + JSON.stringify (_q.Text.Answer));
+    break;
+    case 'multiple-choice-multiple-answer':
+      _q.Text.Question = $('#form-' + _name + '-text').val();
+      _q.Text.Answer = '{\n';
+      $('#form-' + _name + ' div.multiple-choice-multiple-answer-pair').each ( function () {
+        _q.Text.Answer += '~%' + $(this).find('input[name="percentage"]').val() + '%';
+        _q.Text.Answer += '' + $(this).find('input[name="answer"]').val() + '\n';
+      });
+      _q.Text.Answer += '}';
+      console.debug ( 'Multiple-answer: ' + JSON.stringify (_q.Text.Answer));
     break;
     case 'fill-blank-start':
       _q.Text.Question = ['', $('#form-' + _name + '-text').val()];

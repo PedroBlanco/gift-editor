@@ -66,6 +66,17 @@ var accordion_to_GIFT = function accordion_to_GIFT ( _selector )
 
         _full_question += '\n}\n\n';
       break;
+      case 'multiple-choice-multiple-answer':
+        _full_question = $(this).find('p[name="question-text"]').text();
+        _full_question += ' {\n';
+
+        $(this).find( 'div[name="partial-answer"]' ).each(function(){
+          _full_question += '~%' + $(this).find('span[name="answer-percentage"]').text() + '%';
+          _full_question += '' + $(this).find('span[name="answer-text"]').text() + '\n';
+        });
+
+        _full_question += '}\n\n';
+      break;
       case 'fill-blank-start':
         _full_question += '{';
 

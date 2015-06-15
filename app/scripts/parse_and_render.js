@@ -120,6 +120,11 @@ var render_individual_question = function render_individual_question ( _q )
 {
   var _dest = ''
 
+  // Fix #41 - No es problema del parser
+  _q.Title = _q.Title.replace(/(\r\n|\n|\r)/gm," ").trim();
+  _q.Text.Question = _q.Text.Question.replace(/(\r\n|\n|\r)/gm," ").trim();
+  _q.Text.Answer = _q.Text.Answer.replace(/(\r\n|\n|\r)/gm," ");
+
   var q_detected = detect_question_type ( _q );
   switch (q_detected.type) {
     case 'description':
@@ -548,8 +553,8 @@ var render_multiple_choice_multiple_answer = function render_multiple_choice_mul
 
   for ( var i in _d.answer ) {
     _rendered_question.html +=  '<div name="partial-answer">';
-    _rendered_question.html +=   '<span class="form-control-static" name="answer-weight">';
-    _rendered_question.html +=   $.trim(_d.answer[i][0]) + '</span>';
+    _rendered_question.html +=   '<span class="form-control-static" name="answer-percentage">';
+    _rendered_question.html +=   $.trim(_d.answer[i][0]) + '</span>%';
     _rendered_question.html +=   '&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right">&nbsp;&nbsp;';
     _rendered_question.html +=   '<span class="form-control-static" name="answer-text">';
     _rendered_question.html +=   $.trim(_d.answer[i][1]) + '</span>';
