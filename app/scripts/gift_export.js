@@ -129,43 +129,29 @@ var accordion_to_GIFT = function accordion_to_GIFT ( _selector )
 // TODO: ver #19
 var download_GIFT_File = function download_GIFT_file()
 {
+  var text = $('#text-gift-input').val();
+
+  const MIME_TYPE = 'text/plain';
+
   window.URL = window.webkitURL || window.URL;
 
-  var prevLink = output.querySelector('a');
-  if (prevLink) {
+  // var prevLink = output.querySelector('a');
+  /*
+  if (output) {
     window.URL.revokeObjectURL(prevLink.href);
-    output.innerHTML = '';
-  }
+    // output.innerHTML = '';
+    $('#gift_file').hide();
+  }*/
 
-  var bb = new Blob([typer.textContent], {type: MIME_TYPE});
+  var bb = new Blob([text], {type: MIME_TYPE});
 
   // Creación del enlace destino
-  var a = document.createElement('a');
-  a.download = container.querySelector('input[type="text"]').value;
-  a.href = window.URL.createObjectURL(bb);
-  a.textContent = 'Download ready';
+  // var a = document.createElement('a');
+  $('#gift-file').attr('download', 'GIFT_file.txt');
+  $('#gift-file').attr('href', window.URL.createObjectURL(bb) );
 
-  a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
-  a.draggable = true; // Don't really need, but good practice.
-  a.classList.add('dragout');
-
-  output.appendChild(a);
-
-  a.onclick = function(e) {
-    if ('disabled' in this.dataset) {
-      return false;
-    }
-
-    cleanUpGIFT (this);
-  };
-};
-
-var cleanUpGIFT = function cleanUpGIFT (a) {
-  a.textContent = 'Downloaded';
-  a.dataset.disabled = true;
-
-  // Need a small delay for the revokeObjectURL to work properly.
-  setTimeout(function() {
-    window.URL.revokeObjectURL(a.href);
-  }, 1500);
+  $('#gift-file').attr('downloadurl', [MIME_TYPE, $('#gift-file').attr('download'), $('#gift-file').attr('href')].join(':') );
+  // output.draggable = true; // Don't really need, but good practice.
+  // output.classList.add('dragout');
+  $('#gift-file').show();
 };

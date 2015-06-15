@@ -9,6 +9,18 @@
 
 var events_init = function events_init ()
 {
+
+  $('#download-gift-file').click(download_GIFT_File);
+
+  $('#gift-file').click(function(e) {
+    $(this).hide();
+    // Need a small delay for the revokeObjectURL to work properly.
+    setTimeout(function() {
+      window.URL.revokeObjectURL(a.href);
+    }, 1500);
+  });
+
+
   $('#button-process').click (function() {
     var mensaje = peg_parser.parse($('#text1').text() );
     var resultado = document.getElementById('text2');
@@ -79,7 +91,7 @@ var events_init = function events_init ()
 
   $('#button_gift_input').click( function () {
     try {
-      parseText('#text_gift_input', '#accordion1' );
+      parseText('#text-gift-input', '#accordion1' );
     } catch ( myException ) {
       if ( PARSE_DEBUG ) {
         console.error ('Exception caught: ' + myException );
@@ -100,7 +112,7 @@ var events_init = function events_init ()
       console.debug ( '> Generando GIFT: Inicio' );
     }
 
-    $('#text_gift_input').val( accordion_to_GIFT ( '#accordion1' ) );
+    $('#text-gift-input').val( accordion_to_GIFT ( '#accordion1' ) );
 
     if ( PARSE_DEBUG ) {
       console.debug ( '< Generando GIFT: Fin' );
@@ -111,16 +123,16 @@ var events_init = function events_init ()
     $('#text_gift_output').show();
 
     // Ocultamos los controles de entrada de GIFT
-    $('#text_gift_input').prev().hide();
-    $('#text_gift_input').hide();
-    $('#text_gift_input').next().hide();
-    $('#text_gift_input').next().next().hide();
+    $('#text-gift-input').prev().hide();
+    $('#text-gift-input').hide();
+    $('#text-gift-input').next().hide();
+    $('#text-gift-input').next().next().hide();
     */
   } );
 
 
-  if ( $('#text_gift_input' ).val() === '' ) {
-    $('#text_gift_input' ).val( '// Tipo: fill in the blanks - end\n::T1a::Two plus two\nequals {=four =4}\n\n// Tipo: fill in the blanks - middle\n::T1b::Two plus {=two =2}\nequals four.\n\n// Tipo: fill in the blanks - start\n::T1c::{=Two =2} plus two\nequals four.\n\n// Tipo: matching\n::Food for animals:: Which animal eats which food?\n{ =cat -> cat food =dog -> dog food =fish -> fish food }\n\n// Tipo: description/instructions (not really a question)\n::Descripción del examen::Este es un examen\nde prueba en el que no se pueden usar ni\nlápiz ni papel\n\n// Tipo essay\n::Opinión sobre texto de relleno::Escriba su\nopinión sobre si el texto de relleno\nllamado "Lorem ipsum dolor" debería actualizarse a\nlos tiempos o debería seguir intacto\n{}\n\n// Tipo: True/false\n::Lengua - codos::\n¿Puede usted llegar con su lengua a\ncualquiera de sus dos codos?\n{F}\n\n// Tipo: math tolerance question\n::Platos de un menú::¿Cuántos platos\ntiene un menú del día? {#2:1}\n\n// Tipo: math range question\n::Entre 3 y 7::Dígame un número entre\n3 y 7 {#3..7}\n' );
+  if ( $('#text-gift-input' ).val() === '' ) {
+    $('#text-gift-input' ).val( '// Tipo: fill in the blanks - end\n::T1a::Two plus two\nequals {=four =4}\n\n// Tipo: fill in the blanks - middle\n::T1b::Two plus {=two =2}\nequals four.\n\n// Tipo: fill in the blanks - start\n::T1c::{=Two =2} plus two\nequals four.\n\n// Tipo: matching\n::Food for animals:: Which animal eats which food?\n{ =cat -> cat food =dog -> dog food =fish -> fish food }\n\n// Tipo: description/instructions (not really a question)\n::Descripción del examen::Este es un examen\nde prueba en el que no se pueden usar ni\nlápiz ni papel\n\n// Tipo essay\n::Opinión sobre texto de relleno::Escriba su\nopinión sobre si el texto de relleno\nllamado "Lorem ipsum dolor" debería actualizarse a\nlos tiempos o debería seguir intacto\n{}\n\n// Tipo: True/false\n::Lengua - codos::\n¿Puede usted llegar con su lengua a\ncualquiera de sus dos codos?\n{F}\n\n// Tipo: math tolerance question\n::Platos de un menú::¿Cuántos platos\ntiene un menú del día? {#2:1}\n\n// Tipo: math range question\n::Entre 3 y 7::Dígame un número entre\n3 y 7 {#3..7}\n' );
   }
 
   // FIXME: Es posible que haya que usar alguna de las dos siguientes líneas cada vez que alteremos el contenido de accordion1
