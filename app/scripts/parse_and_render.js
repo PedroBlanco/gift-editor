@@ -121,9 +121,15 @@ var render_individual_question = function render_individual_question ( _q )
   var _dest = ''
 
   // Fix #41 - No es problema del parser
-  _q.Title = _q.Title.replace(/(\r\n|\n|\r)/gm," ").trim();
-  _q.Text.Question = _q.Text.Question.replace(/(\r\n|\n|\r)/gm," ").trim();
-  _q.Text.Answer = _q.Text.Answer.replace(/(\r\n|\n|\r)/gm," ");
+  _q.Title = _q.Title.replace(/(\r\n|\n|\r)/gm,' ').trim();
+  if ( _q.Text.Question instanceof Array ) {
+    for (var i in _q.Text.Question ){
+      _q.Text.Question[i] = _q.Text.Question[i].replace(/(\r\n|\n|\r)/gm,' ').trim();
+    }
+  } else {
+    _q.Text.Question = _q.Text.Question.replace(/(\r\n|\n|\r)/gm,' ').trim();
+  }
+  _q.Text.Answer = _q.Text.Answer.replace(/(\r\n|\n|\r)/gm,' ');
 
   var q_detected = detect_question_type ( _q );
   switch (q_detected.type) {
