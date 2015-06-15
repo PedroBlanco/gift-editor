@@ -1,21 +1,25 @@
 <div class="col-sm-5">
-  <div id='left-panel' class="left-panel center-block">
+  <div id="left-panel" class="left-panel center-block">
     <h3>Texto GIFT a procesar</h3>
     <div class="button-bar">
       <button type="button" id="hide-left-panel" class="btn btn-info" style="float: left;">
         <span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Ocultar Edición
       </button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" id="upload-gift-file" class="btn btn-info">
+        <span class="glyphicon glyphicon-upload"></span>&nbsp; Subir archivo
+      </button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="real-upload-gift-file" type="file" accept="text/plain" style="display:none;">
       <button type="button" id="download-gift-file" class="btn btn-info">
         <span class="glyphicon glyphicon-download"></span>&nbsp; Generar archivo
       </button>
-      <a href="" style="display:none; margin-left:1em;" class="btn btn-info" id="gift-file"><span class="glyphicon glyphicon-download-alt"></span>&nbsp; Descargar archivo</a>
+      <a href="" style="display:none;" class="btn btn-info" id="gift-file"><span class="glyphicon glyphicon-download-alt"></span>&nbsp; Descargar archivo</a>
     </div>
     <br>
     <textarea class="form-control mono" id="text-gift-input" cols="30" rows="10"></textarea>
   </div>
 </div>
 <div class="col-sm-2 button-column">
-  <div id='gift-buttons-panel' class="left-panel">
+  <div id="gift-buttons-panel" class="left-panel">
     <button class="form-control btn btn-info btn-info-inverse" type="button" id="button_gift_input">Convertir texto&nbsp;&nbsp;<span class="glyphicon glyphicon-forward"></span>
     </button>
     <br>

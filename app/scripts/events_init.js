@@ -10,13 +10,41 @@
 var events_init = function events_init ()
 {
 
-  $('#download-gift-file').click(download_GIFT_File);
+  $('#download-gift-file').click(function(){
+    $(this).hide();
+    download_GIFT_File ();
+  });
+
+  $('#upload-gift-file').click(function(){
+    $('#real-upload-gift-file').click();
+    $('#gift-file').hide();
+    $('#download-gift-file').show();
+    // Need a small delay for the revokeObjectURL to work properly.
+    setTimeout(function() {
+      window.URL.revokeObjectURL($('#gift-file').attr('href'));
+    }, 1500);
+  });
+
+  // Tomado de http://www.javascripture.com/FileReader
+  $('#real-upload-gift-file').on('change', function (event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var text = reader.result;
+      //console.log(reader.result.substring(0, 200));
+      $('#text-gift-input').val(reader.result);
+    };
+    reader.readAsText(input.files[0]);
+  });
+
 
   $('#gift-file').click(function(e) {
     $(this).hide();
+    $('#download-gift-file').show();
     // Need a small delay for the revokeObjectURL to work properly.
     setTimeout(function() {
-      window.URL.revokeObjectURL(a.href);
+      window.URL.revokeObjectURL($(this).attr('href'));
     }, 1500);
   });
 
